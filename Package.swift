@@ -11,11 +11,9 @@ let package = Package(
   products: [
     .library(name: "BasePrimitives", targets: ["BasePrimitives"])
   ],
-//  dependencies: [],
   targets: [
     .target(
       name: "BasePrimitives",
-//      dependencies: []
     )
   ]
 )
