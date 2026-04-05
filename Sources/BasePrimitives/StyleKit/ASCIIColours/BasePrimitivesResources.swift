@@ -1,5 +1,5 @@
-import Foundation
+//import Foundation
 
-public enum BasePrimitivesResources {
-  public static let bundle: Bundle = .module
-}
+//public enum BasePrimitivesResources {
+//  public static let bundle: Bundle = .module
+//}
