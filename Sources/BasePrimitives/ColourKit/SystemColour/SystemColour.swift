@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 1/9/2025.
 //
 
-
 //import CoreTools
 import SwiftUI
 
@@ -52,14 +51,14 @@ extension SystemColour {
     return self.toColour.mixCompatible(
       with: colour.toColour,
       by: amount,
-      in: .perceptual
+      in: .perceptual,
     )
   }
 
   public var toPrimitiveColour: PrimitiveColour? {
     PrimitiveColour(rawValue: self.rawValue)
   }
-  
+
   public func rgbColour(in env: EnvironmentValues) -> RGBColour? {
     .init(fromSystem: self, env: env)
   }
@@ -76,12 +75,12 @@ extension SystemColour {
   }
 
   /// This unable to work, as HSVAdjustable only works in deltas
-//  public func hsvAdjusted(by adjustment: HSVAdjustment) -> Color? {
-//    guard let baseAdjustment = hsvAdjustment else { return nil }
-//    let adjusted: HSVAdjustment = baseAdjustment.interpolated(
-//      towards: adjustment
-//    )
-//    return adjusted.toColour()
-//  }
+  //  public func hsvAdjusted(by adjustment: HSVAdjustment) -> Color? {
+  //    guard let baseAdjustment = hsvAdjustment else { return nil }
+  //    let adjusted: HSVAdjustment = baseAdjustment.interpolated(
+  //      towards: adjustment
+  //    )
+  //    return adjusted.toColour()
+  //  }
 
 }
