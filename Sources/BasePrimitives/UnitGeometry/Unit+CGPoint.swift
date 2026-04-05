@@ -21,7 +21,7 @@ extension CGPoint {
   /// ```
   public func toUnitPoint(
     in size: CGSize,
-    rounding: GridRounding = .none,
+    rounding: Rounding = .none,
     fallback: UnitPoint = .center
   ) -> UnitPoint {
     

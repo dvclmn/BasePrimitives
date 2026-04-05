@@ -22,7 +22,7 @@ extension BinaryFloatingPoint {
   /// - Returns: An integer that represents the number of 'units' that can fit along the length of `self`
   public func toGridCount(
     using unitLength: CGFloat,
-    rounding: GridRounding = .down
+    rounding: Rounding = .down
   ) -> Int? {
     guard isSafeToConvert(self, using : unitLength) else { return nil }
     let resultRounded = (CGFloat(self) / unitLength).rounded(using: rounding)
@@ -34,7 +34,7 @@ extension BinaryFloatingPoint {
   /// that's still a float, but now 'quantised' to the integer equivalent
   public func snappedToGrid(
     using unitLength: CGFloat,
-    rounding: GridRounding = .down
+    rounding: Rounding = .down
   ) -> Self {
     guard isSafeToConvert(self, using : unitLength),
       let gridCount = self.toGridCount(using: unitLength, rounding: rounding)

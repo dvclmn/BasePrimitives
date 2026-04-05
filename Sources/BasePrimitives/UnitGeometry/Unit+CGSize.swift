@@ -16,7 +16,7 @@ extension CGSize {
     along axis: GeometryAxis,
     using unitSize: CGSize,
     mapping: AxisMapping = .default,
-    rounding: GridRounding = .down,
+    rounding: Rounding = .down,
   ) -> Int? {
     /// Ensures the same convention is used for extracting both length values
     let lengthOfSelf = self.value(along: axis, mapping: mapping)
