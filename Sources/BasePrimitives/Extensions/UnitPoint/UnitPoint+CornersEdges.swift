@@ -42,17 +42,11 @@ public enum DimensionLength {
   }
 }
 
-public enum RectBoundaryPlacement {
-  case inside
-  case centre
-  case outside
-}
-
 extension UnitPoint {
 
   public func valueFromSize(
     _ size: CGSize,
-    fallBackIfCorner fallBack: CornerFallBack = .zero
+    fallBackIfCorner fallBack: CornerFallBack = .zero,
   ) -> CGFloat {
     guard let sizeKeyPath else {
       return fallBack.value(size)
@@ -105,4 +99,3 @@ public enum CornerFallBack {
     }
   }
 }
-

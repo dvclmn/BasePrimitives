@@ -100,7 +100,6 @@ extension GeometryAxis {
     }
   }
 
-
   //  public var numberingFrameSize: (CGFloat?, CGFloat?) {
   //    return switch self {
   //      case .horizontal: (nil, Self.fixedLength)

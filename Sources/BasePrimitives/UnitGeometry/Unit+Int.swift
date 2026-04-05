@@ -13,7 +13,7 @@ extension Int {
 
   public func toScreenLength(
     using unitLength: CGFloat,
-    policy: ConversionSafetyPolicy = .assertDebug
+    policy: ConversionSafetyPolicy = .assertDebug,
   ) -> CGFloat {
     switch policy {
       case .checkOnly, .assertDebug:
@@ -28,7 +28,7 @@ extension Int {
 
   public func toScreenLengthIfPossible(
     using unitLength: CGFloat?,
-    policy: ConversionSafetyPolicy = .checkOnly
+    policy: ConversionSafetyPolicy = .checkOnly,
   ) -> CGFloat? {
     guard let unitLength else { return nil }
     switch policy {
@@ -55,7 +55,7 @@ extension Int {
     along axis: GeometryAxis,
     mapping: AxisMapping = .default,
     using unitSize: CGSize,
-    policy: ConversionSafetyPolicy = .assertDebug
+    policy: ConversionSafetyPolicy = .assertDebug,
   ) -> CGFloat {
     let length = unitSize.value(along: axis, mapping: mapping)
     return toScreenLength(using: length, policy: policy)
@@ -65,7 +65,7 @@ extension Int {
     along axis: GeometryAxis,
     mapping: AxisMapping = .default,
     using unitSize: CGSize?,
-    policy: ConversionSafetyPolicy = .checkOnly
+    policy: ConversionSafetyPolicy = .checkOnly,
   ) -> CGFloat? {
     guard let unitSize else { return nil }
     let length = unitSize.value(along: axis, mapping: mapping)
