@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import InteractionKit
+
 
 // MARK: - Binding CGRect
 extension Binding where Value == CGRect {

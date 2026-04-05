@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import InteractionKit
 
 //extension CGPoint: @retroactive Hashable {
 //  public var hashValue: Int { x.hashValue << 32 ^ y.hashValue }
@@ -16,9 +15,8 @@ import InteractionKit
 //  return lhs.distance(to: rhs) < 0.000001
 //}
 
-
 extension CGPoint {
-  
+
   public func isNearUnitPoint(
     _ unitPoint: UnitPoint,
     in size: CGSize,
@@ -27,16 +25,16 @@ extension CGPoint {
     let targetPoint = unitPoint.toCGPoint(in: size)
     return self.distance(to: targetPoint) <= threshold
   }
-  
+
   public func distance(to other: CGPoint) -> CGFloat {
     let dx = CGFloat(x - other.x)
     let dy = CGFloat(y - other.y)
     return sqrt((dx * dx) + (dy * dy))
   }
-  
+
   public func debugColour(
     unitPoint: UnitPoint,
-    in size: CGSize
+    in size: CGSize,
   ) -> Color {
     guard self.isNearUnitPoint(unitPoint, in: size) else {
       return Color.clear
@@ -84,7 +82,7 @@ extension CGPoint {
   ) -> CGPoint {
     let anchor = CGPoint(
       x: unitPoint.x * containerSize.width,
-      y: unitPoint.y * containerSize.height,)
+      y: unitPoint.y * containerSize.height, )
     return CGPoint(x: anchor.x - self.x, y: anchor.y - self.y)
   }
 
@@ -154,12 +152,6 @@ extension CGPoint {
   //  public func distance(to other: CGPoint) -> CGFloat {
   //    return hypot(other.x - x, other.y - y)
   //  }
-
-  public func distance(to other: CGPoint) -> CGFloat {
-    let dx = CGFloat(x - other.x)
-    let dy = CGFloat(y - other.y)
-    return sqrt((dx * dx) + (dy * dy))
-  }
 
   /// Returns true if both x and y coordinates are in the range [0.0, 1.0]
   //  public var isNormalised: Bool {

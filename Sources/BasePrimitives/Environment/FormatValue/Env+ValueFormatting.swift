@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import InteractionKit
+
 
 // MARK: - Environment values
 extension EnvironmentValues {

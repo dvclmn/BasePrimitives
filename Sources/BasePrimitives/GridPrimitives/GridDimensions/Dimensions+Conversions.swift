@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import InteractionKit
 
 extension String {
   public var gridDimensions: GridDimensions {
@@ -82,10 +81,10 @@ extension CGSize {
 
     return GridDimensions(width: width, height: height)
   }
-  
+
   public func snappedToGrid(
     using unitSize: CGSize,
-    rounding: GridRounding = .down
+    rounding: GridRounding = .down,
   ) -> CGSize? {
     guard let dimensions = toGridDimensions(using: unitSize, rounding: rounding) else {
       return nil

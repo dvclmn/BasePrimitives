@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import InteractionKit
+
 
 extension CGSize: @retroactive Hashable {
   public func hash(into hasher: inout Hasher) {
@@ -138,9 +138,9 @@ extension CGSize {
   //  }
   
   // New, from BaseHelpers
-  package var midpoint: CGPoint {
-    return CGPoint(x: width / 2, y: height / 2)
-  }
+//  package var midpoint: CGPoint {
+//    return CGPoint(x: width / 2, y: height / 2)
+//  }
   public init(fromLength length: CGFloat) {
     self.init(width: length, height: length)
   }

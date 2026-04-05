@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import InteractionKit
 
 extension EnvironmentValues {
 

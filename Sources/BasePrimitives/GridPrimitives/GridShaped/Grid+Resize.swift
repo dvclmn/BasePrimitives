@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import InteractionKit
+
 
 extension GridShaped {
 

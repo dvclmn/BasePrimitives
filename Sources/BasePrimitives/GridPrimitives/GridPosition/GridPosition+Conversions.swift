@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import InteractionKit
+
 
 extension GridPosition {
 

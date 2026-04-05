@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 30/3/2026.
 //
 
-import InteractionKit
+
 import Foundation
 
 extension GeometryAxis {

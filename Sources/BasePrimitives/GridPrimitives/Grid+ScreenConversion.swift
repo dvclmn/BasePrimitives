@@ -6,7 +6,7 @@
 //
 
 import CoreGraphics
-import InteractionKit
+
 
 /// Centralised Grid ⇄ Screen conversions that respect `AxisMapping`.
 ///

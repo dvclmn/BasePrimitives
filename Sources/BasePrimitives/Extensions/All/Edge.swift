@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 20/12/2024.
 //
 
-import InteractionKit
+
 import SwiftUI
 
 extension VerticalEdge {

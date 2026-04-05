@@ -10,6 +10,7 @@ import Foundation
 extension ClosedRange {
   public var isZero: Bool { lowerBound == upperBound }
   public var isGreaterThanZero: Bool { lowerBound < upperBound }
+//  public var isGreaterThanZero: Bool { lowerBound < upperBound }
   public var isGreaterThanOrEqualToZero: Bool { lowerBound <= upperBound }
 
 }

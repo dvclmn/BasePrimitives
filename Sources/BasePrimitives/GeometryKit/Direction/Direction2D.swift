@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import InteractionKit
+
 
 public struct Direction2D: Sendable, Hashable {
   public let x: CGFloat
