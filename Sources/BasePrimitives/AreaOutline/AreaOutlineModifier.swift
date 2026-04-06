@@ -7,45 +7,31 @@
 
 import SwiftUI
 
-public struct AreaOutline {
-  public let colour: Color
-  public let rounding: CGFloat
-  public let lineWidth: CGFloat
-
-  public init(
-    colour: Color = .white.opacity(0.07),
-    rounding: CGFloat = 4,
-    lineWidth: CGFloat = 1,
-  ) {
-    self.colour = colour
-    self.rounding = rounding
-    self.lineWidth = lineWidth
-  }
-}
-
 struct AreaOutlineModifier: ViewModifier {
 
   @Environment(\.areaOutline) private var areaOutline
   @Environment(\.zoomClamped) private var zoomClamped
   @Environment(\.zoomRange) private var zoomRange
 
-  let styleOverride: AreaOutline?
+  let colour: Color?
+  let rounding: CGFloat?
+  let lineWidth: CGFloat?
 
-  init(
-    colour: Color?,
-    rounding: CGFloat?,
-    lineWidth: CGFloat?,
-  ) {
-    guard let colour, let rounding, let lineWidth else {
-      self.styleOverride = nil
-      return
-    }
-    self.styleOverride = .init(
-      colour: colour,
-      rounding: rounding,
-      lineWidth: lineWidth,
-    )
-  }
+  //  init(
+  //    colour: Color?,
+  //    rounding: CGFloat?,
+  //    lineWidth: CGFloat?,
+  //  ) {
+  //    guard let colour, let rounding, let lineWidth else {
+  //      self.styleOverride = nil
+  //      return
+  //    }
+  //    self.styleOverride = .init(
+  //      colour: colour,
+  //      rounding: rounding,
+  //      lineWidth: lineWidth,
+  //    )
+  //  }
 
   func body(content: Content) -> some View {
     content
@@ -59,17 +45,17 @@ struct AreaOutlineModifier: ViewModifier {
 }
 extension AreaOutlineModifier {
   private var effectiveRounding: CGFloat {
-    let base = styleOverride?.rounding ?? areaOutline.rounding
+    let base = rounding ?? areaOutline.rounding
     return base.removingZoom(zoomClamped)
   }
 
   private var effectiveLineWidth: CGFloat {
-    let base = styleOverride?.lineWidth.toDouble ?? areaOutline.lineWidth
+    let base = lineWidth?.toDouble ?? areaOutline.lineWidth
     return base.removingZoom(zoomClamped, across: zoomRange)
   }
 
   private var effectiveColour: Color {
-    styleOverride?.colour ?? areaOutline.colour
+    colour ?? areaOutline.colour
   }
 }
 extension View {
@@ -83,7 +69,7 @@ extension View {
       AreaOutlineModifier(
         colour: colour,
         rounding: rounding,
-        lineWidth: lineWidth
+        lineWidth: lineWidth,
       )
     )
   }
