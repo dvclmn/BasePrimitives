@@ -96,8 +96,6 @@ extension EnvironmentValues {
 
   @Entry public var pointerStyle: PointerStyleCompatible?
 
-  @Entry public var areaOutline: AreaOutline = .init()
-
 }
 
 // MARK: - Animation

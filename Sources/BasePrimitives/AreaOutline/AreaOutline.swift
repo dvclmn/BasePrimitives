@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-public struct AreaOutline {
+@_spi(Internals) public struct AreaOutline {
   public let colour: Color
   public let rounding: CGFloat
   public let lineWidth: CGFloat
-  
+
   public init(
     colour: Color = .white.opacity(0.07),
     rounding: CGFloat = 4,
@@ -21,4 +21,8 @@ public struct AreaOutline {
     self.rounding = rounding
     self.lineWidth = lineWidth
   }
+}
+
+extension AreaOutline {
+
 }
