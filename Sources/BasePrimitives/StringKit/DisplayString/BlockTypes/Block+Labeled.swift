@@ -32,7 +32,7 @@ public struct Labeled: Sendable {
     value: DisplayFragment?,
     separator: ComponentSeparator = .colon,
     //    separator: String?,
-    formatOverride: FloatDisplayFormat? = nil
+    formatOverride: FloatDisplayFormat? = nil,
   ) {
     self.key = key
     self.separator = separator
@@ -50,13 +50,13 @@ extension Labeled {
     _ key: String,
     value: Any?,
     separator: ComponentSeparator = .colon,
-    format: FloatDisplayFormat? = nil
+    format: FloatDisplayFormat? = nil,
   ) {
     self.init(
       key: AbbreviableLabel(key),
       value: value.map { DisplayFragment.make(from: $0) },
       separator: separator,
-      formatOverride: format
+      formatOverride: format,
     )
   }
 
@@ -79,13 +79,13 @@ extension Labeled {
   public init(
     _ label: String,
     abbreviated: String? = nil,
-    value: any FloatRenderable
+    value: any FloatRenderable,
   ) {
     self.init(
       key: AbbreviableLabel(label, abbreviated: abbreviated),
       value: DisplayFragment(value),
       separator: .space,
-      formatOverride: nil
+      formatOverride: nil,
     )
   }
 }
@@ -112,7 +112,7 @@ extension Labeled {
   /// Returns `nil` if all parts are absent.
   public func toString(
     labelStyle: AbbreviableLabel.Style = .standard,
-    using format: FloatDisplayFormat = .default
+    using format: FloatDisplayFormat = .default,
   ) -> String? {
     let effectiveFormat = formatOverride ?? format
     let label: String? = labelPart(with: labelStyle)
