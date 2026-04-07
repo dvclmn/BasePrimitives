@@ -10,66 +10,44 @@ import SwiftUI
 struct AreaOutlineModifier: ViewModifier {
 
   @Environment(\.areaOutline) private var areaOutline
-  @Environment(\.zoomClamped) private var zoomClamped
-  @Environment(\.zoomRange) private var zoomRange
+  //  @Environment(\.zoomClamped) private var zoomClamped
+  //  @Environment(\.zoomRange) private var zoomRange
+  @Environment(\.self) private var env
 
-  let colour: Color?
-  let rounding: CGFloat?
-  let lineWidth: CGFloat?
+  //  let colour: Color?
+  //  let rounding: CGFloat?
+  //  let lineWidth: CGFloat?
 
-  //  init(
-  //    colour: Color?,
-  //    rounding: CGFloat?,
-  //    lineWidth: CGFloat?,
-  //  ) {
-  //    guard let colour, let rounding, let lineWidth else {
-  //      self.styleOverride = nil
-  //      return
-  //    }
-  //    self.styleOverride = .init(
-  //      colour: colour,
-  //      rounding: rounding,
-  //      lineWidth: lineWidth,
-  //    )
-  //  }
+  let outline: AreaOutline
 
   func body(content: Content) -> some View {
     content
       .overlay {
-        RoundedRectangle(cornerRadius: effectiveRounding)
+        RoundedRectangle(cornerRadius: outline.resolvedOutline(in: env).rounding)
           .fill(.clear)
-          .stroke(effectiveColour, lineWidth: effectiveLineWidth)
+          .stroke(
+            outline.colour,
+            lineWidth: outline.resolvedOutline(in: env).width
+          )
           .allowsHitTesting(false)
       }
   }
 }
-extension AreaOutlineModifier {
-  private var effectiveRounding: CGFloat {
-    let base = rounding ?? areaOutline.rounding
-    return base.removingZoom(zoomClamped)
-  }
 
-  private var effectiveLineWidth: CGFloat {
-    let base = lineWidth?.toDouble ?? areaOutline.lineWidth
-    return base.removingZoom(zoomClamped, across: zoomRange)
-  }
-
-  private var effectiveColour: Color {
-    colour ?? areaOutline.colour
-  }
-}
 extension View {
   /// If no values specifed, will default to Environment values
   public func areaOutline(
-    colour: Color? = nil,
-    rounding: CGFloat? = nil,
-    lineWidth: CGFloat? = nil,
+    colour: Color = .white.opacity(0.07),
+    rounding: Double = 4,
+    lineWidth: Double = 1,
   ) -> some View {
     self.modifier(
       AreaOutlineModifier(
-        colour: colour,
-        rounding: rounding,
-        lineWidth: lineWidth,
+        outline: .init(
+          colour: colour,
+          rounding: rounding,
+          lineWidth: lineWidth
+        )
       )
     )
   }
