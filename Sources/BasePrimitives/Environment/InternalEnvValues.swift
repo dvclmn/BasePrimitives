@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-extension EnvironmentValues {
+//extension EnvironmentValues {
   
   /// This is generally exposed to
-  @Entry @_spi(Internals) public var areaOutline: AreaOutline = .init()
-}
+//  @Entry @_spi(Internals) public var areaOutline: AreaOutline = .init()
+//}
