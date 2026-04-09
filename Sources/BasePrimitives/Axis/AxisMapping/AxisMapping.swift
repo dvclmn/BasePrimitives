@@ -67,8 +67,8 @@ public enum AxisMapping: Sendable {
 
   /// Converts a physical axis (SwiftUI.Axis) into your logical GeometryAxis.
   public func map(_ swiftUIAxis: Axis) -> GeometryAxis {
-    let gridAxis = swiftUIAxis.toGeometryAxis
-    return map(gridAxis)
+    let axis = swiftUIAxis.toGeometryAxis
+    return map(axis)
 
   }
 }

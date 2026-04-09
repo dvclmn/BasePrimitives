@@ -71,10 +71,3 @@ extension AxisMapping {
     }
   }
 }
-
-//public protocol AxisSelectable {
-//  associatedtype Component
-//
-//  func value(along axis: GridAxis, mapping: AxisMapping) -> Component
-//  func setting(_ newValue: Component, along axis: GridAxis, mapping: AxisMapping) -> Self
-//}
