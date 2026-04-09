@@ -54,7 +54,7 @@ extension Labeled {
   ) {
     self.init(
       key: AbbreviableLabel(key),
-      value: value.map { DisplayFragment.make(from: $0) },
+      value: DisplayFragment.make(from: value),
       separator: separator,
       formatOverride: format,
     )

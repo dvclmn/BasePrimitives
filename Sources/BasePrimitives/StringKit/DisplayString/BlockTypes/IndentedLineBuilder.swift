@@ -11,7 +11,7 @@ package struct IndentedLineBuilder {
   let indent: String
   
   /// Controls which glyph set is used when drawing the tree structure.
-  /// Defaults to `.rounded` to match the previous behavior.
+  /// Defaults to `.rounded` to match the previous behaviour.
   let glyphStyle: IndentGlyphStyle = .rounded
   
   /// Convenience accessor for the concrete glyphs of the selected style.

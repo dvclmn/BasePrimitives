@@ -32,7 +32,7 @@ extension View {
     _ keyPath: KeyPath<EnvironmentValues, Value>,
     to binding: Binding<Value>,
   ) -> some View {
-    modifier(EnvironmentSyncModifier(keyPath, id: { $0 }, apply: { binding.wrappedValue = $0 }))
+    modifier(EnvironmentSyncModifier(keyPath, id: { $0 }, action: { binding.wrappedValue = $0 }))
   }
 
   /// Synchronize an environment value into a binding using a custom identity.
@@ -59,7 +59,7 @@ extension View {
     id: @escaping (Value) -> ID,
     to binding: Binding<Value>,
   ) -> some View {
-    modifier(EnvironmentSyncModifier(keyPath, id: id, apply: { binding.wrappedValue = $0 }))
+    modifier(EnvironmentSyncModifier(keyPath, id: id, action: { binding.wrappedValue = $0 }))
   }
 
   // MARK: - Binding Sync (Optional)
@@ -75,7 +75,7 @@ extension View {
     _ keyPath: KeyPath<EnvironmentValues, Value?>,
     to binding: Binding<Value?>,
   ) -> some View {
-    modifier(EnvironmentSyncModifier(keyPath, id: { $0 }, apply: { binding.wrappedValue = $0 }))
+    modifier(EnvironmentSyncModifier(keyPath, id: { $0 }, action: { binding.wrappedValue = $0 }))
   }
 
   /// Synchronize an optional environment value into a binding using a custom identity.
@@ -98,7 +98,7 @@ extension View {
     id: @escaping (Value?) -> ID,
     to binding: Binding<Value?>,
   ) -> some View {
-    modifier(EnvironmentSyncModifier(keyPath, id: id, apply: { binding.wrappedValue = $0 }))
+    modifier(EnvironmentSyncModifier(keyPath, id: id, action: { binding.wrappedValue = $0 }))
   }
 
   // MARK: - Action-Based Observation (Non-Optional)
@@ -110,7 +110,7 @@ extension View {
   ///
   /// - Parameters:
   ///   - keyPath: The environment key path to observe.
-  ///   - apply: A closure invoked with the latest value.
+  ///   - perform: A closure invoked with the latest value.
   ///
   /// - Example:
   /// ```swift
@@ -120,9 +120,9 @@ extension View {
   /// ```
   public func syncEnvironment<Value: Equatable>(
     _ keyPath: KeyPath<EnvironmentValues, Value>,
-    apply: @escaping (Value) -> Void,
+    perform action: @escaping (Value) -> Void,
   ) -> some View {
-    modifier(EnvironmentSyncModifier(keyPath, id: { $0 }, apply: apply))
+    modifier(EnvironmentSyncModifier(keyPath, id: { $0 }, action: action))
   }
 
   /// Observe an environment value and perform an action using a custom identity.
@@ -143,9 +143,9 @@ extension View {
   public func syncEnvironment<Value, ID: Equatable>(
     _ keyPath: KeyPath<EnvironmentValues, Value>,
     id: @escaping (Value) -> ID,
-    apply: @escaping (Value) -> Void,
+    perform action: @escaping (Value) -> Void,
   ) -> some View {
-    modifier(EnvironmentSyncModifier(keyPath, id: id, apply: apply))
+    modifier(EnvironmentSyncModifier(keyPath, id: id, action: action))
   }
 
   // MARK: - Action-Based Observation (Optional)
@@ -157,9 +157,9 @@ extension View {
   ///   - apply: A closure invoked with the latest value.
   public func syncEnvironment<Value: Equatable>(
     _ keyPath: KeyPath<EnvironmentValues, Value?>,
-    apply: @escaping (Value?) -> Void,
+    perform action: @escaping (Value?) -> Void,
   ) -> some View {
-    modifier(EnvironmentSyncModifier(keyPath, id: { $0 }, apply: apply))
+    modifier(EnvironmentSyncModifier(keyPath, id: { $0 }, action: action))
   }
 
   /// Observe an optional environment value and perform an action using a custom identity.
@@ -178,9 +178,9 @@ extension View {
   public func syncEnvironment<Value, ID: Equatable>(
     _ keyPath: KeyPath<EnvironmentValues, Value?>,
     id: @escaping (Value?) -> ID,
-    apply: @escaping (Value?) -> Void,
+    perform action: @escaping (Value?) -> Void,
   ) -> some View {
-    modifier(EnvironmentSyncModifier(keyPath, id: id, apply: apply))
+    modifier(EnvironmentSyncModifier(keyPath, id: id, action: action))
   }
 
 }

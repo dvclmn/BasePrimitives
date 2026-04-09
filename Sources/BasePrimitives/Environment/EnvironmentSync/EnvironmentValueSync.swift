@@ -11,19 +11,19 @@ struct EnvironmentSyncModifier<Value, ID: Equatable>: ViewModifier {
 
   @Environment private var value: Value
   let id: (Value) -> ID
-  let apply: (Value) -> Void
+  let action: (Value) -> Void
 
   init(
     _ keyPath: KeyPath<EnvironmentValues, Value>,
     id: @escaping (Value) -> ID,
-    apply: @escaping (Value) -> Void,
+    action: @escaping (Value) -> Void,
   ) {
     _value = Environment(keyPath)
     self.id = id
-    self.apply = apply
+    self.action = action
   }
 
   func body(content: Content) -> some View {
-    content.task(id: id(value)) { apply(value) }
+    content.task(id: id(value)) { action(value) }
   }
 }

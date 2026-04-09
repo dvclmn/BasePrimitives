@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// The sizing behavior of `Button`s and other button-like controls.
+/// The sizing behaviour of `Button`s and other button-like controls.
 public enum ButtonSizingCompatible: Hashable, Sendable {
   case automatic
   case flexible

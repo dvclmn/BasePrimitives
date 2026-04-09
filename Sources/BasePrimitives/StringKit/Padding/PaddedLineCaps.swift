@@ -16,7 +16,7 @@ public enum TextPadAlignment: Sendable, Hashable {
 public enum OddPaddingPolicy: Sendable, Hashable {
   case reduce  // shrink width by 1 to make padding even
   case expand  // grow width by 1 to make padding even
-  case tolerate  // accept uneven sides (current behavior)
+  case tolerate  // accept uneven sides (current behaviour)
 }
 
 public struct LineCaps: Sendable, Hashable {
