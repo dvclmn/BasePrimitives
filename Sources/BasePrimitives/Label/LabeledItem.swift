@@ -11,6 +11,8 @@ import Foundation
 /// for some flexibility over in DisplayString
 public protocol LabeledItem: Identifiable {
   var id: Self.ID { get }
+//  var title: String { get }
+//  var icon: String? { get }
   var label: QuickLabel { get }
   var blurb: String? { get }
 }
@@ -23,5 +25,6 @@ extension LabeledItem {
 /// No guarantee that the string will be correctly formatted though, in terms of casing.
 extension LabeledItem where Self: RawRepresentable, Self.RawValue == String {
   public var id: String { rawValue }
+//  public var title: String { rawValue.capitalizedFirstLetter }
   public var label: QuickLabel { .init(rawValue.capitalizedFirstLetter) }
 }

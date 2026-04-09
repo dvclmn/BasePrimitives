@@ -118,7 +118,7 @@ extension View {
   ///   print("Scene phase changed to: \(phase)")
   /// }
   /// ```
-  public func syncEnvironment<Value: Equatable>(
+  public func onEnvironmentChange<Value: Equatable>(
     _ keyPath: KeyPath<EnvironmentValues, Value>,
     perform action: @escaping (Value) -> Void,
   ) -> some View {
@@ -140,7 +140,7 @@ extension View {
   ///   // Only called when token changes
   /// }
   /// ```
-  public func syncEnvironment<Value, ID: Equatable>(
+  public func onEnvironmentChange<Value, ID: Equatable>(
     _ keyPath: KeyPath<EnvironmentValues, Value>,
     id: @escaping (Value) -> ID,
     perform action: @escaping (Value) -> Void,
@@ -155,7 +155,7 @@ extension View {
   /// - Parameters:
   ///   - keyPath: The environment key path to observe.
   ///   - apply: A closure invoked with the latest value.
-  public func syncEnvironment<Value: Equatable>(
+  public func onEnvironmentChange<Value: Equatable>(
     _ keyPath: KeyPath<EnvironmentValues, Value?>,
     perform action: @escaping (Value?) -> Void,
   ) -> some View {
@@ -175,7 +175,7 @@ extension View {
   ///   // Only called when token changes
   /// }
   /// ```
-  public func syncEnvironment<Value, ID: Equatable>(
+  public func onEnvironmentChange<Value, ID: Equatable>(
     _ keyPath: KeyPath<EnvironmentValues, Value?>,
     id: @escaping (Value?) -> ID,
     perform action: @escaping (Value?) -> Void,
