@@ -1,5 +1,5 @@
 //
-//  Focus.swift
+//  StateBindable.swift
 //  Collection
 //
 //  Created by Dave Coleman on 3/2/2025.
@@ -25,12 +25,12 @@ where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable
   @State private var debouncer: AsyncDebouncer?
 
   let handlerValue: HandlerBinding
-  let viewValue: ViewBinding
+  let viewValue: ViewBinding?
 
   init(
     debounce: DebounceMode,
     handlerValue: HandlerBinding,
-    viewValue: ViewBinding
+    viewValue: ViewBinding?,
   ) {
     self._debouncer = debounce.createDebouncer()
     self.handlerValue = handlerValue
@@ -43,14 +43,15 @@ where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable
         guard !self.hasAppeared else { return }
         self.hasAppeared = true
 
-        guard self.viewValue.wrappedValue != self.handlerValue.wrappedValue else { return }
+        guard let viewValue else { return }
+        guard viewValue.wrappedValue != self.handlerValue.wrappedValue else { return }
 
         if let debouncer {
           debouncer.execute { @MainActor in
-            self.viewValue.wrappedValue = self.handlerValue.wrappedValue
+            viewValue.wrappedValue = self.handlerValue.wrappedValue
           }
         } else {
-          self.viewValue.wrappedValue = self.handlerValue.wrappedValue
+          viewValue.wrappedValue = self.handlerValue.wrappedValue
         }
       }
 
@@ -66,7 +67,7 @@ where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable
 
       }
 
-      .onChange(of: self.viewValue.wrappedValue) { _, newValue in
+      .onChange(of: self.viewValue?.wrappedValue) { _, newValue in
         if let debouncer {
           debouncer.execute { @MainActor in
             viewDidChange(newValue)
@@ -80,16 +81,18 @@ where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable
 }
 
 extension Bind {
-  private func viewDidChange(_ newValue: ViewBinding.Value) {
+  private func viewDidChange(_ newValue: ViewBinding.Value?) {
+    guard let newValue else { return }
     guard self.handlerValue.wrappedValue != newValue
     else { return }
     self.handlerValue.wrappedValue = newValue
   }
 
   private func handlerDidChange(_ newValue: HandlerBinding.Value) {
-    guard self.viewValue.wrappedValue != newValue
+    guard let viewValue else { return }
+    guard viewValue.wrappedValue != newValue
     else { return }
-    self.viewValue.wrappedValue = newValue
+    viewValue.wrappedValue = newValue
   }
 }
 
@@ -98,14 +101,14 @@ extension View {
   public func bindModel<HandlerValue: _Bindable, ViewValue: _Bindable>(
     debounce: DebounceMode,
     _ handlerValue: HandlerValue,
-    to viewValue: ViewValue
+    to viewValue: ViewValue?,
   ) -> some View
   where HandlerValue.Value == ViewValue.Value, HandlerValue.Value: Equatable {
     self.modifier(
       Bind(
         debounce: debounce,
         handlerValue: handlerValue,
-        viewValue: viewValue
+        viewValue: viewValue,
       )
     )
   }

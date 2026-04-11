@@ -20,7 +20,7 @@ extension Sequence where Element: Identifiable {
 }
 extension Sequence where Element: Hashable {
   /// Creates a dictionary from the elements in the sequence with the same default value.
-  public func dictionaryWithDefault<T>(_ defaultValue: T) -> [Element: T] {
+  public func dictionaryWithDefault<T>(of defaultValue: T) -> [Element: T] {
     Dictionary(uniqueKeysWithValues: self.map { ($0, defaultValue) })
   }
 }

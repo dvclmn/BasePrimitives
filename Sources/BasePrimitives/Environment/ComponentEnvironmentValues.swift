@@ -27,6 +27,7 @@ extension EnvironmentValues {
 
   /// I think this should be removed, and callers just access `viewportRect`
   /// directly and get the size from there
+  @available(*, deprecated, message: "Use `viewportRect.size` instead")
   public var viewportSize: CGSize? { viewportRect?.size }
 
   /// Strokes

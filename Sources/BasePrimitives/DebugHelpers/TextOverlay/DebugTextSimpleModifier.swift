@@ -37,7 +37,7 @@ struct DebugTextSimpleOverlayModifier: ViewModifier {
       //        self.gatheredText = newText.joined(separator: "\n")
       //      }
       .overlay(alignment: alignment) {
-        if isEnabled {
+        if isEnabled, !text.isEmpty {
           Text(text)
             .fixedSize(horizontal: true, vertical: false)
             .font(.caption)

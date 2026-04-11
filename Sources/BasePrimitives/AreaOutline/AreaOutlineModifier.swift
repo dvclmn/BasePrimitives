@@ -35,11 +35,4 @@ extension View {
       )
     )
   }
-
-  /// If no values specifed, will default to Environment values
-  //  public func areaOutline(_ outline: AreaOutline) -> some View {
-  //    self.modifier(
-  //      AreaOutlineModifier(outline: outline)
-  //    )
-  //  }
 }
