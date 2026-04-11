@@ -11,7 +11,7 @@ let package = Package(
 
   products: [
     .library(name: "BasePrimitives", targets: ["BasePrimitives"]),
-    .library(name: "VectorKit", targets: ["VectorKit"])
+//    .library(name: "VectorKit", targets: ["VectorKit"])
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
@@ -20,8 +20,8 @@ let package = Package(
     .target(
       name: "BasePrimitives"
     ),
-    .target(
-      name: "VectorKit"
-    )
+//    .target(
+//      name: "VectorKit"
+//    )
   ],
 )

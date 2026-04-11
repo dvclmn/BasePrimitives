@@ -11,29 +11,29 @@ extension UnitPoint {
 
   public var opposing: UnitPoint {
     switch self {
-      case .top: return .bottom
-      case .bottom: return .top
-      case .leading: return .trailing
-      case .trailing: return .leading
-      case .topLeading: return .bottomTrailing
-      case .topTrailing: return .bottomLeading
-      case .bottomLeading: return .topTrailing
-      case .bottomTrailing: return .topLeading
-      default: return .center
+      case .top: .bottom
+      case .bottom: .top
+      case .leading: .trailing
+      case .trailing: .leading
+      case .topLeading: .bottomTrailing
+      case .topTrailing: .bottomLeading
+      case .bottomLeading: .topTrailing
+      case .bottomTrailing: .topLeading
+      default: .center
     }
   }
 
   public var toAlignment: Alignment {
     switch self {
-      case .top: return .top
-      case .bottom: return .bottom
-      case .leading: return .leading
-      case .trailing: return .trailing
-      case .topLeading: return .topLeading
-      case .topTrailing: return .topTrailing
-      case .bottomLeading: return .bottomLeading
-      case .bottomTrailing: return .bottomTrailing
-      default: return .center
+      case .top: .top
+      case .bottom: .bottom
+      case .leading: .leading
+      case .trailing: .trailing
+      case .topLeading: .topLeading
+      case .topTrailing: .topTrailing
+      case .bottomLeading: .bottomLeading
+      case .bottomTrailing: .bottomTrailing
+      default: .center
     }
   }
 

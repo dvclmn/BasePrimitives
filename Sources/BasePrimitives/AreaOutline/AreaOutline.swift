@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+/// The main hook of this type is centralising the common task
+/// of maintaining a consistent 'thing' across zoom levels, with
+/// an optional bias when reaching outer extremities.
+///
+/// Tbh, I should probably wrap that up better so it's not so
+/// *outline* focused, and then expose tiny helpers. Later.
 @_spi(Internals) public struct AreaOutline {
   public let colour: Color
   public let rounding: Double

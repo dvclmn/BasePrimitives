@@ -29,7 +29,6 @@ import SwiftUI
   }
 
   public var body: some View {
-
     RoundedRectangle(cornerRadius: outline.resolvedOutline(in: env).rounding)
       .fill(.clear)
       .stroke(
