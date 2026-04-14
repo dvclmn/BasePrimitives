@@ -13,6 +13,11 @@ public struct CoordinateSpaceMapper {
   /// Captured via Anchor preference key in `CanvasCoreView`.
   /// Rect origin represents pan offset, rect size represents
   /// canvas size scaled by zoom.
+  ///
+  /// Trying to think; when could I avoid recomputing this, or is
+  /// it too cheap to bother? Currently it's 'rebuilt' on *any*
+  /// interaction, whereas maybe it could be invalidated only
+  /// when artwork frame or zoom *actually* change/
   public let artworkFrame: Rect<ScreenSpace>
   public let zoom: Double
 
