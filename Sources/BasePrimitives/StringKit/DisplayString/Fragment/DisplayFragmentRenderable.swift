@@ -7,12 +7,21 @@
 
 /// This exists to
 public protocol DisplayFragmentRenderable: Sendable {
+  
   func render(
-    format: FloatDisplayFormat,
-    labelStyle: AbbreviableLabel.Style,
+    using format: FloatDisplayFormat,
+    with labelStyle: AbbreviableLabel.Style,
+    delimiter: String,
   ) -> String
 }
 
-//extension String: DisplayFragmentRenderable {
-//  public func render(using format: FloatDisplayFormat) -> String { self }
-//}
+extension String: DisplayFragmentRenderable {
+  /// This is a passthrough, does nothing. Could probably be modelled better
+  public func render(
+    using format: FloatDisplayFormat,
+    with labelStyle: AbbreviableLabel.Style,
+    delimiter: String,
+  ) -> String { self }
+}
+
+

@@ -8,14 +8,29 @@
 /// IIRC, there was an issue with holding an `any `
 /// Type-erased box
 public struct DisplayFragment: Sendable {
-  private let _render: @Sendable (FloatDisplayFormat) -> String
+  private let _render: @Sendable (FloatDisplayFormat, AbbreviableLabel.Style, String) -> String
 
+  //  public init(from string: String) {
+  //    //  public init<R: DisplayFragmentRenderable>(_ base: R) {
+  //    self._render = { _, _ in
+  ////      base.render(using: format, with: style)
+  //      string
+  //    }
+  //  }
+
+  //  public init<T: FloatComponentsLabeled>(_ base: T) {
   public init<R: DisplayFragmentRenderable>(_ base: R) {
-    self._render = { format in base.render(using: format) }
+    self._render = { format, style, delimiter in
+      base.render(using: format, with: style, delimiter: delimiter)
+    }
   }
 
-  public func render(using format: FloatDisplayFormat) -> String {
-    _render(format)
+  public func render(
+    using format: FloatDisplayFormat,
+    with labelStyle: AbbreviableLabel.Style,
+    delimiter: String,
+  ) -> String {
+    _render(format, labelStyle, delimiter)
   }
 }
 
@@ -24,7 +39,8 @@ public struct DisplayFragment: Sendable {
 extension DisplayFragment {
   public static func make(from value: Any?) -> DisplayFragment {
     switch value {
-      case let result as DisplayFragmentRenderable:
+      case let result as FloatComponentsLabeled:
+        //      case let result as DisplayFragmentRenderable:
         return DisplayFragment(result)
 
       case let val as CustomStringConvertible:

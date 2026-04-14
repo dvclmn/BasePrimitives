@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public protocol FloatFormattable: BinaryFloatingPoint, DisplayPresetRenderable {
-//public protocol FloatFormattable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {
+//public protocol FloatFormattable: BinaryFloatingPoint, DisplayPresetRenderable {
+public protocol FloatFormattable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {
   func render(using format: FloatDisplayFormat) -> String
 }
 
@@ -17,6 +17,15 @@ public typealias NumberGrouping = FloatingPointFormatStyle<Double>.Configuration
 extension FloatFormattable {
   public func displayString(_ preset: FloatDisplayPreset) -> String {
     render(using: preset.format)
+  }
+
+  /// Conformance to `DisplayFragmentRenderable`
+  public func render(
+    using format: FloatDisplayFormat,
+    with labelStyle: AbbreviableLabel.Style,
+    delimiter: String,
+  ) -> String {
+    render(using: format)
   }
 }
 
@@ -33,4 +42,3 @@ extension FloatFormattable {
 extension Double: FloatFormattable {}
 extension CGFloat: FloatFormattable {}
 extension Float: FloatFormattable {}
-
