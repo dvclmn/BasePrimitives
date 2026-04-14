@@ -43,7 +43,7 @@ extension DisplayStringBuilder {
 
   /// Overloads for dedicated Block Types ``Labeled``, ``Indented``, ``Divider`` etc
   public static func buildExpression(_ value: Labeled) -> [DisplayBlock] {
-    [value.block]
+    [.labeled(value)]
   }
 
   public static func buildExpression(_ value: Indented) -> [DisplayBlock] {

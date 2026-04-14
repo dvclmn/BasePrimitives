@@ -19,7 +19,7 @@ public struct AbbreviableLabel: Sendable {
 
   public init(
     _ label: String,
-    abbreviated: String? = nil
+    abbreviated: String? = nil,
   ) {
     self.label = label
     self.abbreviated = abbreviated

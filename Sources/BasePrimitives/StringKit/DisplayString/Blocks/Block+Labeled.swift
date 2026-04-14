@@ -26,17 +26,20 @@ public struct Labeled: Sendable {
 
   /// Per-item float format override. Inherits from context when `nil`.
   public let formatOverride: FloatDisplayFormat?
+  public var styleOverride: AbbreviableLabel.Style?
 
-  public init(
+  init(
     key: AbbreviableLabel,
     value: DisplayFragment?,
     separator: String = ": ",
     formatOverride: FloatDisplayFormat? = nil,
+    styleOverride: AbbreviableLabel.Style? = nil,
   ) {
     self.key = key
     self.separator = separator
     self.value = value
     self.formatOverride = formatOverride
+    self.styleOverride = styleOverride
   }
 }
 
@@ -74,7 +77,8 @@ extension Labeled {
     )
   }
 
-  /// Convenience init for `FloatComponentsLabeled` components — takes a `FloatFormattable` value directly.
+  /// Convenience init for `FloatComponentsLabeled` components.
+  /// Takes a `FloatFormattable` value directly.
   public init(
     _ label: String,
     abbreviated: String? = nil,
@@ -91,9 +95,8 @@ extension Labeled {
 
 // MARK: - Rendering
 
-extension Labeled {
-
-  public var block: DisplayBlock { .labeled(self) }
+/// Allows exposure to BaseHelpers, for InfoBar, without leaking to user-facing API
+@_spi(Internals) extension Labeled {
 
   /// Renders the label text only (no value or separator).
   public func labelPart(with style: AbbreviableLabel.Style = .standard) -> String? {
@@ -109,17 +112,18 @@ extension Labeled {
   /// Renders `"<label><separator><value>"`, e.g. `"W 260"`.
   /// Pass `.none` for `labelStyle` to suppress the label entirely.
   /// Returns `nil` if all parts are absent.
-  public func toString(
+  package func toString(
     labelStyle: AbbreviableLabel.Style = .standard,
     using format: FloatDisplayFormat = .default,
   ) -> String {
     let effectiveFormat = formatOverride ?? format
-    let label: String? = labelPart(with: labelStyle)
-    let separatorString: String? = label != nil ? separator.toString : nil
+    let effectiveStyle = styleOverride ?? labelStyle
+    
+    let label: String? = labelPart(with: effectiveStyle)
+    let sep: String? = label != nil ? separator.toString : nil
     let value: String? = valuePart(using: effectiveFormat)
 
-    let result = [label, separatorString, value].compactMap { $0 }.joined()
+    let result = [label, sep, value].compactMap { $0 }.joined()
     return result
-//    return result.isEmpty ? nil : result
   }
 }

@@ -19,7 +19,7 @@ public protocol FloatComponentsLabeled: DisplayFragmentRenderable, DisplayPreset
   /// E.g. `[("W", 260), ("H", 410)]` for a `CGSize`.
   var components: [Labeled] { get }
 
-  func renderProperties(
+  func renderComponents(
     labelStyle: AbbreviableLabel.Style,
     using format: FloatDisplayFormat,
     delimiter: String,
@@ -30,18 +30,18 @@ extension FloatComponentsLabeled {
 
   /// Convenience: render with a preset (uses `.standard` label style).
   public func displayString(_ preset: FloatDisplayPreset) -> String {
-    renderProperties(labelStyle: .standard, using: preset.format)
+    renderComponents(labelStyle: .standard, using: preset.format)
   }
 
   /// `DisplayFragmentRenderable` conformance — renders with default label style.
   public func render(using format: FloatDisplayFormat) -> String {
-    renderProperties(labelStyle: .standard, using: format)
+    renderComponents(labelStyle: .standard, using: format)
   }
 }
 
 extension FloatComponentsLabeled {
 
-  public func renderProperties(
+  public func renderComponents(
     labelStyle: AbbreviableLabel.Style = .standard,
     using format: FloatDisplayFormat = .default,
     delimiter: String = ", ",
