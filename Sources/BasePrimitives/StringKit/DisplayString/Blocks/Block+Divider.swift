@@ -13,8 +13,6 @@ public struct Divider {
   }
 }
 
-/// Have removed this as `DisplayRenderable` and `FloatRenderable`
-/// is actually the same thing, and I think is only needed for floats (which Divider isn't)
 extension Divider: StringRenderable {
   public var toString: String { value }
 }

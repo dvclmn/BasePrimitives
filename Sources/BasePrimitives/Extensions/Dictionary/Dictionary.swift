@@ -11,18 +11,14 @@ extension Dictionary where Key: CustomStringConvertible, Value: CustomStringConv
   public func displayString<T: Comparable>(
     sortedBy keyPath: KeyPath<Element, T>,
     keyValueSeparator: String = ": ",
-    pairSeparator: String = ", "
+    pairSeparator: String = ", ",
   ) -> String {
     sorted(by: keyPath)
       .map { $0.key.description + keyValueSeparator + $0.value.description }
       .joined(separator: pairSeparator)
   }
 
-  public func prettyPrinted(
-    //  public func prettyPrinted<T: Comparable>(
-    aligned: Bool = true,
-    //    sortedBy keyPath: KeyPath<Element, T>,
-  ) -> String {
+  public func prettyPrinted(aligned: Bool = true) -> String {
     guard !isEmpty else { return "[:]" }
 
     let pairs = map {
@@ -47,33 +43,6 @@ extension Dictionary where Key: CustomStringConvertible, Value: CustomStringConv
 
     return "[\n\(lines.joined(separator: "\n"))\n]"
   }
-
-  //  func prettyPrint(aligned: Bool = true) {
-  //    print(prettyPrinted(aligned: aligned))
-  //  }
-
-  //extension Dictionary: StringRenderable where Key: StringRenderable, Value: StringRenderable {
-
-  //        (
-  //          "Elements",
-  //          store.userData().elementDefaults
-  //            .sorted(by: \.key.id)
-  //            .map { $0.key.rawValue + ": " + $0.value.toString }
-  //            .joined(separator: ", ")
-  //        ),
-  //        ("Element Defaults", store.userData.elementDefaults.count.toString),
-  //  public var toString: String { map(\.toString).joined(separator: ", ") }
-  //}
-
-  //  public func displayString() -> String {
-  //    guard !self.isEmpty else { return "nil" }
-  //
-  //    let formattedPairs = self.map { key, value in
-  //      "  | \"\(key)\": \"\(value)\""
-  //    }
-  //
-  //    return "\n" + formattedPairs.joined(separator: "\n")
-  //  }
 }
 
 extension Dictionary {
@@ -89,7 +58,7 @@ extension Dictionary {
   /// ```
   public init<S: Sequence>(
     grouping values: S,
-    by keyPath: KeyPath<S.Element, Key>
+    by keyPath: KeyPath<S.Element, Key>,
   ) where Value == [S.Element] {
     //    print("Performed a grouping operation for \(Array(values).count) values, at \(Date.debug)")
     self.init(grouping: values, by: { $0[keyPath: keyPath] })

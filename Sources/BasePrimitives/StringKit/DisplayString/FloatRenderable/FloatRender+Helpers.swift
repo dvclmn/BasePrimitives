@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension FloatRenderable {
+extension FloatFormattable {
   public func render(using format: FloatDisplayFormat = .default) -> String {
 
     let result: String

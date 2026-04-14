@@ -75,11 +75,11 @@ extension Labeled {
     )
   }
 
-  /// Convenience init for `PropertiesLabeled` components — takes a `FloatRenderable` value directly.
+  /// Convenience init for `PropertiesLabeled` components — takes a `FloatFormattable` value directly.
   public init(
     _ label: String,
     abbreviated: String? = nil,
-    value: any FloatRenderable,
+    value: any FloatFormattable,
   ) {
     self.init(
       key: AbbreviableLabel(label, abbreviated: abbreviated),

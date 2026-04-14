@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-public protocol FloatRenderable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {
+public protocol FloatFormattable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {
   func render(using format: FloatDisplayFormat) -> String
 }
 public typealias NumberGrouping = FloatingPointFormatStyle<Double>.Configuration.Grouping
 
-extension FloatRenderable {
+extension FloatFormattable {
   public func displayString(_ preset: FloatDisplayPreset) -> String {
     render(using: preset.format)
   }
 }
 
 /// This protocol combo is unlikely to exist, but just in case
-extension FloatRenderable where Self: PropertiesLabeled {
+extension FloatFormattable where Self: PropertiesLabeled {
   public var displayString: String {
     renderProperties(using: .default)
   }
@@ -28,7 +28,7 @@ extension FloatRenderable where Self: PropertiesLabeled {
   }
 }
 
-extension Double: FloatRenderable {}
-extension CGFloat: FloatRenderable {}
-extension Float: FloatRenderable {}
+extension Double: FloatFormattable {}
+extension CGFloat: FloatFormattable {}
+extension Float: FloatFormattable {}
 

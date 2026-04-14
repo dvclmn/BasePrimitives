@@ -11,7 +11,9 @@ public protocol StringRenderable: Sendable {
   var toString: String { get }
 }
 
-extension StringRenderable where Self: FloatRenderable {
+/// Opting in `FloatFormattable` types to being `StringRenderable`
+/// using a basic default
+extension StringRenderable where Self: FloatFormattable {
   public var toString: String { render(using: .default) }
 }
 
@@ -20,7 +22,6 @@ extension StringRenderable where Self: PropertiesLabeled {
 }
 
 // MARK: - String types
-
 extension String: StringRenderable {
   public var toString: String { self }
 }
@@ -38,7 +39,6 @@ extension Substring: StringRenderable {
 }
 
 // MARK: - Primitives
-
 extension Int: StringRenderable {
   public var toString: String { String(self) }
 }
@@ -47,44 +47,12 @@ extension Bool: StringRenderable {
   public var toString: String { self ? "true" : "false" }
 }
 
-// MARK: - Alignment
-extension Alignment: StringRenderable {
-  public var toString: String { self.displayName.standard }
-}
-
 // MARK: - Collections
 extension Array: StringRenderable where Element: StringRenderable {
   public var toString: String { map(\.toString).joined(separator: ", ") }
 }
 
-
-// MARK: - Floats
-
-/// Covered already by FloatRenderable
-//extension Double: StringRenderable {
-//  public var toString: String { String(self) }
-//}
-
-//extension CGFloat: StringRenderable {
-//  public var toString: String { "\(self)" }
-//}
-//
-//extension Float: StringRenderable {
-//  public var toString: String { String(self) }
-//}
-
-
-
-/// Covered already by PropertiesLabeled
-//extension CGSize: StringRenderable {
-//  public var toString: String { rende }
-//}
-
-//extension NSRect: StringRenderable {
-//  public var toString: String { displayString }
-//}
-
-//extension CGPoint: StringRenderable {
-//  public var toString: String { displayString }
-//}
-
+// MARK: - Other
+extension Alignment: StringRenderable {
+  public var toString: String { self.displayName.standard }
+}
