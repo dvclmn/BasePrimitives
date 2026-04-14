@@ -12,7 +12,3 @@ public struct Divider {
     self.value = value
   }
 }
-
-extension Divider: StringRenderable {
-  public var toString: String { value }
-}

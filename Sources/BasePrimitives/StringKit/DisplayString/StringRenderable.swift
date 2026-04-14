@@ -13,13 +13,17 @@ public protocol StringRenderable: Sendable {
 
 /// Opting in `FloatFormattable` types to being `StringRenderable`
 /// using a basic default
-extension StringRenderable where Self: FloatFormattable {
-  public var toString: String { render(using: .default) }
-}
-
-extension StringRenderable where Self: PropertiesLabeled {
-  public var toString: String { renderProperties(using: .default) }
-}
+///
+/// Update: Decided to remove these conditional conformances, to make
+/// the differences between `StringRenderable`, `FloatFormattable`
+/// `PropertiesLabeled` etc clearer. They're achieving different things.
+//extension StringRenderable where Self: FloatFormattable {
+//  public var toString: String { render(using: .default) }
+//}
+//
+//extension StringRenderable where Self: PropertiesLabeled {
+//  public var toString: String { renderProperties(using: .default) }
+//}
 
 // MARK: - String types
 extension String: StringRenderable {

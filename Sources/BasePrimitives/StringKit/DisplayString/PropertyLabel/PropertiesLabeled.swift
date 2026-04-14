@@ -7,13 +7,16 @@
 
 import Foundation
 
-/// A type with multiple named float properties, e.g. `CGPoint` (x, y) or `CGSize` (width, height).
+/// A type with multiple named float properties.
+/// E.g. `CGPoint` (x, y) or `CGSize` (width, height).
 ///
 /// Responsibility: join its `[Labeled]` components with a `ComponentSeparator`.
-/// It does not own block-level separator logic — that lives at the `DisplayBlock`/`DisplayString` layer.
+/// It does not own block-level separator logic — that lives at the
+/// `DisplayBlock`/`DisplayString` layer.
 public protocol PropertiesLabeled: DisplayFragmentRenderable, DisplayPresetRenderable {
 
-  /// The ordered label+value components, e.g. `[("W", 260), ("H", 410)]` for a `CGSize`.
+  /// The ordered label+value components.
+  /// E.g. `[("W", 260), ("H", 410)]` for a `CGSize`.
   var components: [Labeled] { get }
 
   func renderProperties(
