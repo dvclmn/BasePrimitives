@@ -5,6 +5,7 @@
 //  Created by Dave Coleman on 14/4/2026.
 //
 
+/// IIRC, there was an issue with holding an `any `
 /// Type-erased box
 public struct DisplayFragment: Sendable {
   private let _render: @Sendable (FloatDisplayFormat) -> String

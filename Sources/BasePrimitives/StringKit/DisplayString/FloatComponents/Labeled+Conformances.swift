@@ -19,8 +19,14 @@ extension CGPoint: FloatComponentsLabeled {
 extension CGSize: FloatComponentsLabeled {
   public var components: [Labeled] {
     [
-      .init("Width", abbreviated: "W", value: width),
-      .init("Height", abbreviated: "H", value: height),
+      .init(
+        key: AbbreviableLabel("Width", abbreviated: "W"),
+        value: DisplayFragment(width),
+      ),
+      .init(
+        key: AbbreviableLabel("Height", abbreviated: "H"),
+        value: DisplayFragment(height),
+      ),
     ]
   }
 }

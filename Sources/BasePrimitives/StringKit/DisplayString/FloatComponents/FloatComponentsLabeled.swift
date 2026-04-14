@@ -13,7 +13,8 @@ import Foundation
 /// Responsibility: join its `[Labeled]` components with a `ComponentSeparator`.
 /// It does not own block-level separator logic — that lives at the
 /// `DisplayBlock`/`DisplayString` layer.
-public protocol FloatComponentsLabeled: DisplayFragmentRenderable, DisplayPresetRenderable {
+public protocol FloatComponentsLabeled: DisplayPresetRenderable {
+//public protocol FloatComponentsLabeled: DisplayFragmentRenderable, DisplayPresetRenderable {
 
   /// The ordered label+value components.
   /// E.g. `[("W", 260), ("H", 410)]` for a `CGSize`.

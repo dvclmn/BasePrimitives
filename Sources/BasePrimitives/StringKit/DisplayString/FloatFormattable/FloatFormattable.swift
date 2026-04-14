@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-public protocol FloatFormattable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {
+public protocol FloatFormattable: BinaryFloatingPoint, DisplayPresetRenderable {
+//public protocol FloatFormattable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {
   func render(using format: FloatDisplayFormat) -> String
 }
 

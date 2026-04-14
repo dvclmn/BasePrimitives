@@ -6,6 +6,8 @@
 //
 
 extension Labeled {
+  /// This label style applies to any Labeled items in the `value`,
+  /// not to the label style of `Self`
   public func labelStyle(
     _ style: AbbreviableLabel.Style
   ) -> Self {

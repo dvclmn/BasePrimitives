@@ -76,21 +76,6 @@ extension Labeled {
       separator: separator,
     )
   }
-
-  /// Convenience init for `FloatComponentsLabeled` components.
-  /// Takes a `FloatFormattable` value directly.
-  public init(
-    _ label: String,
-    abbreviated: String? = nil,
-    value: any FloatFormattable,
-  ) {
-    self.init(
-      key: AbbreviableLabel(label, abbreviated: abbreviated),
-      value: DisplayFragment(value),
-      separator: " ",
-      formatOverride: nil,
-    )
-  }
 }
 
 // MARK: - Rendering
@@ -99,15 +84,26 @@ extension Labeled {
 @_spi(Internals) extension Labeled {
 
   /// Renders the label text only (no value or separator).
-  public func labelPart(with style: AbbreviableLabel.Style = .standard) -> String? {
-    key.labelText(with: style)
+  /// Have removed the option to pass in a label style for this,
+  /// as these methods are for a display context, not for use
+  /// as the building block for `FloatComponentsLabeled`
+  public func labelPart() -> String? {
+//  public func labelPart(with style: AbbreviableLabel.Style) -> String? {
+    key.labelText(with: .standard)
   }
 
   /// Renders the value only.
-  public func valuePart(using format: FloatDisplayFormat = .default) -> String? {
+  public func valuePart(
+    using format: FloatDisplayFormat,
+    labelStyle: AbbreviableLabel.Style,
+  ) -> String? {
     let effectiveFormat = formatOverride ?? format
     return value?.render(using: effectiveFormat)
   }
+
+}
+
+extension Labeled {
 
   /// Renders `"<label><separator><value>"`, e.g. `"W 260"`.
   /// Pass `.none` for `labelStyle` to suppress the label entirely.
@@ -118,10 +114,13 @@ extension Labeled {
   ) -> String {
     let effectiveFormat = formatOverride ?? format
     let effectiveStyle = styleOverride ?? labelStyle
-    
-    let label: String? = labelPart(with: effectiveStyle)
+
+    let label: String? = labelPart()
     let sep: String? = label != nil ? separator.toString : nil
-    let value: String? = valuePart(using: effectiveFormat)
+    let value: String? = valuePart(
+      using: effectiveFormat,
+      labelStyle: effectiveStyle,
+    )
 
     let result = [label, sep, value].compactMap { $0 }.joined()
     return result
