@@ -1,13 +1,9 @@
 //
-//  DisplayElement.swift
-//  BaseHelpers
+//  DisplayFragment.swift
+//  BasePrimitives
 //
-//  Created by Dave Coleman on 23/2/2026.
+//  Created by Dave Coleman on 14/4/2026.
 //
-
-public protocol DisplayFragmentRenderable: Sendable {
-  func render(using format: FloatDisplayFormat) -> String
-}
 
 /// Type-erased box
 public struct DisplayFragment: Sendable {
@@ -20,10 +16,6 @@ public struct DisplayFragment: Sendable {
   public func render(using format: FloatDisplayFormat) -> String {
     _render(format)
   }
-}
-
-extension String: DisplayFragmentRenderable {
-  public func render(using format: FloatDisplayFormat) -> String { self }
 }
 
 /// `DisplayBlock(from: Any?)` can just become `.text(.make(from: value))`

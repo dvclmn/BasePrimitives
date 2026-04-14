@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension CGPoint: PropertiesLabeled {
+extension CGPoint: FloatComponentsLabeled {
   public var components: [Labeled] {
     [
       .init("X", value: x),
@@ -16,7 +16,7 @@ extension CGPoint: PropertiesLabeled {
   }
 }
 
-extension CGSize: PropertiesLabeled {
+extension CGSize: FloatComponentsLabeled {
   public var components: [Labeled] {
     [
       .init("Width", abbreviated: "W", value: width),
@@ -25,11 +25,11 @@ extension CGSize: PropertiesLabeled {
   }
 }
 
-extension NSRect: PropertiesLabeled {
+extension NSRect: FloatComponentsLabeled {
   public var components: [Labeled] { origin.components + size.components }
 }
 
-extension UnitPoint: PropertiesLabeled {
+extension UnitPoint: FloatComponentsLabeled {
   public var components: [Labeled] {
     [
       .init("X", value: x),
@@ -38,7 +38,7 @@ extension UnitPoint: PropertiesLabeled {
   }
 }
 
-extension CGVector: PropertiesLabeled {
+extension CGVector: FloatComponentsLabeled {
   public var components: [Labeled] {
     [
       .init("DX", value: dx),

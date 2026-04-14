@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 17/11/2025.
 //
 
-public struct Divider {
+public struct Divider: Sendable {
   public let value: String
 
   public init(value: String = "----------\n") {

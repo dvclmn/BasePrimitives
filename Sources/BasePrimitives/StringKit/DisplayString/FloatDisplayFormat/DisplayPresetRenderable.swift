@@ -6,13 +6,13 @@
 //
 
 /// This somewhat joins `FloatFormattable`
-/// and `PropertiesLabeled` a bit? I think?
+/// and `FloatComponentsLabeled` a bit? I think?
 ///
 /// Except it only exposes a `FloatDisplayPreset`,
 /// not the full flexibility of `FloatDisplayFormat`.
 ///
 /// This is meant as a more concise API for quick use in UI etc.
-/// Can dip to `FloatFormattable`/`PropertiesLabeled`
+/// Can dip to `FloatFormattable`/`FloatComponentsLabeled`
 /// for more control
 public protocol DisplayPresetRenderable: Sendable {
   var displayString: String { get }

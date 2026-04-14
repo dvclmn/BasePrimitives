@@ -14,7 +14,7 @@ public enum DisplayBlock: Sendable {
   case text(DisplayFragment)
   case labeled(Labeled)
   case indented(Indented)
-  case divider(String)
+  case divider(Divider)
 }
 
 extension DisplayBlock {
@@ -34,7 +34,7 @@ extension DisplayBlock {
           label.toString(labelStyle: labelStyle, using: format)
 
         case .divider(let text):
-          text
+          text.value
 
         case .indented(let indented):
           indented.render(labelStyle: labelStyle, using: format)

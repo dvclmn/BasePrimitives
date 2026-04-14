@@ -16,12 +16,12 @@ public protocol StringRenderable: Sendable {
 ///
 /// Update: Decided to remove these conditional conformances, to make
 /// the differences between `StringRenderable`, `FloatFormattable`
-/// `PropertiesLabeled` etc clearer. They're achieving different things.
+/// `FloatComponentsLabeled` etc clearer. They're achieving different things.
 //extension StringRenderable where Self: FloatFormattable {
 //  public var toString: String { render(using: .default) }
 //}
 //
-//extension StringRenderable where Self: PropertiesLabeled {
+//extension StringRenderable where Self: FloatComponentsLabeled {
 //  public var toString: String { renderProperties(using: .default) }
 //}
 

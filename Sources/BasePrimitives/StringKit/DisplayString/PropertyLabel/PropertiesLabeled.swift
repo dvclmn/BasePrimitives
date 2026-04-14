@@ -13,7 +13,7 @@ import Foundation
 /// Responsibility: join its `[Labeled]` components with a `ComponentSeparator`.
 /// It does not own block-level separator logic — that lives at the
 /// `DisplayBlock`/`DisplayString` layer.
-public protocol PropertiesLabeled: DisplayFragmentRenderable, DisplayPresetRenderable {
+public protocol FloatComponentsLabeled: DisplayFragmentRenderable, DisplayPresetRenderable {
 
   /// The ordered label+value components.
   /// E.g. `[("W", 260), ("H", 410)]` for a `CGSize`.
@@ -26,7 +26,7 @@ public protocol PropertiesLabeled: DisplayFragmentRenderable, DisplayPresetRende
   ) -> String
 }
 
-extension PropertiesLabeled {
+extension FloatComponentsLabeled {
 
   /// Convenience: render with a preset (uses `.standard` label style).
   public func displayString(_ preset: FloatDisplayPreset) -> String {
@@ -39,7 +39,7 @@ extension PropertiesLabeled {
   }
 }
 
-extension PropertiesLabeled {
+extension FloatComponentsLabeled {
 
   public func renderProperties(
     labelStyle: AbbreviableLabel.Style = .standard,
@@ -47,7 +47,7 @@ extension PropertiesLabeled {
     delimiter: String = ", ",
   ) -> String {
     components
-      .map { $0.toString(labelStyle: labelStyle, using: format) ?? "" }
+      .map { $0.toString(labelStyle: labelStyle, using: format) }
       .joined(delimiter)
   }
 }

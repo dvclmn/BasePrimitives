@@ -51,7 +51,7 @@ extension DisplayStringBuilder {
   }
 
   public static func buildExpression(_ value: Divider) -> [DisplayBlock] {
-    [.divider(value.value)]
+    [.divider(value)]
   }
 
   public static func buildExpression(_ value: IndentedLines) -> [DisplayBlock] {

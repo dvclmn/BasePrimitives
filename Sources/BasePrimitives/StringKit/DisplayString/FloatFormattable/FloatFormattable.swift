@@ -20,7 +20,7 @@ extension FloatFormattable {
 }
 
 /// This protocol combo is unlikely to exist, but just in case
-extension FloatFormattable where Self: PropertiesLabeled {
+extension FloatFormattable where Self: FloatComponentsLabeled {
   public var displayString: String {
     renderProperties(using: .default)
   }

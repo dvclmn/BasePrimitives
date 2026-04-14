@@ -8,13 +8,13 @@
 import AppKit
 
 /// A label+value pair. Used both as a standalone `DisplayBlock` (e.g. `"Dimensions: 260 x 410"`)
-/// and as an individual component inside `PropertiesLabeled` (e.g. `"W 260"`).
+/// and as an individual component inside `FloatComponentsLabeled` (e.g. `"W 260"`).
 ///
 /// Separator ownership:
 /// - The separator between this label and its value (`separator`, default `" "`) lives here.
 /// - The separator between a top-level block label and its content (e.g. `": "`) is supplied
 ///   by the `DisplayBlock` rendering layer.
-/// - The delimiter between sibling components (e.g. `" x "`) lives on `PropertiesLabeled`.
+/// - The delimiter between sibling components (e.g. `" x "`) lives on `FloatComponentsLabeled`.
 public struct Labeled: Sendable {
 
   public let key: AbbreviableLabel
@@ -74,7 +74,7 @@ extension Labeled {
     )
   }
 
-  /// Convenience init for `PropertiesLabeled` components — takes a `FloatFormattable` value directly.
+  /// Convenience init for `FloatComponentsLabeled` components — takes a `FloatFormattable` value directly.
   public init(
     _ label: String,
     abbreviated: String? = nil,
