@@ -22,7 +22,7 @@ public struct Labeled: Sendable {
 
   /// Separator between the label text and the value,
   /// e.g. the space in `W 260`. Defaults to `" "`.
-  public let separator: ComponentSeparator
+  public let separator: String
 
   /// Per-item float format override. Inherits from context when `nil`.
   public let formatOverride: FloatDisplayFormat?
@@ -30,8 +30,7 @@ public struct Labeled: Sendable {
   public init(
     key: AbbreviableLabel,
     value: DisplayFragment?,
-    separator: ComponentSeparator = .colon,
-    //    separator: String?,
+    separator: String = ": ",
     formatOverride: FloatDisplayFormat? = nil,
   ) {
     self.key = key
@@ -49,7 +48,7 @@ extension Labeled {
   public init(
     _ key: String,
     value: Any?,
-    separator: ComponentSeparator = .colon,
+    separator: String = ": ",
     format: FloatDisplayFormat? = nil,
   ) {
     self.init(
@@ -66,7 +65,7 @@ extension Labeled {
     data: C,
     maxItems: Int? = nil,
     showCount: Bool = true,
-    separator: ComponentSeparator = .colon,
+    separator: String = ": ",
   ) {
     self.init(
       key: AbbreviableLabel(key),
@@ -84,7 +83,7 @@ extension Labeled {
     self.init(
       key: AbbreviableLabel(label, abbreviated: abbreviated),
       value: DisplayFragment(value),
-      separator: .space,
+      separator: " ",
       formatOverride: nil,
     )
   }
@@ -113,13 +112,14 @@ extension Labeled {
   public func toString(
     labelStyle: AbbreviableLabel.Style = .standard,
     using format: FloatDisplayFormat = .default,
-  ) -> String? {
+  ) -> String {
     let effectiveFormat = formatOverride ?? format
     let label: String? = labelPart(with: labelStyle)
     let separatorString: String? = label != nil ? separator.toString : nil
     let value: String? = valuePart(using: effectiveFormat)
 
     let result = [label, separatorString, value].compactMap { $0 }.joined()
-    return result.isEmpty ? nil : result
+    return result
+//    return result.isEmpty ? nil : result
   }
 }
