@@ -53,7 +53,7 @@ extension FloatComponentsLabeled {
     delimiter: String = ", ",
   ) -> String {
     components
-      .map { $0.toString(labelStyle: labelStyle, using: format) }
+      .map { $0.toString(using: format, with: labelStyle) }
       .joined(delimiter)
   }
 }

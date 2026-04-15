@@ -59,7 +59,7 @@ extension DisplayString {
   }
 
   public var lines: [String] {
-    components.map { $0.render(labelStyle: labelStyle, using: format) }
+    components.map { $0.render(using: format, with: labelStyle) }
   }
 
   public func decimalPlaces(_ places: Int) -> DisplayString {
@@ -86,6 +86,6 @@ extension Array where Element == DisplayBlock {
     labelStyle: AbbreviableLabel.Style = .standard,
     format: FloatDisplayFormat = .default
   ) -> [String] {
-    map { $0.render(labelStyle: labelStyle, using: format) }
+    map { $0.render(using: format, with: labelStyle) }
   }
 }

@@ -27,12 +27,13 @@ public enum Rounding: String, Sendable {
   case down
   case up
   case none
-  
+
   public var name: String { rawValue.capitalized }
 
-  private var rule: FloatingPointRoundingRule? {
+  fileprivate var rule: FloatingPointRoundingRule? {
     switch self {
-      case .down: .towardZero
+      /// This was previously `.towardZero`. Not sure which it should be tbh
+      case .down: .down
       case .up: .up
       case .none: nil
     }
@@ -47,17 +48,17 @@ public enum Rounding: String, Sendable {
   }
 
   /// Returns an integer by rounding the value using the selected Rounding rule.
+  ///
+  /// Note: When rounding is `.none`, the value is still truncated toward zero
+  /// by the `Int` conversion. There is no lossless float-to-Int path.
   public func roundedInt(_ value: CGFloat) -> Int {
     guard let rule else { return Int(value) }
     return Int(value.rounded(rule))
   }
-
-  public func fractionalPart(_ value: CGFloat) -> CGFloat {
-    return value - value.rounded(.towardZero)
-  }
 }
 
 extension BinaryFloatingPoint {
+  
   /// Returns a floating-point value rounded using the specified Rounding rule.
   ///
   /// Example:
@@ -67,8 +68,8 @@ extension BinaryFloatingPoint {
   /// let roundedUp = value.rounded(using: .up)     // 6.0
   /// ```
   public func rounded(using rounding: Rounding) -> Self {
-    let rounded = rounding.roundedIfNeeded(CGFloat(self))
-    return Self(rounded)
+    guard let rule = rounding.rule else { return self }
+    return self.rounded(rule)
   }
 
   /// Returns an integer rounded using the specified Rounding rule.
@@ -82,35 +83,6 @@ extension BinaryFloatingPoint {
   public func roundedInt(using rounding: Rounding) -> Int {
     return rounding.roundedInt(CGFloat(self))
   }
-}
 
-#warning("This seems like a duplicate of the above")
-public enum SnapStrategy {
-  case floor
-  case ceil
-  case round
-}
-
-extension SnapStrategy {
-  func snapped<T: BinaryFloatingPoint>(_ value: T) -> T {
-    switch self {
-      case .floor:
-        return Foundation.floor(value)
-      case .ceil:
-        return Foundation.ceil(value)
-      case .round:
-        return Foundation.round(value)
-    }
-  }
-
-  func snapped(_ value: CGFloat) -> Int {
-    switch self {
-      case .floor:
-        return Int(Foundation.floor(value))
-      case .ceil:
-        return Int(Foundation.ceil(value))
-      case .round:
-        return Int(Foundation.round(value))
-    }
-  }
+  var fractionalPart: Self { self - self.rounded(.towardZero) }
 }

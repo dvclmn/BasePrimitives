@@ -7,10 +7,7 @@
 
 import SwiftUI
 
-public protocol GeometryCapturable: Equatable, Sendable {
-  //  var type: Self.Type { get }
-  //  var transform: @Sendable (GeometryProxy) -> Self { get }
-}
+public protocol GeometryCapturable: Equatable, Sendable {}
 extension CGSize: GeometryCapturable {}
 extension CGRect: GeometryCapturable {}
 extension EdgeInsets: GeometryCapturable {}

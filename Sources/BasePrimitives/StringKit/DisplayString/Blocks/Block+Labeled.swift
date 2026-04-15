@@ -88,17 +88,22 @@ extension Labeled {
   /// as these methods are for a display context, not for use
   /// as the building block for `FloatComponentsLabeled`
   public func labelPart() -> String? {
-//  public func labelPart(with style: AbbreviableLabel.Style) -> String? {
+    //  public func labelPart(with style: AbbreviableLabel.Style) -> String? {
     key.labelText(with: .standard)
   }
 
   /// Renders the value only.
-  public func valuePart(
+  public static func valuePart(
+    for label: Self,
     using format: FloatDisplayFormat,
-    labelStyle: AbbreviableLabel.Style,
+    with labelStyle: AbbreviableLabel.Style,
+    delimiter: String = ", ",
   ) -> String? {
-    let effectiveFormat = formatOverride ?? format
-    return value?.render(using: effectiveFormat)
+    return label.value?.render(
+      using: format,
+      with: labelStyle,
+      delimiter: delimiter,
+    )
   }
 
 }
@@ -109,17 +114,18 @@ extension Labeled {
   /// Pass `.none` for `labelStyle` to suppress the label entirely.
   /// Returns `nil` if all parts are absent.
   package func toString(
-    labelStyle: AbbreviableLabel.Style = .standard,
     using format: FloatDisplayFormat = .default,
+    with labelStyle: AbbreviableLabel.Style = .standard,
   ) -> String {
     let effectiveFormat = formatOverride ?? format
     let effectiveStyle = styleOverride ?? labelStyle
 
     let label: String? = labelPart()
     let sep: String? = label != nil ? separator.toString : nil
-    let value: String? = valuePart(
+    let value: String? = Self.valuePart(
+      for: self,
       using: effectiveFormat,
-      labelStyle: effectiveStyle,
+      with: effectiveStyle,
     )
 
     let result = [label, sep, value].compactMap { $0 }.joined()

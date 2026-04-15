@@ -15,7 +15,7 @@ public struct Indented: Sendable {
 extension Indented {
   public init(
     _ title: String? = nil,
-    @DisplayStringBuilder content: () -> [DisplayBlock]
+    @DisplayStringBuilder content: () -> [DisplayBlock],
   ) {
     self.title = title
     self.content = content()
@@ -27,13 +27,15 @@ extension Indented {
     }
     self.init(title: indentedLines.title, content: blocks)
   }
+
   public func render(
-    labelStyle: AbbreviableLabel.Style = .standard,
-    using format: FloatDisplayFormat
+    using format: FloatDisplayFormat,
+    with labelStyle: AbbreviableLabel.Style = .standard,
   ) -> String {
 
     let content = content.map {
-      $0.render(labelStyle: labelStyle, using: format)
+      $0.render(using: format, with: labelStyle)
+      //      $0.render(labelStyle: labelStyle, using: format)
     }
     let elements = indentedElements(content: content)
 
@@ -47,7 +49,7 @@ extension Indented {
   private func indentedElements(
     content: [String],
     indent: String = "  ",
-    isLastElement: Bool = false
+    isLastElement: Bool = false,
   ) -> [String] {
     var builder = IndentedLineBuilder(indent: indent)
     return builder.build(from: content)

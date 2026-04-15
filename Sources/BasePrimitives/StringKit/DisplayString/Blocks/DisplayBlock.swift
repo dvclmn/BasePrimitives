@@ -22,22 +22,25 @@ extension DisplayBlock {
   /// `labelStyle` is the layer-4 concern: how a top-level block label is displayed.
   /// Default is `.standard`; callers (e.g. `DisplayString`) can override.
   public func render(
-    labelStyle: AbbreviableLabel.Style = .standard,
-    using format: FloatDisplayFormat
+    using format: FloatDisplayFormat,
+    with labelStyle: AbbreviableLabel.Style,
+    delimiter: String = ", ",
+    //    labelStyle: AbbreviableLabel.Style = .standard,
+    //    using format: FloatDisplayFormat
   ) -> String {
     let string: String? =
       switch self {
         case .text(let fragment):
-          fragment.render(using: format)
+          fragment.render(using: format, with: labelStyle, delimiter: delimiter)
 
         case .labeled(let label):
-          label.toString(labelStyle: labelStyle, using: format)
+          label.toString(using: format, with: labelStyle)
 
         case .divider(let text):
           text.value
 
         case .indented(let indented):
-          indented.render(labelStyle: labelStyle, using: format)
+          indented.render(using: format, with: labelStyle)
       }
 
     return string ?? ""

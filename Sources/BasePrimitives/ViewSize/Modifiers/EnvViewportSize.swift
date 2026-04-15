@@ -5,13 +5,11 @@
 //  Created by Dave Coleman on 10/8/2025.
 //
 
-import BasePrimitives
 import SwiftUI
 
 /// Represents the full App Window dimensions, sans
 /// UI elements like sidebar, inspector, toolbar etc.
-public struct EnvironmentViewportSizeModifier: ViewModifier {
-//  @Environment(\.isDebugMode) private var isDebugMode
+public struct EnvironmentViewportRectModifier: ViewModifier {
   @State private var viewportRect: CGRect?
 
   let mode: DebounceMode

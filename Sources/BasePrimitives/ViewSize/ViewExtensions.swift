@@ -21,7 +21,7 @@ extension View {
         capture: capture,
         mode: debounceMode,
         isEnabled: isEnabled,
-        valueOutput: valueOutput
+        valueOutput: valueOutput,
       )
     )
   }
@@ -31,15 +31,9 @@ extension View {
   /// viewport size, and also safe area insets.
   ///
   /// If a callback is needed, see ``viewSize(capture:mode:isEnabled:valueOutput:)``
-  public func viewportCapture(
-    mode debounceMode: DebounceMode,
-    //    showsIndicator: Bool = false,
-  ) -> some View {
+  public func viewportCapture(mode debounceMode: DebounceMode) -> some View {
     self.modifier(
-      EnvironmentViewportSizeModifier(
-        mode: debounceMode,
-        //        showsIndicator: showsIndicator
-      )
+      EnvironmentViewportRectModifier(mode: debounceMode)
     )
   }
 }
