@@ -1,6 +1,6 @@
 //
 //  Clamping.swift
-//  InteractionKit
+//  BasePrimitives
 //
 //  Created by Dave Coleman on 2/4/2026.
 //

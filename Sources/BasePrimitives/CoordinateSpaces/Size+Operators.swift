@@ -1,6 +1,6 @@
 //
 //  Size+Operators.swift
-//  InteractionKit
+//  BasePrimitives
 //
 //  Created by Dave Coleman on 4/4/2026.
 //

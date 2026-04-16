@@ -1,6 +1,6 @@
 //
 //  CatmullRom.swift
-//  LilyPad
+//  Lilypad
 //
 
 import SwiftUI

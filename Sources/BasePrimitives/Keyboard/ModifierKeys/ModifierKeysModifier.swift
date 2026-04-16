@@ -29,6 +29,8 @@ public struct ModifierKeysModifier: ViewModifier {
   @State private var modifierKeys = Modifiers()
 
   let keysToWatch: EventModifiers
+  let onChange: ((Modifiers) -> Void)?
+
   public func body(content: Content) -> some View {
 
     if #available(macOS 15, iOS 18, *) {
@@ -37,7 +39,10 @@ public struct ModifierKeysModifier: ViewModifier {
           mask: keysToWatch,
           initial: true,
         ) { _, new in
-          self.modifierKeys = Modifiers(from: new)
+
+          let modifiers = Modifiers(from: new)
+          self.modifierKeys = modifiers
+          onChange?(modifiers)
         }
         .environment(\.modifierKeys, modifierKeys)
 
@@ -46,7 +51,10 @@ public struct ModifierKeysModifier: ViewModifier {
       content
         .onAppear {
           NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
-            self.modifierKeys = Modifiers(from: event)
+            let modifiers = Modifiers(from: event)
+            self.modifierKeys = modifiers
+            onChange?(modifiers)
+
             return event
           }
         }
@@ -60,7 +68,24 @@ public struct ModifierKeysModifier: ViewModifier {
 }
 
 extension View {
-  public func readModifierKeys(_ keysToWatch: EventModifiers = .all) -> some View {
-    self.modifier(ModifierKeysModifier(keysToWatch: keysToWatch))
+  public func readModifierKeys(_ modifiersToWatch: EventModifiers = .all) -> some View {
+    self.modifier(
+      ModifierKeysModifier(
+        keysToWatch: modifiersToWatch,
+        onChange: nil,
+      )
+    )
+  }
+
+  public func modifierKeys(
+    _ modifiersToWatch: EventModifiers = .all,
+    onChange perform: @escaping (Modifiers) -> Void,
+  ) -> some View {
+    self.modifier(
+      ModifierKeysModifier(
+        keysToWatch: modifiersToWatch,
+        onChange: perform,
+      )
+    )
   }
 }

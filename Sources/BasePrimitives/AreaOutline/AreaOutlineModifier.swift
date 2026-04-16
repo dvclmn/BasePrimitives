@@ -1,6 +1,6 @@
 //
 //  AreaOutlineModifier.swift
-//  InteractionKit
+//  BasePrimitives
 //
 //  Created by Dave Coleman on 5/4/2026.
 //
