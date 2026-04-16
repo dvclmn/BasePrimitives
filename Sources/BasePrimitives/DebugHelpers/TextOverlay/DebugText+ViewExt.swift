@@ -12,7 +12,13 @@ extension View {
     modifier(DebugTextOverlayModifier(alignment: alignment))
   }
 
-  public func debugItem(
+  public func debugText(
+    _ text: String,
+  ) -> some View {
+    modifier(DebugItemModifier(text: text))
+  }
+  
+  public func debugText(
     @DisplayStringBuilder _ text: () -> [DisplayBlock]
   ) -> some View {
     modifier(DebugItemModifier(text: text().output()))

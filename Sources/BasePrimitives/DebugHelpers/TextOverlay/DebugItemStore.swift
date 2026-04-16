@@ -1,5 +1,5 @@
 //
-//  DebugText.swift
+//  DebugItemStore.swift
 //  BasePrimitives
 //
 //  Created by Dave Coleman on 16/4/2026.

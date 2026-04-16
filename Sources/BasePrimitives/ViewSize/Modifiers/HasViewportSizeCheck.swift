@@ -8,14 +8,11 @@
 import SwiftUI
 
 public struct HasViewportSizeCheckModifier: ViewModifier {
-  @Environment(\.viewportSize) private var viewportSize
+//  @Environment(\.viewportSize) private var viewportSize
 
   public func body(content: Content) -> some View {
     content
-      .addDebugText(
-        "No viewport size value in environment",
-        isEnabled: viewportSize == nil
-      )
+      .debugText("No viewport size value in environment")
     //      .backgroundTint(viewportSize == nil ? .red : .black)
   }
 }
