@@ -30,7 +30,7 @@ extension Modifiers {
   ]
 
   /// Default display string uses symbols, e.g. "[􀆕, 􀆔]"
-  var displayString: String {
+  public var displayString: String {
     displayString(using: .icon)
   }
 
@@ -38,7 +38,7 @@ extension Modifiers {
   /// - Parameter elements: Which elements to include for each modifier.
   /// - Returns: A string like "[Option, Command]", "[􀆕, 􀆔]", or
   ///   "[Option 􀆕, Command 􀆔]".
-  func displayString(using elements: ModifierDisplayElements) -> String {
+  public func displayString(using elements: ModifierDisplayElements) -> String {
     /// Build parts in canonical order for stable output
     var parts: [String] = []
 
