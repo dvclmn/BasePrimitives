@@ -11,8 +11,10 @@ extension View {
   public func debugTextOverlay(alignment: Alignment = .bottomLeading) -> some View {
     modifier(DebugTextOverlayModifier(alignment: alignment))
   }
-  
-  public func debugItem(_ text: String) -> some View {
-    modifier(DebugItemModifier(text: text))
+
+  public func debugItem(
+    @DisplayStringBuilder _ text: () -> [DisplayBlock]
+  ) -> some View {
+    modifier(DebugItemModifier(text: text().output()))
   }
 }

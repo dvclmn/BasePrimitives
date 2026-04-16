@@ -9,13 +9,14 @@ import SwiftUI
 
 struct DebugTextOverlayModifier: ViewModifier {
   @State private var store = DebugItemStore()
+  
   var alignment: Alignment
   
   func body(content: Content) -> some View {
     content
-      .environment(store)
       .overlay(alignment: alignment) {
         DebugItemsOverlayView(store: store)
       }
+      .environment(store)
   }
 }
