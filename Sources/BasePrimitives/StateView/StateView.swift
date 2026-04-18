@@ -24,17 +24,15 @@ public struct StateView<Content: View>: View {
   public var body: some View {
 
     VStack {
-      //    DecomposedView(.subview, layout: .vstack(alignment: .center)) {
-      // MARK: - Title
-      TitleView()
+      TitleAndIconView()
         /// Padding to achieve nice vertical optical centering
         .safePaddingCompatible(.top, paddingLength)
 
-      // MARK: - Message
       MessageView()
       additionalContent
     }
     .monospacedDigit()
+    .frame(maxWidth: 380)
     .padding(.vertical, layoutPadding ?? Styles.sizeRegular)
     .padding(.horizontal, layoutPadding ?? Styles.sizeRegular)
   }
@@ -42,18 +40,24 @@ public struct StateView<Content: View>: View {
 
 extension StateView {
 
-  private var paddingLength: CGFloat {
-    (label.icon != nil && !layoutType.isHstack)
-      ? controlSize.scale(iconSize * 1.4)
-      : .zero
+  private var effectiveTitleColour: some ShapeStyle {
+    let base: HierarchicalShapeStyle = .primary
+    let opacity: CGFloat = message != nil ? 1.0 : 0.85
+    return base.opacity(opacity)
   }
+  private var paddingLength: CGFloat {
+    let hasIcon: Bool = label.icon != nil
+    let isHstack: Bool = layoutType.isHstack
+    return hasIcon && !isHstack ? controlSize.scale(iconSize * 1.4) : .zero
+  }
+
   private var iconSize: CGFloat {
     let baseIconSize: CGFloat = 46
     return iconFontSize ?? baseIconSize
   }
 
   @ViewBuilder
-  private func TitleView() -> some View {
+  private func TitleAndIconView() -> some View {
     Group {
       switch layoutType {
         case .hstack:
@@ -70,7 +74,8 @@ extension StateView {
     }  // END group
     .multilineTextAlignment(.center)
     .font(.system(controlSize.textStyle))
-    .foregroundStyle(.secondary)
+    .foregroundStyle(effectiveTitleColour)
+
   }
 
   @ViewBuilder
@@ -85,10 +90,11 @@ extension StateView {
   @ViewBuilder
   private func MessageView() -> some View {
     if let message = message {
-      Text(message)
+      Text(message.toMarkdownCompatible)
         .multilineTextAlignment(.center)
-        .font(.system(size: controlSize.scale(15)))
-        .foregroundStyle(.tertiary)
+        //        .font(.system(size: controlSize.scale(15)))
+        .font(.system(controlSize.textStyle))
+        .foregroundStyle(.secondary.opacity(0.8))
         .padding(.bottom, controlSize.scale(16))
     }
   }
@@ -108,7 +114,7 @@ extension StateView {
   public init(
     _ title: String,
     message: String? = nil,
-    @ViewBuilder additionalContent: () -> Content = { EmptyView() }
+    @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
     self.label = QuickLabel(title)
     self.message = message
@@ -119,7 +125,7 @@ extension StateView {
     _ title: String,
     icon: IconLiteral? = nil,
     message: String? = nil,
-    @ViewBuilder additionalContent: () -> Content = { EmptyView() }
+    @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
     self.label = QuickLabel(title, icon: icon)
     self.message = message
@@ -129,7 +135,7 @@ extension StateView {
   public init(
     label: QuickLabel,
     message: String? = nil,
-    @ViewBuilder additionalContent: () -> Content = { EmptyView() }
+    @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
     self.label = label
     self.message = message

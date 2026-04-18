@@ -52,7 +52,12 @@ struct DebugItemModifier: ViewModifier {
       }
       .overlay {
         if store == nil {
-          Circle().fill(Color.orange.tertiary)
+          StateView(
+            "`DebugItemStore` missing from environment",
+            icon: .emojiComposition(.example),
+            message:
+              "Ensure you add modifier `debugTextOverlay(alignment:)` somewhere high up in your project's view hierarchy.",
+          )
         }
       }
   }

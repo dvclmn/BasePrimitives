@@ -21,7 +21,6 @@ extension ControlSize {
   }
 
   public var textStyle: Font.TextStyle {
-    //  public var fontSize: CGFloat {
     switch self {
       case .mini: .caption2
       case .small: .callout
@@ -34,9 +33,8 @@ extension ControlSize {
 
   public func scale(
     _ value: CGFloat,
-    //    for controlSize: ControlSize,
     by strength: CGFloat = 1.0,
-    min: CGFloat = 0
+    min: CGFloat = 0,
   ) -> CGFloat {
     let result = value * self.scaleFactor * strength
     return max(min, result)

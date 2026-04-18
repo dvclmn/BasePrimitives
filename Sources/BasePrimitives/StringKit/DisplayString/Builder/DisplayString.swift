@@ -12,7 +12,7 @@ public struct DisplayString {
   private let components: [DisplayBlock]
 
   /// Separator inserted between each top-level block. Defaults to `"\n"`.
-  private let separator: String
+  private let lineSeparator: String
 
   /// How individual float values are formatted.
   private let format: FloatDisplayFormat
@@ -28,7 +28,7 @@ public struct DisplayString {
     labelStyle: AbbreviableLabel.Style
   ) {
     self.components = components
-    self.separator = separator
+    self.lineSeparator = separator
     self.format = format
     self.labelStyle = labelStyle
   }
@@ -42,7 +42,7 @@ extension DisplayString {
     labelStyle: AbbreviableLabel.Style = .standard,
     @DisplayStringBuilder _ content: () -> [DisplayBlock]
   ) {
-    self.separator = separator
+    self.lineSeparator = separator
     self.format = format
     self.labelStyle = labelStyle
     self.components = content()
@@ -52,7 +52,7 @@ extension DisplayString {
 extension DisplayString {
   public var text: String {
     components.output(
-      separator: separator,
+      lineSeparator: lineSeparator,
       labelStyle: labelStyle,
       format: format
     )
@@ -65,21 +65,21 @@ extension DisplayString {
   public func decimalPlaces(_ places: Int) -> DisplayString {
     var newFormat = format
     newFormat.decimalPlaces = places
-    return DisplayString(components, separator: separator, format: newFormat, labelStyle: labelStyle)
+    return DisplayString(components, separator: lineSeparator, format: newFormat, labelStyle: labelStyle)
   }
 
   public func labelStyle(_ style: AbbreviableLabel.Style) -> DisplayString {
-    DisplayString(components, separator: separator, format: format, labelStyle: style)
+    DisplayString(components, separator: lineSeparator, format: format, labelStyle: style)
   }
 }
 
 extension Array where Element == DisplayBlock {
   public func output(
-    separator: String = "\n",
+    lineSeparator: String = "\n",
     labelStyle: AbbreviableLabel.Style = .standard,
     format: FloatDisplayFormat = .default
   ) -> String {
-    lines(labelStyle: labelStyle, format: format).joined(separator)
+    lines(labelStyle: labelStyle, format: format).joined(lineSeparator)
   }
 
   public func lines(
