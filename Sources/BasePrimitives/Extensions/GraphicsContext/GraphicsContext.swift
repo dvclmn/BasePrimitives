@@ -36,9 +36,10 @@ extension GraphicsContext {
     for width: CGFloat,
     sensitivity: CGFloat? = 0.2
   ) -> CGFloat {
-    guard let range = environment.zoomRange else {
-      return width
-    }
+    let range = environment.zoomRange
+//    guard let range = environment.zoomRange else {
+//      return width
+//    }
     return width.removingZoom(
       environment.zoomLevel,
       across: range.toCGFloatRange,

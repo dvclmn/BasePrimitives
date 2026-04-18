@@ -87,12 +87,14 @@ extension EnvironmentValues {
   /// which clamps by ``zoomRange`` if clamping is required
 
   @Entry public var zoomLevel: Double = 1.0
-  @Entry public var zoomRange: ClosedRange<Double>?
+  
+  /// This was previously optional, but trying out a default value instead
+  @Entry public var zoomRange: ClosedRange<Double> = 0.2...10
 
   /// Will return unclamped if no zoom range found in the Environment
   public var zoomClamped: Double {
     guard zoomLevel.isFiniteAndGreaterThanZero else { return 1.0 }
-    return zoomLevel.clampedIfNeeded(to: zoomRange)
+    return zoomLevel.clamped(to: zoomRange)
   }
 
   @Entry public var pointerStyle: PointerStyleCompatible?
