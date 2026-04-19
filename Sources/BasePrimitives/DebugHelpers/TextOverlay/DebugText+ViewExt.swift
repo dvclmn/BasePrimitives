@@ -8,8 +8,16 @@
 import SwiftUI
 
 extension View {
-  public func debugTextOverlay(alignment: Alignment = .bottomLeading) -> some View {
-    modifier(DebugTextOverlayModifier(alignment: alignment))
+  public func debugTextOverlay(
+    isEnabled: Bool = true,
+    alignment: Alignment = .bottomLeading,
+  ) -> some View {
+    modifier(
+      DebugTextOverlayModifier(
+        isEnabled: isEnabled,
+        alignment: alignment
+      )
+    )
   }
 
   public func debugText(

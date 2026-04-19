@@ -7,35 +7,6 @@
 
 import SwiftUI
 
-struct DebugItemsOverlayView: View {
-  @Environment(\.colourOverride) private var colourOverride
-
-  var store: DebugItemStore
-
-  var body: some View {
-
-    if !store.items.isEmpty {
-      VStack(alignment: .leading, spacing: 2) {
-        ForEach(store.items) { item in
-          Text(item.text)
-            .font(.caption)
-            .monospaced()
-        }
-      }
-      .padding(Styles.sizeTiny)
-      .background(.regularMaterial)
-      .background(colourOverride?.opacityLow)
-      .clipShape(.rect(cornerRadius: 3))
-      .padding()
-      .allowsHitTesting(false)
-
-    } else {
-      Text("No debug items")
-    }
-
-  }
-}
-
 struct DebugItemModifier: ViewModifier {
   @Environment(DebugItemStore.self) private var store: DebugItemStore?
 
