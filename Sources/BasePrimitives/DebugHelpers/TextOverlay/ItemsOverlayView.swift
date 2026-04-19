@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct DebugItemsOverlayView: View {
+  @Environment(DebugItemStore.self) private var store: DebugItemStore?
   @Environment(\.colourOverride) private var colourOverride
-
-  var store: DebugItemStore
 
   var body: some View {
 
-    if !store.items.isEmpty {
+    if let store, !store.items.isEmpty {
       VStack(alignment: .leading, spacing: 2) {
         ForEach(store.items) { item in
           Text(item.text)

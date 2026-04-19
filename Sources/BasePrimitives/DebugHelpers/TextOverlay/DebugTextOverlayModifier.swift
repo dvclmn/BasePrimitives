@@ -7,20 +7,33 @@
 
 import SwiftUI
 
+extension EnvironmentValues {
+  @Entry var debugItemStore: DebugItemStore? = nil
+}
+
 struct DebugTextOverlayModifier: ViewModifier {
-  @State private var store = DebugItemStore()
+  @Environment(DebugItemStore.self) private var store: DebugItemStore?
 
   let isEnabled: Bool
   var alignment: Alignment
+
+  init(
+    store: DebugItemStore?,
+    isEnabled: Bool,
+    alignment: Alignment,
+  ) {
+    self._store = Environment(DebugItemStore.self)
+    self.isEnabled = isEnabled
+    self.alignment = alignment
+  }
 
   func body(content: Content) -> some View {
     content
       .overlay(alignment: alignment) {
         if isEnabled {
-          DebugItemsOverlayView(store: store)
+          DebugItemsOverlayView()
         }
       }
       .environment(store)
   }
 }
-
