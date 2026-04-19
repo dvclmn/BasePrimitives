@@ -7,33 +7,27 @@
 
 import SwiftUI
 
-extension EnvironmentValues {
-  @Entry var debugItemStore: DebugItemStore? = nil
-}
-
 struct DebugTextOverlayModifier: ViewModifier {
-  @Environment(DebugItemStore.self) private var store: DebugItemStore?
+  @Environment(DebugItemStore.self) private var inheritedStore: DebugItemStore?
+  @State private var ownedStore = DebugItemStore()
 
   let isEnabled: Bool
   var alignment: Alignment
 
-  init(
-    store: DebugItemStore?,
-    isEnabled: Bool,
-    alignment: Alignment,
-  ) {
-    self._store = Environment(DebugItemStore.self)
-    self.isEnabled = isEnabled
-    self.alignment = alignment
-  }
-
   func body(content: Content) -> some View {
-    content
-      .overlay(alignment: alignment) {
-        if isEnabled {
-          DebugItemsOverlayView()
+    if inheritedStore != nil {
+      /// A store already exists higher up — become a transparent pass-through.
+      /// Any .debugItem(...) descendants will write to the inherited store naturally.
+      content
+    } else {
+      /// We're the canonical host — own the store, inject it, render the overlay.
+      content
+        .environment(ownedStore)
+        .overlay(alignment: alignment) {
+          if isEnabled {
+            DebugItemsOverlayView(store: ownedStore)
+          }
         }
-      }
-      .environment(store)
+    }
   }
 }
