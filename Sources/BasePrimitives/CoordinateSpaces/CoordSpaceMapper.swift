@@ -9,16 +9,15 @@ import Foundation
 
 public struct CoordinateSpaceMapper {
 
-  /// The canvas artwork as it's situated in the Viewport.
-  /// Captured via Anchor preference key in `CanvasCoreView`.
-  /// Rect origin represents pan offset, rect size represents
-  /// canvas size scaled by zoom.
+  /// The canvas artwork as it's situated in the Viewport,
+  /// captured via Anchor preference key in `CanvasCoreView`.
   ///
-  /// Trying to think; when could I avoid recomputing this, or is
-  /// it too cheap to bother? Currently it's 'rebuilt' on *any*
-  /// interaction, whereas maybe it could be invalidated only
-  /// when artwork frame or zoom *actually* change/
+  /// `origin`:  Expresses the offset from the Viewport origin (top left),
+  /// to the top left corner of the artwork.
+  ///
+  /// `size`: Expresses the canvas size scaled by zoom
   public let artworkFrame: Rect<ScreenSpace>
+
   public let zoom: Double
 
   /// Zoom is expected to be provided already clamped to `zoomRange`.
@@ -33,6 +32,37 @@ public struct CoordinateSpaceMapper {
 }
 
 extension CoordinateSpaceMapper {
+
+  /// ```
+  /// // canvas → screen: scale first, then translate
+  /// // viewportPoint = zoom * canvasPoint + artworkFrame.origin
+  /// let canvasToViewport = CGAffineTransform(
+  ///   translationX: artworkFrame.minX,
+  ///   y: artworkFrame.minY
+  /// ).scaledBy(x: zoom, y: zoom)
+  /// //  ^ .scaledBy() prepends the scale, so the effective order is:
+  /// //    scale the point, *then* apply the translation — which is what we want
+  /// ```
+
+  /// Transforms a canvas-space point to a screen-space point.
+  /// Encodes: screenPoint = zoom × canvasPoint + artworkFrame.origin
+  public var canvasToViewport: CGAffineTransform {
+    CGAffineTransform(translationX: artworkFrame.minX, y: artworkFrame.minY)
+      .scaledBy(x: zoom, y: zoom)
+  }
+
+  /// The inverse: transforms a screen-space point to a canvas-space point.
+  /// Encodes: canvasPoint = (screenPoint - artworkFrame.origin) / zoom
+  public var viewportToCanvas: CGAffineTransform {
+    canvasToViewport.inverted()
+  }
+
+  private var canvasSize: Size<CanvasSpace> {
+    Size<CanvasSpace>(
+      width: artworkFrame.width / zoom,
+      height: artworkFrame.height / zoom,
+    )
+  }
 
   /// Convert screen-space point to canvas-space
   public func canvasPoint(from screenPoint: Point<ScreenSpace>) -> Point<CanvasSpace> {
@@ -64,8 +94,6 @@ extension CoordinateSpaceMapper {
   public func isInsideCanvas(
     _ canvasPoint: Point<CanvasSpace>
   ) -> Bool {
-    let canvasSize = artworkFrame.size / zoom
-
     let xInBounds = (0..<canvasSize.width).contains(canvasPoint.x)
     let yInBounds = (0..<canvasSize.height).contains(canvasPoint.y)
     return xInBounds && yInBounds

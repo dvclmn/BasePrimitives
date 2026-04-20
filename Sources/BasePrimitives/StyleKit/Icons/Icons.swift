@@ -13,7 +13,7 @@ protocol IconGalleryViewable: Identifiable, RawRepresentable, CaseIterable where
 }
 
 // MARK: - Icons
-public enum Icons: String, IconGalleryViewable, Codable, Equatable {
+public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case stats = "chart.dots.scatter"
   case statsAlt = "chart.pie"
   case refresh = "arrow.triangle.2.circlepath"
@@ -169,6 +169,9 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable {
   case multiplayer = "person.3"
   case racing = "flag.checkered"
   case action = "burst"
+  
+  // Convenient aliases
+  public static let zoom = Self.search
 
   public var id: String { self.rawValue }
 

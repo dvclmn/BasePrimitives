@@ -11,6 +11,12 @@ public func += <Space>(lhs: inout Size<Space>, rhs: Size<Space>) {
   lhs.width += rhs.width
   lhs.height += rhs.height
 }
+
+public func += <Space>(lhs: inout Size<Space>, rhs: CGFloat) {
+  lhs.width += rhs
+  lhs.height += rhs
+}
+
 public func + <Space>(
   lhs: Size<Space>,
   rhs: Size<Space>,
