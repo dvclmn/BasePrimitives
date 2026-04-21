@@ -24,7 +24,7 @@ public enum KeyboardElementDisplayStyle {
   }
 }
 
-#warning("Bring this back, just fiddling with modifiers")
+// TODO: Bring this back, just fiddling with modifiers
 //extension KeyboardShortcut {
 //  public func displayString(
 //    keyStyle: KeyboardElementDisplayStyle = .symbolLiteral,

@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 19/5/2025.
 //
 
-import BasePrimitives
 import SwiftUI
 
 public typealias IsViewCompactHandler = (Bool) -> Void

@@ -67,10 +67,13 @@ public final class AsyncDebouncer {
 
   /// Executes the action either immediately (skipping the debounce delay) or with the standard trailing-edge debounce.
   /// - Parameters:
-  ///   - immediateIf: When true, the action runs immediately (leading-edge). When false, it uses the standard trailing-edge debounce.
+  ///   - shouldSkipDelay: When true, the action runs immediately (leading-edge). When false, it uses the standard trailing-edge debounce.
   ///   - action: The asynchronous action to perform.
   @MainActor
-  public func execute(immediateIf shouldSkipDelay: Bool, action: @escaping @Sendable () async -> Void) {
+  public func execute(
+    immediateIf shouldSkipDelay: Bool,
+    action: @escaping @Sendable () async -> Void
+  ) {
     if shouldSkipDelay {
       executeLeading(action: action)
     } else {

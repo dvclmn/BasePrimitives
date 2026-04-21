@@ -13,7 +13,8 @@ let package = Package(
     .library(name: "BasePrimitives", targets: ["BasePrimitives"]),
     .library(name: "CoreUtilities", targets: [
       "CoreUtilities",
-      "InputPrimitives"
+      "InputPrimitives",
+      "GeometryPrimitives",
     ]),
   ],
   dependencies: [
@@ -29,6 +30,9 @@ let package = Package(
     ),
     .target(
       name: "CoreUtilities"
+    ),
+    .target(
+      name: "GeometryPrimitives"
     ),
   ],
 )
