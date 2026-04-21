@@ -8,13 +8,38 @@
 import SwiftUI
 
 struct AreaOutlineModifier: ViewModifier {
-  @Environment(\.self) private var env
+//  @Environment(\.self) private var env
+  @Environment(\.zoomLevel) private var zoomLevel
+  @Environment(\.zoomRange) private var zoomRange
 
-  let outline: AreaOutline
+  let colour: Color
+  let rounding: Double
+  let lineWidth: Double
+  let sensitivity: Double?
+//  let outline: AreaOutline
 
   func body(content: Content) -> some View {
     content
-      .overlay { AreaOutlineShape(outline) }
+      .overlay {
+        RoundedRectangle(
+          cornerRadius: rounding.removingZoom(
+            zoomLevel,
+            across: zoomRange,
+            sensitivity: sensitivity,
+          )
+        )
+        .fill(.clear)
+        .stroke(
+          colour,
+          lineWidth: lineWidth.removingZoom(
+            zoomLevel,
+            across: zoomRange,
+            sensitivity: sensitivity,
+          ),
+        )
+        .allowsHitTesting(false)
+      }
+//      .overlay { AreaOutlineShape(outline) }
   }
 }
 
@@ -26,11 +51,15 @@ extension View {
   ) -> some View {
     self.modifier(
       AreaOutlineModifier(
-        outline: .init(
-          colour: colour,
-          rounding: rounding,
-          lineWidth: lineWidth,
-        )
+        colour: colour,
+        rounding: rounding,
+        lineWidth: lineWidth,
+        sensitivity: nil
+//        outline: .init(
+//          colour: colour,
+//          rounding: rounding,
+//          lineWidth: lineWidth,
+//        )
       )
     )
   }

@@ -5,17 +5,17 @@
 //  Created by Dave Coleman on 7/4/2026.
 //
 
-import SwiftUI
-
-struct AreaOutlineShape: View {
-  //  @Environment(\.self) private var env
-  @Environment(\.zoomLevel) private var zoomLevel
-  @Environment(\.zoomRange) private var zoomRange
-
-  let colour: Color
-  let rounding: Double
-  let lineWidth: Double
-  let sensitivity: Double
+//import SwiftUI
+//
+////struct AreaOutlineShape: View {
+//  //  @Environment(\.self) private var env
+//  @Environment(\.zoomLevel) private var zoomLevel
+//  @Environment(\.zoomRange) private var zoomRange
+//
+//  let colour: Color
+//  let rounding: Double
+//  let lineWidth: Double
+//  let sensitivity: Double
   //  let outline: AreaOutline
 
   //  public init(_ outline: AreaOutline) {
@@ -36,23 +36,23 @@ struct AreaOutlineShape: View {
   //    )
   //  }
 
-  public var body: some View {
-    RoundedRectangle(
-      cornerRadius: rounding.removingZoom(
-        zoomLevel,
-        across: zoomRange,
-        sensitivity: sensitivity,
-      )
-    )
-    .fill(.clear)
-    .stroke(
-      colour,
-      lineWidth: lineWidth.removingZoom(
-        zoomLevel,
-        across: zoomRange,
-        sensitivity: sensitivity,
-      ),
-    )
-    .allowsHitTesting(false)
-  }
-}
+//  public var body: some View {
+//    RoundedRectangle(
+//      cornerRadius: rounding.removingZoom(
+//        zoomLevel,
+//        across: zoomRange,
+//        sensitivity: sensitivity,
+//      )
+//    )
+//    .fill(.clear)
+//    .stroke(
+//      colour,
+//      lineWidth: lineWidth.removingZoom(
+//        zoomLevel,
+//        across: zoomRange,
+//        sensitivity: sensitivity,
+//      ),
+//    )
+//    .allowsHitTesting(false)
+//  }
+//}
