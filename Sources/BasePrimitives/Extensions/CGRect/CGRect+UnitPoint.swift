@@ -119,10 +119,8 @@ extension CGRect {
   public var bottomEdge: CGFloat { maxY }
 
   // Dimensions
-  #warning("TODO: Needs to be passed through the AxisMapping pipeline, to be safer")
+  // TODO: These need to be passed through the AxisMapping pipeline, to be safer
   public var horizontal: ClosedRange<CGFloat> { minX...maxX }
-  
-#warning("TODO: Needs to be passed through the AxisMapping pipeline, to be safer")
   public var vertical: ClosedRange<CGFloat> { minY...maxY }
 
 }
