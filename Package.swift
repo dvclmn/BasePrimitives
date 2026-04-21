@@ -11,8 +11,11 @@ let package = Package(
 
   products: [
     .library(name: "BasePrimitives", targets: ["BasePrimitives"]),
-    .library(name: "InputPrimitives", targets: ["InputPrimitives"]),
-    .library(name: "CoreUtilities", targets: ["CoreUtilities"]),
+//    .library(name: "InputPrimitives", targets: ["InputPrimitives"]),
+    .library(name: "CoreUtilities", targets: [
+      "CoreUtilities",
+      "InputPrimitives"
+    ]),
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")

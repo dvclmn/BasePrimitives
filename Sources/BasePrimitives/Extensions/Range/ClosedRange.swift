@@ -7,13 +7,6 @@
 
 import Foundation
 
-extension ClosedRange {
-  public var isZero: Bool { lowerBound == upperBound }
-  public var isGreaterThanZero: Bool { lowerBound < upperBound }
-//  public var isGreaterThanZero: Bool { lowerBound < upperBound }
-  public var isGreaterThanOrEqualToZero: Bool { lowerBound <= upperBound }
-
-}
 extension ClosedRange where Bound == CGFloat {
   public var toDoubleRange: ClosedRange<Double> {
     Double(self.lowerBound)...Double(self.upperBound)
@@ -33,7 +26,7 @@ extension ClosedRange where Bound == CGFloat {
       stride(
         from: lowerBound,
         through: upperBound,
-        by: stepSize
+        by: stepSize,
       )
     )
   }
@@ -48,8 +41,6 @@ extension ClosedRange where Bound == Double {
     CGFloat(lowerBound)...CGFloat(upperBound)
   }
 }
-
-
 
 extension ClosedRange where Bound == Int {
   public var toDoubleRange: ClosedRange<Double> {
