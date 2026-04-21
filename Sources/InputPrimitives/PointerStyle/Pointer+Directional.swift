@@ -12,6 +12,7 @@ public enum HorizontalDirectionCompatible {
   case leading
   case trailing
 }
+
 public enum VerticalDirectionCompatible {
   case up
   case down
