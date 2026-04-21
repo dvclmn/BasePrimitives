@@ -80,7 +80,6 @@ extension EnvironmentValues {
   @Entry public var isEditable: Bool = true
 
   @Entry public var panOffset: CGSize = .zero
-  //  @Entry public var panOffset: Size<ScreenSpace> = .zero
   @Entry public var rotation: Angle = .zero
 
   /// Important: This zoom level is not clamped. Use ``zoomClamped``
