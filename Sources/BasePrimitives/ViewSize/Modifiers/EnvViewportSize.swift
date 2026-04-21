@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreUtilities
 
 /// Represents the full App Window dimensions, sans
 /// UI elements like sidebar, inspector, toolbar etc.

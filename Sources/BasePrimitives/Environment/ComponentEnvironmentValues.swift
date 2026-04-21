@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import InputPrimitives
 
 /// System-provided Env values for reference:
 /// https://developer.apple.com/documentation/swiftui/environmentvalues/
@@ -76,11 +77,6 @@ extension EnvironmentValues {
   /// so prefer use of native `controlSize` in those cases/
   @Entry public var isCompactMode: Bool = false
   @Entry public var isEditable: Bool = true
-
-  @Entry public var panOffset: CGSize = .zero
-  @Entry public var rotation: Angle = .zero
-
-  @Entry public var pointerStyle: PointerStyleCompatible?
 
 }
 

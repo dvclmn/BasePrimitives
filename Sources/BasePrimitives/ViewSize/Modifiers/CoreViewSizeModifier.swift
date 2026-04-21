@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreUtilities
 
 public typealias ViewSizeOutput<T> = (T) -> Void
 

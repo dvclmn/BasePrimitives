@@ -15,7 +15,7 @@ extension GraphicsContext {
     fillColour: Color = .blue.opacity(0.4),
     strokeColour: Color = .indigo,
     strokeThickness: CGFloat = 1,
-    removeZoom: Bool = true
+//    removeZoom: Bool = true
   ) {
     self.fill(
       path,
@@ -25,25 +25,12 @@ extension GraphicsContext {
     self.stroke(
       path,
       with: .color(strokeColour),
-      lineWidth: removeZoom ? unZoomedLineWidth(for: strokeThickness) : strokeThickness
-    )
-  }
-
-}
-
-extension GraphicsContext {
-  func unZoomedLineWidth(
-    for width: CGFloat,
-    sensitivity: CGFloat? = 0.2
-  ) -> CGFloat {
-    let range = environment.zoomRange
-//    guard let range = environment.zoomRange else {
-//      return width
-//    }
-    return width.removingZoom(
-      environment.zoomLevel,
-      across: range.toCGFloatRange,
-      sensitivity: sensitivity
+      lineWidth: strokeThickness
+      
+      /// See CanvasKit for `unZoomedLineWidth(for:)`
+//      lineWidth: removeZoom ? unZoomedLineWidth(for: strokeThickness) : strokeThickness
     )
   }
 }
+
+

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreUtilities
 
 // MARK: - View size modifiers
 extension View {
