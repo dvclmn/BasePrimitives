@@ -100,13 +100,6 @@ extension GeometryAxis {
     }
   }
 
-  //  public var numberingFrameSize: (CGFloat?, CGFloat?) {
-  //    return switch self {
-  //      case .horizontal: (nil, Self.fixedLength)
-  //      case .vertical: (Self.fixedLength, nil)
-  //    }
-  //  }
-
   public var cellNumberTextAlignment: UnitPoint {
     switch self {
       case .horizontal: .center
@@ -141,24 +134,21 @@ extension GeometryAxis {
   }
 
   public func hasOverflow(
-    artworkFrameInViewport: CGRect?,
+    contentFrame: CGRect,
     buffer: CGFloat,
   ) -> Bool {
-
-    guard let artworkFrameInViewport else { return false }
     switch self {
       case .horizontal:
-        let minX = artworkFrameInViewport.minX - buffer
+        let minX = contentFrame.minX - buffer
         let hasOverflow: Bool = minX < 0
         return hasOverflow
 
       case .vertical:
-        let minY = artworkFrameInViewport.minY - buffer
+        let minY = contentFrame.minY - buffer
         let hasOverflow: Bool = minY < 0
         return hasOverflow
     }
   }
-
 }
 
 /// Metadata
