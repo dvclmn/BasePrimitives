@@ -40,8 +40,7 @@ extension BinaryFloatingPoint {
       let gridCount = self.toGridCount(using: unitLength, rounding: rounding)
     else { return self }
     
-    let result = gridCount.toScreenLength(using: unitLength)
-
+    guard let result = gridCount.toScreenLength(using: unitLength) else { return self }
     return Self(result)
   }
 }
