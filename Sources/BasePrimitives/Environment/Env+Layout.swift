@@ -9,8 +9,7 @@ import SwiftUI
 
 extension EnvironmentValues {
 
-  /// View layout
-  /// See `LayoutKit` for `layoutMode`
+  @Entry public var layoutType: LayoutType = .passthrough
   @Entry public var layoutAxis: Axis? = nil
   @Entry public var layoutAlignment: Alignment? = nil
   @Entry public var textAlignment: TextAlignment? = nil

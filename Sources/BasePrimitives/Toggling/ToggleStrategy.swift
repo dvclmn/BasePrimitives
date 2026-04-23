@@ -35,7 +35,7 @@ extension Collection where Element == Bool {
   
   /// Decide a single “target” value if the strategy calls for it.
   /// Returns `nil` when each element must be flipped individually (the `.invert` case).
-  func target(for strategy: ToggleStrategy) -> Bool? {
+  package func target(for strategy: ToggleStrategy) -> Bool? {
     guard !isEmpty else { return true }
     
     let trueCount  = filter { $0 }.count
