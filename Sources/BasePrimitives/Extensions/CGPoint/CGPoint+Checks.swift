@@ -9,7 +9,6 @@ import SwiftUI
 
 extension CGPoint {
 
-
   public var isGreaterThanOrEqualToZero: Bool { x >= 0 && y >= 0 }
   public var isGreaterThanZero: Bool { x > 0 && y > 0 }
 

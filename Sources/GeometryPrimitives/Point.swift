@@ -45,9 +45,14 @@ public struct Point<Space>: Sendable, Equatable {
     self.y = point.y
   }
 
-  public init(fromOffset point: CGSize) {
-    self.x = point.width
-    self.y = point.height
+  public init(fromOffset size: CGSize) {
+    self.x = size.width
+    self.y = size.height
+  }
+  
+  public init(fromOffset size: Size<Space>) {
+    self.x = size.width
+    self.y = size.height
   }
 }
 

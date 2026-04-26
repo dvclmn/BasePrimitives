@@ -5,6 +5,7 @@
 //  Created by Dave Coleman on 17/3/2026.
 //
 
+import BasePrimitives
 import Foundation
 
 public struct CoordinateSpaceMapper {
@@ -31,6 +32,20 @@ public struct CoordinateSpaceMapper {
     self.canvasSize = canvasSize
     //    self.zoom = zoom
   }
+
+  public init(
+    zoom: Double,
+    panOffset: Size<ScreenSpace>,
+    canvasSize: Size<CanvasSpace>,
+  ) {
+    let origin: Point<ScreenSpace> = .init(fromOffset: panOffset)
+
+    let screenSize = canvasSize.cgSize * zoom
+    let size: Size<ScreenSpace> = .init(fromCGSize: screenSize)
+
+    self.init(frame: .init(origin: origin, size: size), canvasSize: canvasSize)
+  }
+
 }
 
 extension CoordinateSpaceMapper {
@@ -101,12 +116,12 @@ extension CoordinateSpaceMapper {
     canvasToViewport.inverted()
   }
 
-//  private var canvasSize: Size<CanvasSpace> {
-//    Size<CanvasSpace>(
-//      width: artworkFrame.width / zoom,
-//      height: artworkFrame.height / zoom,
-//    )
-//  }
+  //  private var canvasSize: Size<CanvasSpace> {
+  //    Size<CanvasSpace>(
+  //      width: artworkFrame.width / zoom,
+  //      height: artworkFrame.height / zoom,
+  //    )
+  //  }
 
   /// Convert screen-space point to canvas-space
   public func canvasPoint(from screenPoint: Point<ScreenSpace>) -> Point<CanvasSpace> {
