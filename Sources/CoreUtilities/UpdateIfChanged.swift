@@ -7,10 +7,13 @@
 
 import Foundation
 
+// Note to self: Both the optional and non-optional variants of
+// `updateIfChanged` are required for the compiler to be happy.
+
 @discardableResult
 public func updateIfChanged<T: Equatable>(
   _ target: inout T,
-  to newValue: T
+  to newValue: T,
 ) -> Bool {
   guard target != newValue else { return false }
   target = newValue
@@ -20,7 +23,7 @@ public func updateIfChanged<T: Equatable>(
 @discardableResult
 public func updateIfChanged<T: Equatable>(
   _ target: inout T?,
-  to newValue: T
+  to newValue: T,
 ) -> Bool {
   guard target != newValue else { return false }
   target = newValue
@@ -30,7 +33,7 @@ public func updateIfChanged<T: Equatable>(
 @discardableResult
 public func updateIfNil<T: Equatable>(
   _ target: inout T?,
-  to newValue: T
+  to newValue: T,
 ) -> Bool {
   if target == nil {
     target = newValue
@@ -54,7 +57,7 @@ public func updateIfNil<T: Equatable>(
 public func performIfChanged<T: Equatable>(
   _ oldValue: T,
   _ newValue: T,
-  perform: @autoclosure () -> Void
+  perform: @autoclosure () -> Void,
 ) -> Bool {
   guard oldValue != newValue else { return false }
   perform()
@@ -77,12 +80,11 @@ public func performIfChanged<T: Equatable>(
 ////  return true
 //}
 
-
 @discardableResult
 public func updateIfChanged<Root, Value: Equatable>(
   _ object: inout Root,
   at keyPath: WritableKeyPath<Root, Value>,
-  to newValue: Value
+  to newValue: Value,
 ) -> Bool {
   guard object[keyPath: keyPath] != newValue else { return false }
   object[keyPath: keyPath] = newValue
@@ -93,7 +95,7 @@ public func updateIfChanged<Root, Value: Equatable>(
 public func updateIfChanged<Root, Value: Equatable>(
   _ object: inout Root,
   at keyPath: WritableKeyPath<Root, Value?>,
-  to newValue: Value
+  to newValue: Value,
 ) -> Bool {
   guard object[keyPath: keyPath] != newValue else { return false }
   object[keyPath: keyPath] = newValue
@@ -128,13 +130,12 @@ public func updateIfChanged<Root, Value: Equatable>(
 public func updateIfChangedWithOptionalRoot<Root, Value: Equatable>(
   _ newValue: Value,
   on object: inout Root?,
-  keyPath: WritableKeyPath<Root, Value>
+  keyPath: WritableKeyPath<Root, Value>,
 ) -> Bool {
   guard object?[keyPath: keyPath] != newValue else { return false }
   object?[keyPath: keyPath] = newValue
   return true
 }
-
 
 /// ```
 /// runIfChanged(newZoom, comparedTo: store.canvasState.zoom) {

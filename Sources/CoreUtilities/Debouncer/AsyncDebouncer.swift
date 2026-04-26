@@ -16,54 +16,90 @@ import Foundation
 /// two separate tasks, or one may cancel the other. Use seperate instances.
 @Observable
 public final class AsyncDebouncer {
-  private var task: Task<Void, Never>?
-  private let interval: Duration
-  // Used for leading-edge (immediate) execution to enforce a cooldown window
-  private var cooldownTask: Task<Void, Never>?
+  private var task: Task<Void, Error>?
 
-  public init(interval: CGFloat = 0.2) {
+  /// Used for leading-edge (immediate) execution to enforce a cooldown window
+  private var cooldownTask: Task<Void, Error>?
+
+  private let interval: Duration
+
+  public init(interval: TimeInterval = 0.2) {
     self.interval = Duration.seconds(interval)
   }
 
+  deinit {
+    task?.cancel()
+  }
+}
+
+extension AsyncDebouncer {
+
   @MainActor
-  public func execute(action: @escaping @Sendable () async -> Void) {
+  public func execute(
+    action: @escaping @MainActor @Sendable () async -> Void
+  ) {
+    //  public func execute(action: @escaping @Sendable () async -> Void) {
     /// Cancel any previous task
     task?.cancel()
 
     task = Task {
-      try? await Task.sleep(for: interval)
-      if Task.isCancelled { return }
+      /// try await natively throws a CancellationError if cancelled
+      try await Task.sleep(for: interval)
       await action()
-
     }
+    //    task = Task {
+    //      try? await Task.sleep(for: interval)
+    //      if Task.isCancelled { return }
+    //      await action()
+    //
+    //    }
   }
 
   /// Executes immediately (leading edge) if there isn't an active cooldown window.
   /// Subsequent calls within the cooldown window are ignored until the interval elapses.
   /// This behaves like a throttle with a leading edge.
   @MainActor
-  public func executeLeading(action: @escaping @Sendable () async -> Void) {
-    // If we're currently within the cooldown window, ignore this trigger.
+  public func executeLeading(
+    action: @escaping @MainActor @Sendable () async -> Void
+  ) {
     if cooldownTask != nil { return }
-
-    // Cancel any pending trailing debounced task.
     task?.cancel()
 
-    // Run immediately.
     Task {
       await action()
     }
 
-    // Start a cooldown window so additional triggers are ignored until the interval passes.
     cooldownTask = Task {
-      try? await Task.sleep(for: interval)
-      // Clear cooldown on the main actor when the window elapses.
-      await MainActor.run { [weak self] in
-        self?.cooldownTask?.cancel()
-        self?.cooldownTask = nil
-      }
+      try await Task.sleep(for: interval)
+      // Inherits @MainActor from the method, so this is safe
+      cooldownTask = nil
     }
   }
+  //  @MainActor
+  //  public func executeLeading(action: @escaping @Sendable () async -> Void) {
+  //
+  //    /// If we're currently within the cooldown window, ignore this trigger.
+  //    if cooldownTask != nil { return }
+  //
+  //    /// Cancel any pending trailing debounced task.
+  //    task?.cancel()
+  //
+  //    /// Run immediately.
+  //    Task {
+  //      await action()
+  //    }
+  //
+  //    /// Start a cooldown window so additional triggers are ignored until the interval passes.
+  //    cooldownTask = Task {
+  //      try? await Task.sleep(for: interval)
+  //
+  //      /// Clear cooldown on the main actor when the window elapses.
+  //      await MainActor.run { [weak self] in
+  //        self?.cooldownTask?.cancel()
+  //        self?.cooldownTask = nil
+  //      }
+  //    }
+  //  }
 
   /// Executes the action either immediately (skipping the debounce delay) or with the standard trailing-edge debounce.
   /// - Parameters:
@@ -72,7 +108,7 @@ public final class AsyncDebouncer {
   @MainActor
   public func execute(
     immediateIf shouldSkipDelay: Bool,
-    action: @escaping @Sendable () async -> Void
+    action: @escaping @Sendable () async -> Void,
   ) {
     if shouldSkipDelay {
       executeLeading(action: action)
@@ -81,8 +117,4 @@ public final class AsyncDebouncer {
     }
   }
 
-  deinit {
-    task?.cancel()
-  }
 }
-

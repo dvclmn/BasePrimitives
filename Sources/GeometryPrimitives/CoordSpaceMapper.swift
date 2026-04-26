@@ -17,21 +17,65 @@ public struct CoordinateSpaceMapper {
   ///
   /// `size`: Expresses the canvas size scaled by zoom
   public let artworkFrame: Rect<ScreenSpace>
-
-  public let zoom: Double
+  public let canvasSize: Size<CanvasSpace>
+  //  public let zoom: Double
 
   /// Zoom is expected to be provided already clamped to `zoomRange`.
   /// Clamped zoom value available from the Environment as `zoomClamped`
   public init(
-    artworkFrame: Rect<ScreenSpace>,
-    zoomClamped zoom: CGFloat,
+    frame: Rect<ScreenSpace>,
+    canvasSize: Size<CanvasSpace>,
+    //    zoomClamped zoom: CGFloat,
   ) {
-    self.artworkFrame = artworkFrame
-    self.zoom = zoom
+    self.artworkFrame = frame
+    self.canvasSize = canvasSize
+    //    self.zoom = zoom
   }
 }
 
 extension CoordinateSpaceMapper {
+
+  //  private var zoom: Double { artworkFrame.size / canvasSize }
+
+  @inlinable
+  var zoom: CGFloat {
+    let widthZoom: CGFloat
+    let heightZoom: CGFloat
+
+    if canvasSize.width != 0 {
+      widthZoom = artworkFrame.width / canvasSize.width
+    } else {
+      widthZoom = 1.0  // default: no zoom
+    }
+
+    if canvasSize.height != 0 {
+      heightZoom = artworkFrame.height / canvasSize.height
+    } else {
+      heightZoom = 1.0  // default: no zoom
+    }
+
+    /// Check for NaN, Inf, or negative scales as well
+    let validWidth = widthZoom.isFinite && widthZoom > 0
+    let validHeight = heightZoom.isFinite && heightZoom > 0
+
+    /// Use minimum valid zoom, fallback to 1.0 if both are invalid
+    if validWidth && validHeight {
+      /// If they differ significantly:
+      if abs(widthZoom - heightZoom) > 0.001 {
+        print("Warning: Zoom level is showing non-uniform scaling.")
+      }
+      return min(widthZoom, heightZoom)
+
+    } else if validWidth {
+      return widthZoom
+
+    } else if validHeight {
+      return heightZoom
+
+    } else {
+      return 1.0
+    }
+  }
 
   /// ```
   /// // canvas → screen: scale first, then translate
@@ -57,12 +101,12 @@ extension CoordinateSpaceMapper {
     canvasToViewport.inverted()
   }
 
-  private var canvasSize: Size<CanvasSpace> {
-    Size<CanvasSpace>(
-      width: artworkFrame.width / zoom,
-      height: artworkFrame.height / zoom,
-    )
-  }
+//  private var canvasSize: Size<CanvasSpace> {
+//    Size<CanvasSpace>(
+//      width: artworkFrame.width / zoom,
+//      height: artworkFrame.height / zoom,
+//    )
+//  }
 
   /// Convert screen-space point to canvas-space
   public func canvasPoint(from screenPoint: Point<ScreenSpace>) -> Point<CanvasSpace> {

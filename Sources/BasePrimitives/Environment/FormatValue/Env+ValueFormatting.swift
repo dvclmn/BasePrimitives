@@ -33,7 +33,10 @@ extension EnvironmentValues {
 
 public protocol ValueFormattable {}
 
-extension View where Self: ValueFormattable {
+// Removed `ValueFormattable` requirement, as it's hard (impossible)
+// to know the order of modifiers, e.g. for Quick slider with SliderStylable
+extension View {
+//extension View where Self: ValueFormattable {
   public func formatValue(_ format: @escaping @Sendable (Double) -> String) -> some View {
     self.environment(\.formatValue, ValueFormatter(format))
   }

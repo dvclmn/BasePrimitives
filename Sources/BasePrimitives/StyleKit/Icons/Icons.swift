@@ -33,6 +33,7 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case moon = "moon"
   case up = "chevron.up"
   case down = "chevron.down"
+  
   case sort = "arrow.up.arrow.down"
   case debug = "ladybug"
   case filter = "line.horizontal.3.decrease"
@@ -57,16 +58,16 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case info = "info.circle"
   case inspector = "rectangle.rightthird.inset.filled"
   case popup = "text.bubble"
-  case messageAlt = "bubble.middle.bottom"
   case message = "bubble"
+  case messageAlt = "bubble.middle.bottom"
   case image = "photo"
   case imageMulti = "photo.on.rectangle.angled"
   case options = "slider.horizontal.3"
   case gear = "gearshape"
   case glasses = "eyeglasses"
-  case bookmark = "bookmark"
-  case rays = "rays"
-  case rotate = "arrow.counterclockwise"
+  case bookmark = "bookmark" // 􀉞
+  case rays = "rays" // 􀇯
+  case rotate = "arrow.counterclockwise" // 􀅉
   case window = "macwindow"  // app, viewport
   case pause = "pause"
   case stop = "stop"
@@ -139,7 +140,7 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case bitmap = "stairs" // raster, pixels
   case theatre = "theatermasks"
   case boat = "ferry"
-  case star = "star"
+  case star = "star" // 􀋂
   case ellipsis = "ellipsis"
   case highlighter = "highlighter"
   case key = "key"
@@ -152,6 +153,7 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case plane = "paperplane"
   case lock = "lock"
   case scribble = "scribble.variable"
+  case scribbleMono = "scribble"
   case wordCount = "text.word.spacing"  // Character, text, paragraph
   case layers = "square.2.layers.3d"
   case moreLayers = "square.3.layers.3d"

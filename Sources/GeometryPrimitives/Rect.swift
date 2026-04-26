@@ -20,7 +20,7 @@ public struct Rect<Space>: Sendable, Equatable {
     x: CGFloat,
     y: CGFloat,
     width: CGFloat,
-    height: CGFloat
+    height: CGFloat,
   ) {
     self.x = x
     self.y = y
@@ -63,7 +63,7 @@ extension Rect {
   public var midpoint: Point<Space> {
     .init(
       x: origin.x + size.width / 2,
-      y: origin.y + size.height / 2
+      y: origin.y + size.height / 2,
     )
   }
 
