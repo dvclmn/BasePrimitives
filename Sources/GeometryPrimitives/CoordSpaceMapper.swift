@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 17/3/2026.
 //
 
-import BasePrimitives
 import Foundation
 
 public struct CoordinateSpaceMapper {
@@ -40,8 +39,11 @@ public struct CoordinateSpaceMapper {
   ) {
     let origin: Point<ScreenSpace> = .init(fromOffset: panOffset)
 
-    let screenSize = canvasSize.cgSize * zoom
-    let size: Size<ScreenSpace> = .init(fromCGSize: screenSize)
+    //    let screenSize = canvasSize.cgSize * zoom
+    let size: Size<ScreenSpace> = .init(
+      width: canvasSize.width * zoom,
+      height: canvasSize.height * zoom,
+    )
 
     self.init(frame: .init(origin: origin, size: size), canvasSize: canvasSize)
   }

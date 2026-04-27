@@ -23,5 +23,11 @@ extension EnvironmentValues {
     guard zoomLevel.isFiniteAndGreaterThanZero else { return 1.0 }
     return zoomLevel.clamped(to: zoomRange)
   }
-
 }
+
+
+//static let minZoomLowerBound: Double = 0.05
+//static let minZoomUpperBound: Double = 40
+//static var zoomRangeConstrained: ClosedRange<Double> {
+//  Self.minZoomLowerBound...Self.minZoomUpperBound
+//}

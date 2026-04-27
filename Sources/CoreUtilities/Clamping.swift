@@ -32,4 +32,3 @@ extension Comparable {
     return Swift.min(upper, Swift.max(lower, self))
   }
 }
-

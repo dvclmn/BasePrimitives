@@ -115,8 +115,6 @@ extension AxisMapping {
   *, deprecated, renamed: "AxisMapping", message: "Renamed for clarity, please use `AxisMapping` instead"
 )
 public enum AxisConvention: Sendable {
-
   case widthIsHorizontal
   case heightIsHorizontal
-
 }

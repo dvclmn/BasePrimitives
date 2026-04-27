@@ -16,16 +16,9 @@ public protocol AxisKeyPathWritable: AxisKeyPathReadable {
 
   /// Path to the second storage slot (e.g. `height`, `y`, `row`)
   static var secondaryWritableKey: WritableKeyPath<Self, Component> { get }
-
-//  func setting(
-//    _ newValue: Component,
-//    along axis: GeometryAxis,
-//    mapping: AxisMapping
-//  ) -> Self
 }
 
 extension AxisKeyPathWritable {
-//  public typealias Component = Self.Component
   public static var primaryKey: KeyPath<Self, Component> { primaryWritableKey }
   public static var secondaryKey: KeyPath<Self, Component> { secondaryWritableKey }
 

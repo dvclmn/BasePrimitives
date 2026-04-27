@@ -81,19 +81,18 @@ extension Labeled {
 // MARK: - Rendering
 
 /// Allows exposure to BaseHelpers, for InfoBar, without leaking to user-facing API
-@_spi(Internals) extension Labeled {
+extension Labeled {
 
   /// Renders the label text only (no value or separator).
   /// Have removed the option to pass in a label style for this,
   /// as these methods are for a display context, not for use
   /// as the building block for `FloatComponentsLabeled`
-  public func labelPart() -> String? {
-    //  public func labelPart(with style: AbbreviableLabel.Style) -> String? {
+  @_spi(Internals) public func labelPart() -> String? {
     key.labelText(with: .standard)
   }
 
   /// Renders the value only.
-  public static func valuePart(
+  @_spi(Internals) public static func valuePart(
     for label: Self,
     using format: FloatDisplayFormat,
     with labelStyle: AbbreviableLabel.Style,

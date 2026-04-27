@@ -26,7 +26,7 @@ import SwiftUI
 /// ```
 public struct ModifierKeysModifier: ViewModifier {
 
-  @State private var modifierKeys = Modifiers()
+  @State private var modifierKeys: Modifiers = []
 
   let keysToWatch: EventModifiers
   let onChange: ((Modifiers) -> Void)?

@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 20/1/2026.
 //
 
-//prefix operator +
 prefix operator *
 
 /// ```
