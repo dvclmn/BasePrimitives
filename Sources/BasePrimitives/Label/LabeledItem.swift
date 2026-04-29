@@ -10,15 +10,13 @@ import Foundation
 /// Previously conformed to `Equatable` and `Hashable`, have removed
 /// for some flexibility over in DisplayString
 public protocol LabeledItem: Identifiable {
-  var id: Self.ID { get }
-//  var title: String { get }
-//  var icon: String? { get }
+//  var id: Self.ID { get }
   var label: QuickLabel { get }
-  var blurb: String? { get }
+//  var blurb: String? { get }
 }
 
 extension LabeledItem {
-  public var blurb: String? { nil }
+//  public var blurb: String? { nil }
 }
 
 /// Convenience where if the `LabeledItem` can provide a raw string, then use that

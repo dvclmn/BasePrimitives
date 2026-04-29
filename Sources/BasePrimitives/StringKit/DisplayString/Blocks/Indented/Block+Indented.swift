@@ -33,17 +33,26 @@ extension Indented {
     with labelStyle: AbbreviableLabel.Style = .standard,
   ) -> String {
 
-    let content = content.map {
-      $0.render(using: format, with: labelStyle)
-      //      $0.render(labelStyle: labelStyle, using: format)
-    }
-    let elements = indentedElements(content: content)
+    let blocks =
+      content.isEmpty
+      ? ["(No items)"]
+      : content.map {
+        $0.render(using: format, with: labelStyle)
+      }
+
+    let elements = indentedElements(content: blocks)
 
     let result = elements.reduce(into: "") { partial, item in
       partial += "\n" + item
     }
-    /// Add title if present, and a final line break
-    return (title ?? "") + result + "\n"
+
+    let effectiveTitle = title ?? ""
+
+    //    guard !content.isEmpty else {
+    //      return effectiveTitle + " (no content)"
+    //    }
+    return effectiveTitle + result + "\n"
+
   }
 
   private func indentedElements(

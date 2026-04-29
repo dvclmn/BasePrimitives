@@ -18,11 +18,11 @@ extension Pickable where Self: CaseIterable, Self.AllCases == [Self] {
   public var allItems: [Self] { Self.allCases }
 }
 
-extension Pickable {
+//extension Pickable {
   /// Produces a rough default Picker label
-  public static var pickerLabel: QuickLabel {
-    let typeName = String(describing: Self.self)
-    let words = typeName.camelCaseToWords
-    return QuickLabel(words)
-  }
-}
+//  public static var pickerLabel: QuickLabel {
+//    let typeName = String(describing: Self.self)
+//    let words = typeName.camelCaseToWords
+//    return QuickLabel(words)
+//  }
+//}

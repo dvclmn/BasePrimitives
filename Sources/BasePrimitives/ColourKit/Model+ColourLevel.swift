@@ -50,6 +50,7 @@ public enum HierarchicalColour: String, Sendable, CaseCyclable, CaseIterable, Na
 
 public enum ColourLevel: String, Sendable, CaseCyclable, CaseIterable, NamedItem, Pickable, Identifiable {
   public typealias Item = Self
+  public static let pickerLabel: QuickLabel = "Colour Level"
 
   public static let defaultCase: ColourLevel = .foreground
 

@@ -47,6 +47,12 @@ extension DisplayBlock {
   }
 }
 
+extension DisplayBlock: ExpressibleByStringLiteral {
+  public init(stringLiteral value: StringLiteralType) {
+    self = .text(.make(from: value))
+  }
+}
+
 //extension DisplayBlock {
 //  var indentationDepth: Int {
 //    switch self {
