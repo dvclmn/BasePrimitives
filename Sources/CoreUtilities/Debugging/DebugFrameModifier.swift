@@ -25,10 +25,10 @@ public struct DebugFrameModifier: ViewModifier {
             .font(.caption2)
             .fixedSize(horizontal: true, vertical: false)
             .foregroundStyle(colour.opacity(0.8))
-            .padding(.horizontal, Styles.sizeNano)
+            .padding(.horizontal, 2)
             .background(Color.black.opacity(0.8))
             .opacity(labelOpacity)
-            .padding(Styles.sizeTiny)
+            .padding(2)
         }
       }
   }

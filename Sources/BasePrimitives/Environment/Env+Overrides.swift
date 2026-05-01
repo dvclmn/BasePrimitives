@@ -32,3 +32,14 @@ extension EnvironmentValues {
   @Entry public var shapeStyleOverride: AnyShapeStyle?
   @Entry public var colourOverride: Color?
 }
+
+extension View {
+  public func backgroundTint(_ style: AnyShapeStyle?) -> some View {
+    self.environment(\.shapeStyleOverride, style)
+  }
+  
+  public func backgroundTint(_ colour: Color?) -> some View {
+    self.environment(\.colourOverride, colour)
+  }
+
+}
