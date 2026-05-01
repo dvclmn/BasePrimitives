@@ -15,19 +15,34 @@ struct DebugTextOverlayModifier: ViewModifier {
   var alignment: Alignment
 
   func body(content: Content) -> some View {
-    if inheritedStore != nil {
-      /// A store already exists higher up — become a transparent pass-through.
-      /// Any .debugItem(...) descendants will write to the inherited store naturally.
-      content
-    } else {
-      /// We're the canonical host — own the store, inject it, render the overlay.
-      content
-        .environment(ownedStore)
-        .overlay(alignment: alignment) {
-          if isEnabled {
-            DebugItemsOverlayView(store: ownedStore)
-          }
+    //    if inheritedStore != nil {
+    /// A store already exists higher up — become a transparent pass-through.
+    /// Any .debugItem(...) descendants will write to the inherited store naturally.
+    //      content
+    //    } else {
+    /// We're the canonical host — own the store, inject it, render the overlay.
+    content
+      .environment(ownedStore)
+      .overlay(alignment: alignment) {
+        if isEnabled, !ownedStore.items.isEmpty {
+          DebugItemsOverlayView(store: ownedStore)
         }
-    }
+      }
+      .overlay {
+        if inheritedStore != nil {
+          Text(
+            "An instance of `DebugItemStore` already exists higher up in the view hierarchy. Ensure `debugTextOverlay(isEnabled:alignment:)` is used only once."
+          )
+          .background(Color.orange.tertiary)
+
+        }
+      }
+    //    }
   }
+}
+
+extension DebugTextOverlayModifier {
+//  private var hasItems: Bool {
+//    guard let items = ownedStore.items
+//  }
 }

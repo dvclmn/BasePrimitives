@@ -20,9 +20,7 @@ extension View {
     )
   }
 
-  public func debugText(
-    _ text: String
-  ) -> some View {
+  public func debugText(_ text: String) -> some View {
     modifier(DebugItemModifier(text: text))
   }
 

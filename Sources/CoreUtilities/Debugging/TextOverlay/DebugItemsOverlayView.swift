@@ -23,12 +23,13 @@ struct DebugItemModifier: ViewModifier {
       }
       .overlay {
         if store == nil {
-          StateView(
-            "`DebugItemStore` missing from environment",
-            icon: .emojiComposition(.example),
-            message:
-              "Ensure you add modifier `debugTextOverlay(alignment:)` somewhere high up in your project's view hierarchy.",
-          )
+          Text("`DebugItemStore` missing from environment")
+//          StateView(
+//            "`DebugItemStore` missing from environment",
+//            icon: .emojiComposition(.example),
+//            message:
+//              "Ensure you add modifier `debugTextOverlay(alignment:)` somewhere high up in your project's view hierarchy.",
+//          )
         }
       }
   }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DebugItemsOverlayView: View {
-  @Environment(\.colourOverride) private var colourOverride
+//  @Environment(\.colourOverride) private var colourOverride
 
   let store: DebugItemStore
   var body: some View {
@@ -21,9 +21,9 @@ struct DebugItemsOverlayView: View {
             .monospaced()
         }
       }
-      .padding(Styles.sizeTiny)
+      .padding(4)
       .background(.regularMaterial)
-      .background(colourOverride?.opacityLow)
+//      .background(colourOverride?.opacityLow)
       .clipShape(.rect(cornerRadius: 3))
       .padding()
       .allowsHitTesting(false)

@@ -25,13 +25,6 @@ import Foundation
 /// ```
 extension Date {
 
-  public static var debug: String {
-    Date.now.formatted(
-      .dateTime
-        .hour().minute().second()
-        .secondFraction(.fractional(3))
-    )
-  }
 
   public func dayOfTheMonthIcon(day: Int? = nil) -> String {
     let today: Int = day ?? Calendar.current.component(.day, from: self)

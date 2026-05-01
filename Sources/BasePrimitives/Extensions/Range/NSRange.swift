@@ -10,10 +10,6 @@ import Foundation
 extension NSRange {
 
 
-  public func toStringRange(in text: String) -> Range<String.Index>? {
-    Range(self, in: text)
-  }
-
   public static let zero = NSRange(location: 0, length: 0)
   public static let notFound = NSRange(location: NSNotFound, length: 0)
 

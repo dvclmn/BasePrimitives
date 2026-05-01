@@ -30,6 +30,10 @@ extension BinaryFloatingPoint {
     return self >= lowerBound && self <= upperBound
   }
   
+  public func toPercent(within range: ClosedRange<Self>) -> Self {
+    self.normalised(in: range) * 100
+  }
+  
   public var isGreaterThanZero: Bool { self > 0 }
   public var isFiniteAndGreaterThanZero: Bool { isFinite && self > 0 }
   public var isGreaterThanOrEqualToZero: Bool { self >= 0 }
