@@ -63,19 +63,19 @@ extension Labeled {
   }
 
   /// Convenience for Collection types
-  public init<C: Collection>(
-    _ key: String,
-    data: C,
-    maxItems: Int? = nil,
-    showCount: Bool = true,
-    separator: String = ": ",
-  ) {
-    self.init(
-      key: AbbreviableLabel(key),
-      value: .make(from: data),
-      separator: separator,
-    )
-  }
+//  public init<C: Collection>(
+//    _ key: String,
+//    data: C,
+//    maxItems: Int? = nil,
+//    showCount: Bool = true,
+//    separator: String = ": ",
+//  ) {
+//    self.init(
+//      key: AbbreviableLabel(key),
+//      value: .make(from: data),
+//      separator: separator,
+//    )
+//  }
 }
 
 // MARK: - Rendering

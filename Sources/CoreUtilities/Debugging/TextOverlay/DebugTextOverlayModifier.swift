@@ -25,7 +25,10 @@ struct DebugTextOverlayModifier: ViewModifier {
       .environment(ownedStore)
       .overlay(alignment: alignment) {
         if isEnabled, !ownedStore.items.isEmpty {
-          DebugItemsOverlayView(store: ownedStore)
+          DebugItemsOverlayView(
+            store: ownedStore,
+            alignment: alignment
+          )
         }
       }
       .overlay {
@@ -42,7 +45,7 @@ struct DebugTextOverlayModifier: ViewModifier {
 }
 
 extension DebugTextOverlayModifier {
-//  private var hasItems: Bool {
-//    guard let items = ownedStore.items
-//  }
+  //  private var hasItems: Bool {
+  //    guard let items = ownedStore.items
+  //  }
 }

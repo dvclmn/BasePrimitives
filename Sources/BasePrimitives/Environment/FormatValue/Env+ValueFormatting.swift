@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 22/3/2026.
 //
 
+import CoreUtilities
 import SwiftUI
-
 
 // MARK: - Environment values
 extension EnvironmentValues {
@@ -36,7 +36,7 @@ public protocol ValueFormattable {}
 // Removed `ValueFormattable` requirement, as it's hard (impossible)
 // to know the order of modifiers, e.g. for Quick slider with SliderStylable
 extension View {
-//extension View where Self: ValueFormattable {
+  //extension View where Self: ValueFormattable {
   public func formatValue(_ format: @escaping @Sendable (Double) -> String) -> some View {
     self.environment(\.formatValue, ValueFormatter(format))
   }

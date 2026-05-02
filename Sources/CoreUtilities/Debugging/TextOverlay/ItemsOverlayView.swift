@@ -8,25 +8,39 @@
 import SwiftUI
 
 struct DebugItemsOverlayView: View {
-//  @Environment(\.colourOverride) private var colourOverride
+  //  @Environment(\.colourOverride) private var colourOverride
 
   let store: DebugItemStore
+  let alignment: Alignment
   var body: some View {
 
     if !store.items.isEmpty {
-      VStack(alignment: .leading, spacing: 2) {
-        ForEach(store.items) { item in
-          Text(item.text)
-            .font(.caption)
-            .monospaced()
+
+      ScrollView {
+
+        Spacer()
+          .containerRelativeFrame([.vertical])
+        
+        VStack(spacing: 2) {
+//        VStack(alignment: alignment.horizontal, spacing: 2) {
+          ForEach(store.items) { item in
+            Text(item.text)
+              .font(.caption)
+              .monospaced()
+          }
         }
+        .padding(5)
+        .background(.regularMaterial)
+        .clipShape(.rect(cornerRadius: 3))
+        .padding()
+
+        //        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
       }
-      .padding(4)
-      .background(.regularMaterial)
-//      .background(colourOverride?.opacityLow)
-      .clipShape(.rect(cornerRadius: 3))
-      .padding()
-      .allowsHitTesting(false)
+      .scrollIndicators(.hidden)
+      .defaultScrollAnchor(<#T##anchor: UnitPoint?##UnitPoint?#>, for: <#T##ScrollAnchorRole#>)
+      //      .scrollContentBackground(.hidden)
+      //      .scrollDisabled(true)
+      //      .allowsHitTesting(false)
 
     } else {
       Text("No debug items")

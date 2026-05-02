@@ -25,7 +25,7 @@ public struct DisplayString {
     _ components: [DisplayBlock],
     separator: String,
     format: FloatDisplayFormat,
-    labelStyle: AbbreviableLabel.Style
+    labelStyle: AbbreviableLabel.Style,
   ) {
     self.components = components
     self.lineSeparator = separator
@@ -40,7 +40,7 @@ extension DisplayString {
     _ separator: String = "\n",
     format: FloatDisplayFormat = .default,
     labelStyle: AbbreviableLabel.Style = .standard,
-    @DisplayStringBuilder _ content: () -> [DisplayBlock]
+    @DisplayStringBuilder _ content: () -> [DisplayBlock],
   ) {
     self.lineSeparator = separator
     self.format = format
@@ -54,7 +54,7 @@ extension DisplayString {
     components.output(
       lineSeparator: lineSeparator,
       labelStyle: labelStyle,
-      format: format
+      format: format,
     )
   }
 
@@ -77,14 +77,14 @@ extension Array where Element == DisplayBlock {
   public func output(
     lineSeparator: String = "\n",
     labelStyle: AbbreviableLabel.Style = .standard,
-    format: FloatDisplayFormat = .default
+    format: FloatDisplayFormat = .default,
   ) -> String {
     lines(labelStyle: labelStyle, format: format).joined(lineSeparator)
   }
 
   public func lines(
     labelStyle: AbbreviableLabel.Style = .standard,
-    format: FloatDisplayFormat = .default
+    format: FloatDisplayFormat = .default,
   ) -> [String] {
     map { $0.render(using: format, with: labelStyle) }
   }

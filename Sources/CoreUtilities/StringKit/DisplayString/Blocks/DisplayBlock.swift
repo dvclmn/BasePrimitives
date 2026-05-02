@@ -25,8 +25,6 @@ extension DisplayBlock {
     using format: FloatDisplayFormat,
     with labelStyle: AbbreviableLabel.Style,
     delimiter: String = ", ",
-    //    labelStyle: AbbreviableLabel.Style = .standard,
-    //    using format: FloatDisplayFormat
   ) -> String {
     let string: String? =
       switch self {

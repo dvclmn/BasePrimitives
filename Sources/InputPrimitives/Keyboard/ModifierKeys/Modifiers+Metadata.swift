@@ -62,6 +62,10 @@ extension Modifiers {
   }
 }
 
+extension Modifiers: CustomStringConvertible {
+  public var description: String { displayString }
+}
+
 public struct ModifierDisplayElements: OptionSet, Sendable {
   public init(rawValue: Int) {
     self.rawValue = rawValue

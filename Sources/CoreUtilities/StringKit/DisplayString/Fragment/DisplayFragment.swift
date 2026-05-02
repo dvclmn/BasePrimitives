@@ -39,15 +39,38 @@ public struct DisplayFragment: Sendable {
 extension DisplayFragment {
   public static func make(from value: Any?) -> DisplayFragment {
     switch value {
-      case let result as FloatComponentsLabeled:
+      case let val as FloatComponentsLabeled:
         //      case let result as DisplayFragmentRenderable:
-        return DisplayFragment(result)
+        return DisplayFragment(val)
+
+      case let val as [CustomStringConvertible]:
+        let values = val.enumerated().map { index, item in
+          "  " + item.description.replacingOccurrences(of: "\n", with: "\n  ")
+          //          if index > 0 {
+          //            item.description.replacingOccurrences(of: "\n", with: "\n  ")
+          //          } else {
+          //            item.description
+          //          }
+
+        }.joined(",\n\n")
+
+        let joined = """
+          [
+          \(values)
+          ]
+          """
+
+        //        let joined = val.map(\.description).joined(separator: ",\n\n")
+        return DisplayFragment("\n" + joined)
 
       case let val as CustomStringConvertible:
         return DisplayFragment(val.description)
 
-      default:
-        return DisplayFragment(String(describing: value))
+      //      case let val = T as Collection where T.Element: CustomStringConvertible:
+
+      //        return DisplayFragment
+
+      default: return DisplayFragment(String(describing: value))
     }
   }
 }

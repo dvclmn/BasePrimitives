@@ -7,7 +7,6 @@
 
 /// This exists to
 public protocol DisplayFragmentRenderable: Sendable {
-  
   func render(
     using format: FloatDisplayFormat,
     with labelStyle: AbbreviableLabel.Style,

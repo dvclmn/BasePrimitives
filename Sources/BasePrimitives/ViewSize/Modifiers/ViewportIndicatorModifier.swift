@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreUtilities
 
 public struct ViewportSizeIndicatorModifier: ViewModifier {
   @Environment(\.viewportRect) private var viewportRect

@@ -62,4 +62,8 @@ extension DisplayStringBuilder {
   public static func buildExpression(_ value: any CustomStringConvertible) -> [DisplayBlock] {
     [.text(.make(from: value))]
   }
+  
+  public static func buildExpression(_ value: (any CustomStringConvertible)?) -> [DisplayBlock] {
+    [.text(.make(from: value))]
+  }
 }

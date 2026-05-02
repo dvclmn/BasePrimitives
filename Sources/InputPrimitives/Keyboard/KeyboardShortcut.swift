@@ -25,13 +25,14 @@ public enum KeyboardElementDisplayStyle {
 }
 
 // TODO: Bring this back, just fiddling with modifiers
-//extension KeyboardShortcut {
-//  public func displayString(
-//    keyStyle: KeyboardElementDisplayStyle = .symbolLiteral,
-//    modifierStyle: KeyboardElementDisplayStyle = .symbolLiteral,
-//  ) -> String {
+extension KeyboardShortcut {
+  public func displayString(
+    keyStyle: KeyboardElementDisplayStyle = .symbolLiteral,
+    modifierStyle: KeyboardElementDisplayStyle = .symbolLiteral,
+  ) -> String {
+    let modifierString = Modifiers(from: modifiers).displayString
 //    let modifiers: String = modifierStyle.isSymbol ? modifiers.symbols : modifiers.names
-//    let key: String = keyStyle.isSymbol ? String(key.symbolLiteral).uppercased() : key.name(isAbbreviated: keyStyle.isAbbreviated)
-//    return modifiers + key
-//  }
-//}
+    let key: String = keyStyle.isSymbol ? String(key.symbolLiteral).uppercased() : key.name(isAbbreviated: keyStyle.isAbbreviated)
+    return modifierString + key
+  }
+}
