@@ -22,25 +22,6 @@ extension Alignment {
     }
   }
 
-  /// Returns a sensible corresponding `UnitPoint`, with fallback.
-  /// Text baseline alignments are ignored and use the fallback.
-  public func toUnitPoint(fallback: UnitPoint = .center) -> UnitPoint {
-
-    switch self {
-
-      case .leading: .leading
-      case .trailing: .trailing
-      case .top: .top
-      case .bottom: .bottom
-      case .topLeading: .topLeading
-      case .topTrailing: .topTrailing
-      case .bottomLeading: .bottomLeading
-      case .bottomTrailing: .bottomTrailing
-
-      default: fallback
-    }
-  }
-
   
 
   //  /// Returns `.center` as default if case is unknown

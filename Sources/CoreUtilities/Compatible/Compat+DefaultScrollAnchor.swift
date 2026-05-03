@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
   @ViewBuilder
-  public func defaultScrollAnchor(
+  public func defaultScrollAnchorCompatible(
     _ anchor: UnitPoint?,
     for role: ScrollAnchorRoleCompatible = .initialOffset,
   ) -> some View {

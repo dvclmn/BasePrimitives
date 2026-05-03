@@ -18,8 +18,8 @@ struct DebugItemsOverlayView: View {
 
       ScrollView {
 
-        Spacer()
-          .containerRelativeFrame([.vertical])
+//        Spacer()
+//          .containerRelativeFrame([.vertical])
         
         VStack(spacing: 2) {
 //        VStack(alignment: alignment.horizontal, spacing: 2) {
@@ -37,7 +37,7 @@ struct DebugItemsOverlayView: View {
         //        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
       }
       .scrollIndicators(.hidden)
-      .defaultScrollAnchor(<#T##anchor: UnitPoint?##UnitPoint?#>, for: <#T##ScrollAnchorRole#>)
+      .defaultScrollAnchorCompatible(alignment.toUnitPoint(fallback: .center), for: .alignment)
       //      .scrollContentBackground(.hidden)
       //      .scrollDisabled(true)
       //      .allowsHitTesting(false)
