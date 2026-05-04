@@ -24,6 +24,7 @@ struct DebugItemModifier: ViewModifier {
       .overlay {
         if store == nil {
           Text("`DebugItemStore` missing from environment")
+            
 //          StateView(
 //            "`DebugItemStore` missing from environment",
 //            icon: .emojiComposition(.example),

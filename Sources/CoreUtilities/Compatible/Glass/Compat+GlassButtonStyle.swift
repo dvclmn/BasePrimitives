@@ -7,17 +7,20 @@
 
 import SwiftUI
 
-//extension PrimitiveButtonStyle where Self == GlassProminentButtonStyleCompatible
+extension PrimitiveButtonStyle where Self == GlassProminentButtonStyleCompatible {
+  public static var glassCompatible: Self { .init(style: .glass) }
+  public static var glassProminentCompatible: Self { .init(style: .glassProminent) }
+}
 
 enum GlassButtonStyle {
   case glass
   case glassProminent
 }
 
-struct GlassProminentButtonStyleCompatible: PrimitiveButtonStyle {
+public struct GlassProminentButtonStyleCompatible: PrimitiveButtonStyle {
 
   let style: GlassButtonStyle
-  func makeBody(configuration: Configuration) -> some View {
+  public func makeBody(configuration: Configuration) -> some View {
 
     if #available(macOS 26, iOS 26, *) {
 

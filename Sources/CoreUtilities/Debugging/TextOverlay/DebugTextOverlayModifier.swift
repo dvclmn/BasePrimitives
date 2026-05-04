@@ -27,7 +27,7 @@ struct DebugTextOverlayModifier: ViewModifier {
         if isEnabled, !ownedStore.items.isEmpty {
           DebugItemsOverlayView(
             store: ownedStore,
-            alignment: alignment
+            alignment: alignment,
           )
         }
       }

@@ -25,11 +25,9 @@ public struct CoordinateSpaceMapper {
   public init(
     frame: Rect<ScreenSpace>,
     canvasSize: Size<CanvasSpace>,
-    //    zoomClamped zoom: CGFloat,
   ) {
     self.artworkFrame = frame
     self.canvasSize = canvasSize
-    //    self.zoom = zoom
   }
 
   public init(
@@ -39,7 +37,6 @@ public struct CoordinateSpaceMapper {
   ) {
     let origin: Point<ScreenSpace> = .init(fromOffset: panOffset)
 
-    //    let screenSize = canvasSize.cgSize * zoom
     let size: Size<ScreenSpace> = .init(
       width: canvasSize.width * zoom,
       height: canvasSize.height * zoom,
@@ -52,8 +49,6 @@ public struct CoordinateSpaceMapper {
 
 extension CoordinateSpaceMapper {
 
-  //  private var zoom: Double { artworkFrame.size / canvasSize }
-
   @inlinable
   var zoom: CGFloat {
     let widthZoom: CGFloat
@@ -62,13 +57,13 @@ extension CoordinateSpaceMapper {
     if canvasSize.width != 0 {
       widthZoom = artworkFrame.width / canvasSize.width
     } else {
-      widthZoom = 1.0  // default: no zoom
+      widthZoom = 1.0
     }
 
     if canvasSize.height != 0 {
       heightZoom = artworkFrame.height / canvasSize.height
     } else {
-      heightZoom = 1.0  // default: no zoom
+      heightZoom = 1.0
     }
 
     /// Check for NaN, Inf, or negative scales as well
@@ -117,13 +112,6 @@ extension CoordinateSpaceMapper {
   public var viewportToCanvas: CGAffineTransform {
     canvasToViewport.inverted()
   }
-
-  //  private var canvasSize: Size<CanvasSpace> {
-  //    Size<CanvasSpace>(
-  //      width: artworkFrame.width / zoom,
-  //      height: artworkFrame.height / zoom,
-  //    )
-  //  }
 
   /// Convert screen-space point to canvas-space
   public func canvasPoint(from screenPoint: Point<ScreenSpace>) -> Point<CanvasSpace> {

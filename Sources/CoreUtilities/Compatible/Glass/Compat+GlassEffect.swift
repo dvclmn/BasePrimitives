@@ -14,8 +14,7 @@ extension View {
     in shape: S,
   ) -> some View {
     if #available(macOS 26, iOS 26, *), let glass {
-//      glassEffect(glass.glassType, in: shape)
-      buttonStyle(.glassProminent)
+      glassEffect(glass.glassType, in: shape)
     } else {
       self
     }
