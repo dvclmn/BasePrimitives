@@ -13,10 +13,10 @@ import Foundation
 /// E.g.
 
 /// ```
-/// enum ScreenSpace {}
+/// enum ViewportSpace {}
 /// enum CanvasSpace {}
 ///
-/// func drawHandle(at point: Point<ScreenSpace>) { ... }
+/// func drawHandle(at point: Point<ViewportSpace>) { ... }
 /// let canvasPoint: Point<CanvasSpace> = .init(x: 120, y: 80)
 ///
 /// ```
@@ -29,7 +29,7 @@ import Foundation
 /// ```
 /// let mapping: ViewportMapping = ... // produced from geometry + transform
 /// let screenPoint = mapping.toGlobal(point: canvasPoint.cgPoint) // or a space-aware overload
-/// drawHandle(at: Point<ScreenSpace>(fromPoint: screenPoint))
+/// drawHandle(at: Point<ViewportSpace>(fromPoint: screenPoint))
 /// ```
 public struct Point<Space>: Sendable, Equatable {
   public var x: CGFloat
@@ -59,10 +59,6 @@ public struct Point<Space>: Sendable, Equatable {
 extension Point {
   public var cgPoint: CGPoint { .init(x: x, y: y) }
   public static var zero: Self { .init(x: 0, y: 0) }
-}
-
-extension CGPoint {
-  public var screenPoint: Point<ScreenSpace> { .init(fromPoint: self) }
 }
 
 // MARK: - Arithmetic

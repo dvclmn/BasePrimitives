@@ -76,6 +76,7 @@ extension View {
     )
   }
 
+  /// Note: This modifier also adds modifier keys to the Environment
   public func modifierKeys(
     _ modifiersToWatch: EventModifiers = .all,
     onChange perform: @escaping (Modifiers) -> Void,

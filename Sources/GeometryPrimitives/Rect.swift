@@ -75,6 +75,3 @@ extension Rect {
   public var midY: CGFloat { y + height / 2 }
 }
 
-extension CGRect {
-  public var screenRect: Rect<ScreenSpace> { .init(fromRect: self) }
-}

@@ -5,6 +5,7 @@
 //  Created by Dave Coleman on 26/4/2026.
 //
 
+import Foundation
 
 /// ```
 /// private func missingValue(_ key: String, for consumer: String) -> String {
@@ -26,10 +27,17 @@ public func printMissing(_ value: String, for consumer: String) {
   //  print("`\(String(describing: value))` missing, needed by `\(consumer)`")
 }
 
+public func printTimestamped(_ message: String) {
+  let value = message + " at \(Date.debug)"
+  print(value)
+//  print("`\(value)` missing, needed by `\(consumer)`")
+  //  print("`\(String(describing: value))` missing, needed by `\(consumer)`")
+}
+
 public func printDidNotSatisfy(
   _ value: String,
   expectation: String,
-  for consumer: String
+  for consumer: String,
 ) {
   print("`\(value)` did not match expected result `\(expectation)`, in method `\(consumer)`")
 }

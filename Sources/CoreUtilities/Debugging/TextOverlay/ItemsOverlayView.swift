@@ -18,11 +18,11 @@ struct DebugItemsOverlayView: View {
 
       ScrollView {
 
-//        Spacer()
-//          .containerRelativeFrame([.vertical])
-        
-        VStack(spacing: 2) {
-//        VStack(alignment: alignment.horizontal, spacing: 2) {
+        //        Spacer()
+        //          .containerRelativeFrame([.vertical])
+
+        VStack(alignment: .leading, spacing: 2) {
+//                  VStack(alignment: alignment.horizontal, spacing: 2) {
           ForEach(store.items) { item in
             Text(item.text)
               .font(.caption)

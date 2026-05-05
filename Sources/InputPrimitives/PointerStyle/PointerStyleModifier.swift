@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-private struct CustomPointerModifier: ViewModifier {
+private struct PointerStyleModifier: ViewModifier {
   let style: PointerStyleCompatible?
 
   func body(content: Content) -> some View {
@@ -21,6 +21,6 @@ private struct CustomPointerModifier: ViewModifier {
 
 extension View {
   public func pointerStyleCompatible(_ style: PointerStyleCompatible?) -> some View {
-    modifier(CustomPointerModifier(style: style))
+    modifier(PointerStyleModifier(style: style))
   }
 }

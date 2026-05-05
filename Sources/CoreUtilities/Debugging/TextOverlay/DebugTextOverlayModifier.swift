@@ -29,6 +29,8 @@ struct DebugTextOverlayModifier: ViewModifier {
             store: ownedStore,
             alignment: alignment,
           )
+          .allowsHitTesting(false)
+//          .border(Color.green.opacity(0.3))
         }
       }
       .overlay {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 /// Allows differentiating one `CGSize` from another, to make it clearer
 /// and easier to move between different coordinate spaces, with compile-time safety.
@@ -41,7 +42,6 @@ extension Size {
 }
 
 extension CGSize {
-  public var screenSize: Size<ScreenSpace> { .init(fromCGSize: self) }
 
   public init<Space>(fromSize size: Size<Space>) {
     self.init(width: size.width, height: size.height)
