@@ -20,11 +20,15 @@ extension View {
     )
   }
 
-  public func debugText(_ text: String) -> some View {
+  public func debugText(
+    isEnabled: Bool = true,
+    _ text: String
+  ) -> some View {
     modifier(DebugItemModifier(text: text))
   }
 
   public func debugText(
+    isEnabled: Bool = true,
     @DisplayStringBuilder _ text: () -> [DisplayBlock]
   ) -> some View {
     modifier(DebugItemModifier(text: text().output()))
