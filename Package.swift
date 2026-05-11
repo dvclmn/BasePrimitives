@@ -14,7 +14,7 @@ let package = Package(
     .library(name: "CoreUtilities", targets: [
       "CoreUtilities",
       "InputPrimitives",
-      "GeometryPrimitives",
+//      "GeometryPrimitives",
     ]),
   ],
   dependencies: [
@@ -31,8 +31,8 @@ let package = Package(
     .target(
       name: "CoreUtilities"
     ),
-    .target(
-      name: "GeometryPrimitives"
-    ),
+//    .target(
+//      name: "GeometryPrimitives"
+//    ),
   ],
 )
