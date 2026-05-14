@@ -21,7 +21,7 @@ extension CGPoint {
   /// ```
   public func toUnitPoint(
     in size: CGSize,
-    rounding: Rounding = .none,
+    rounding: FloatingPointRoundingRule = .down,
     fallback: UnitPoint = .center
   ) -> UnitPoint {
     
@@ -30,8 +30,8 @@ extension CGPoint {
     let rawX = x / size.width
     let rawY = y / size.height
     
-    let valX = rounding.roundedIfNeeded(rawX)
-    let valY = rounding.roundedIfNeeded(rawY)
+    let valX = rawX.rounded(rounding)
+    let valY = rawY.rounded(rounding)
 
     return UnitPoint(x: valX, y: valY)
   }
