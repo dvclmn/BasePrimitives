@@ -26,15 +26,18 @@ where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable
 
   let handlerValue: HandlerBinding
   let viewValue: ViewBinding?
+  let action: @MainActor (HandlerBinding.Value) -> Void
 
   init(
     debounce: DebounceMode,
     handlerValue: HandlerBinding,
     viewValue: ViewBinding?,
+    action: @escaping @MainActor (HandlerBinding.Value) -> Void,
   ) {
     self._debouncer = debounce.createDebouncer()
     self.handlerValue = handlerValue
     self.viewValue = viewValue
+    self.action = action
   }
 
   func body(content: Content) -> some View {
@@ -86,6 +89,7 @@ extension Bind {
     guard self.handlerValue.wrappedValue != newValue
     else { return }
     self.handlerValue.wrappedValue = newValue
+    self.action(newValue)
   }
 
   private func handlerDidChange(_ newValue: HandlerBinding.Value) {
@@ -93,6 +97,7 @@ extension Bind {
     guard viewValue.wrappedValue != newValue
     else { return }
     viewValue.wrappedValue = newValue
+    self.action(newValue)
   }
 }
 
@@ -102,6 +107,7 @@ extension View {
     debounce: DebounceMode,
     _ handlerValue: HandlerValue,
     to viewValue: ViewValue?,
+    perform action: @escaping @MainActor (HandlerValue.Value) -> Void = { _ in }
   ) -> some View
   where HandlerValue.Value == ViewValue.Value, HandlerValue.Value: Equatable {
     self.modifier(
@@ -109,6 +115,7 @@ extension View {
         debounce: debounce,
         handlerValue: handlerValue,
         viewValue: viewValue,
+        action: action,
       )
     )
   }
