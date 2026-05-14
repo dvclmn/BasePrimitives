@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - Helper extensions for SwiftUI
+
 /// Useful for e.g. `Edge` and `Alignment`, which don't store values,
 /// but rather represent directions.
 public protocol AxisOrientable {

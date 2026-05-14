@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 11/9/2025.
 //
 
-import SwiftUI
-
 /// Describes how a type's stored components map to logical axes.
 ///
 /// Many types store two scalars in a fixed order (e.g. `CGSize` stores `(width, height)`,
@@ -65,12 +63,6 @@ public enum AxisMapping: Sendable {
     }
   }
 
-  /// Converts a physical axis (SwiftUI.Axis) into your logical GeometryAxis.
-  public func map(_ swiftUIAxis: Axis) -> GeometryAxis {
-    let axis = swiftUIAxis.toGeometryAxis
-    return map(axis)
-
-  }
 }
 
 // MARK: - Deprecations

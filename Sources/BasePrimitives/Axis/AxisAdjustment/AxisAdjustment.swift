@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 15/12/2025.
 //
 
-import SwiftUI
-
 /// A convenience protocol for types that expose two scalar components addressable by axis.
 ///
 /// Conforming types (for example `CGPoint` (x/y), `CGSize` (width/height), `UnitPoint`,

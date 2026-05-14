@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 6/1/2026.
 //
 
-import SwiftUI
+import Foundation
 
 extension CGSize: AxisKeyPathWritable {
   public static var primaryWritableKey: WritableKeyPath<Self, CGFloat> { \.width }
@@ -24,14 +24,4 @@ extension CGPoint: AxisKeyPathWritable {
 extension CGVector: AxisKeyPathWritable {
   public static var primaryWritableKey: WritableKeyPath<Self, CGFloat> { \.dx }
   public static var secondaryWritableKey: WritableKeyPath<Self, CGFloat> { \.dy }
-}
-
-extension UnitPoint: AxisKeyPathWritable {
-  public static var primaryWritableKey: WritableKeyPath<Self, CGFloat> { \.x }
-  public static var secondaryWritableKey: WritableKeyPath<Self, CGFloat> { \.y }
-}
-
-extension EdgeInsets: AxisKeyPathWritable {
-  public static var primaryWritableKey: WritableKeyPath<Self, CGFloat> { \.horizontalUniform }
-  public static var secondaryWritableKey: WritableKeyPath<Self, CGFloat> { \.verticalUniform }
 }
