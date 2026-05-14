@@ -12,7 +12,7 @@ import CoreUtilities
 extension View {
 
   public func viewSize<T: GeometryCapturable>(
-    capture: GeometryCapture<T> = .size,
+    capture: GeometryCapture<T>,
     mode debounceMode: DebounceMode,
     isEnabled: Bool = true,
     valueOutput: @escaping ViewSizeOutput<T>,

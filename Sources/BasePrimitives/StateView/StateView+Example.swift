@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import BasePrimitives
-
 struct StateViewExample: View {
   
   var body: some View {
