@@ -30,7 +30,6 @@ extension Edge {
 
   /// The physical axis this edge resides on in a standard coordinate system.
   public var toAxis: Axis {
-    //    let mapping: AxisMapping = .identity
     switch self {
       case .top, .bottom: return .vertical
       case .leading, .trailing: return .horizontal

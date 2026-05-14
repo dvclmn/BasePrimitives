@@ -31,8 +31,5 @@ let package = Package(
     .target(
       name: "CoreUtilities"
     ),
-//    .target(
-//      name: "GeometryPrimitives"
-//    ),
   ],
 )

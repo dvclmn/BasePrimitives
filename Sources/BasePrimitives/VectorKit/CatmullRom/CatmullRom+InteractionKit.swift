@@ -11,6 +11,11 @@ import SwiftUI
 /// for drawing applications where captured touch points should lie exactly
 /// on the rendered curve.
 ///
+/// A full stroke or spline can contain any number of control points. Each
+/// evaluated segment is defined by four points: `p1` and `p2` are the visible
+/// segment endpoints, while `p0` and `p3` provide the neighbouring context
+/// used to derive the tangents.
+///
 /// ## Choosing a variant
 ///
 /// - `.centripetal` (α = 0.5): Recommended default. Prevents cusps and
@@ -117,7 +122,9 @@ public enum CatmullRom {
   /// Catmull-Rom cubic Bézier conversion.
   ///
   /// Fewer than 2 points returns an empty path. 2 points returns a straight
-  /// line. 3+ points produces a smooth spline.
+  /// line. 3+ points produces a smooth spline. When `closed` is true, the
+  /// neighbouring control points wrap around the point array so the closing
+  /// segment has continuous Catmull-Rom tangents.
   public static func path(
     through points: [CGPoint],
     variant: Variant = .centripetal,
@@ -129,11 +136,21 @@ public enum CatmullRom {
       p.move(to: points[0])
 
       let n = points.count
-      for i in 0..<(n - 1) {
-        let p0 = points[max(0, i - 1)]
-        let p1 = points[i]
-        let p2 = points[i + 1]
-        let p3 = points[min(n - 1, i + 2)]
+      let wrapsAround = closed && n > 2
+      let segmentCount = wrapsAround ? n : n - 1
+
+      func point(at index: Int) -> CGPoint {
+        if wrapsAround {
+          return points[(index + n) % n]
+        }
+        return points[min(max(0, index), n - 1)]
+      }
+
+      for i in 0..<segmentCount {
+        let p0 = point(at: i - 1)
+        let p1 = point(at: i)
+        let p2 = point(at: i + 1)
+        let p3 = point(at: i + 2)
 
         let (c1, c2) = toCubicBezier(p0: p0, p1: p1, p2: p2, p3: p3, variant: variant)
         p.addCurve(to: p2, control1: c1, control2: c2)
@@ -153,7 +170,8 @@ public enum CatmullRom {
   ///   - positions: Control point positions.
   ///   - values: Scalar values associated with each control point
   ///     (e.g. speed). Must be the same length as `positions`.
-  ///   - steps: Subdivisions per segment. 6–12 is usually sufficient.
+  ///   - steps: Subdivisions per segment. Values below 1 are clamped to 1.
+  ///     6–12 is usually sufficient.
   public static func sample(
     positions: [CGPoint],
     values: [CGFloat],
@@ -165,14 +183,15 @@ public enum CatmullRom {
       return zip(positions, values).map { ($0, $1) }
     }
 
+    let stepCount = max(1, steps)
     var result: [(CGPoint, CGFloat)] = []
-    result.reserveCapacity((n - 1) * steps + 1)
+    result.reserveCapacity((n - 1) * stepCount + 1)
 
     for i in 0..<(n - 1) {
       let i0 = max(0, i - 1), i1 = i, i2 = i + 1, i3 = min(n - 1, i + 2)
 
-      for step in 0..<steps {
-        let t = CGFloat(step) / CGFloat(steps)
+      for step in 0..<stepCount {
+        let t = CGFloat(step) / CGFloat(stepCount)
         let pt = point(p0: positions[i0], p1: positions[i1], p2: positions[i2], p3: positions[i3], t: t, variant: variant)
         let v = scalar(v0: values[i0], v1: values[i1], v2: values[i2], v3: values[i3], t: t, variant: variant)
         result.append((pt, v))
