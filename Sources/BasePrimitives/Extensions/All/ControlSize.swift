@@ -8,6 +8,23 @@
 import SwiftUI
 
 extension ControlSize {
+  public var displayName: String {
+    switch self {
+      case .mini: "Mini"
+      case .small: "Small"
+      case .regular: "Regular"
+      case .large: "Large"
+      case .extraLarge: "Extra Large"
+      @unknown default: "Regular"
+    }
+  }
+  
+}
+
+extension ControlSize: @retroactive Identifiable {
+  public var id: String { displayName }
+}
+extension ControlSize {
 
   public var scaleFactor: CGFloat {
     switch self {

@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-//import UIPrimitives
-
 public struct StateView<Content: View>: View {
   @Environment(\.layoutType) private var layoutType
   @Environment(\.layoutAlignment) private var layoutAlignment
@@ -26,15 +24,14 @@ public struct StateView<Content: View>: View {
     VStack {
       TitleAndIconView()
         /// Padding to achieve nice vertical optical centering
-        .safePaddingCompatible(.top, paddingLength)
+        .safeAreaPadding(.top, paddingLength)
 
       MessageView()
       additionalContent
     }
     .monospacedDigit()
     .frame(maxWidth: 380)
-    .padding(.vertical, layoutPadding ?? Styles.sizeRegular)
-    .padding(.horizontal, layoutPadding ?? Styles.sizeRegular)
+    .padding(layoutPadding ?? Styles.sizeRegular)
   }
 }
 
