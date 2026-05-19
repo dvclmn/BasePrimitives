@@ -39,7 +39,7 @@ extension StateView {
 
   private var effectiveTitleColour: some ShapeStyle {
     let base: HierarchicalShapeStyle = .primary
-    let opacity: CGFloat = message != nil ? 1.0 : 0.85
+    let opacity: CGFloat = hasMessage ? 0.9 : 0.85
     return base.opacity(opacity)
   }
   private var paddingLength: CGFloat {
@@ -52,6 +52,8 @@ extension StateView {
     let baseIconSize: CGFloat = 46
     return iconFontSize ?? baseIconSize
   }
+  
+  private var hasMessage: Bool { message != nil }
 
   @ViewBuilder
   private func TitleAndIconView() -> some View {
@@ -89,7 +91,6 @@ extension StateView {
     if let message = message {
       Text(message.toMarkdownCompatible)
         .multilineTextAlignment(.center)
-        //        .font(.system(size: controlSize.scale(15)))
         .font(.system(controlSize.textStyle))
         .foregroundStyle(.secondary.opacity(0.8))
         .padding(.bottom, controlSize.scale(16))

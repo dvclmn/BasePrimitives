@@ -13,95 +13,48 @@ struct StateViewExample: View {
 
   var body: some View {
 
-    VStack {
-      StateView(
-        "Normal view",
-        icon: .symbol(Icons.binoculars.icon),
-        message: "I'm a view with a normal size.",
-        //        icon: Icon.emoji("🐠")
-      ) {
-        Button {
-
-        } label: {
-          Label("Example button", systemImage: "plus")
-        }
+    ScrollView {
+      ForEach(ControlSize.allCases) { size in
+        StateViewComparison(
+          title: content(size).0,
+          icon: content(size).1,
+          message: content(size).2,
+        )
+        
       }
-
-      ContentUnavailableView {
-        Label("Normal view", systemImage: Icons.binoculars.icon)
-      } description: {
-        Text("I'm a view with a normal size.")
-      } actions: {
-        Button {
-
-        } label: {
-          Label("Example button", systemImage: "plus")
-        }
-      }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
+
     .controlSize(controlSize)
     .symbolVariant(.fill)
     .symbolRenderingMode(.hierarchical)
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .safeAreaInset(edge: .bottom) {
-      Picker("Size", selection: $controlSize) {
-        ForEach(ControlSize.allCases) { size in
-          Text(size.displayName).tag(size)
-        }
-      }
-      .pickerStyle(.segmented)
 
-    }
-
-    //    .toolbar {
-    //      ToolbarItem {
-    //      }
-    //    }
-
-    //      ContentUnavailableView(
-    //        "Normal view",
-    //        systemImage: Icons.binoculars.icon,
-    //        description: Text("I'm a view with a normal size."),
-    //      )
-
-    //      MultiItemView("Butts", data: [1, 2, 3]) { item in
-    //        Text(item.string)
-    //      }
-    //
-    //      StateView(
-    //        title: "I'm a mini view",
-    //        message: "Action label",
-    //        icon: Icon.emoji("🐠")
-    //      ) {
-    //        Button {
-    //
-    //        } label: {
-    //          Label("Example button", systemImage: "plus")
+//    .padding(40)
+    .frame(width: 600, height: 700)
+    .background(.black.opacity(0.6))
+    //    .safeAreaInset(edge: .bottom) {
+    //      Picker("Size", selection: $controlSize) {
+    //        ForEach(ControlSize.allCases) { size in
+    //          Text(size.displayName).tag(size)
     //        }
     //      }
+    //      .pickerStyle(.segmented)
     //
-    //      StateView(
-    //        title: "Here is a title",
-    //        message: "Action label. I'm a small size.",
-    //        icon: Icon.symbol(Icons.getRandomIcon),
-    //        itemCount: 6
-    //      ) {
-    //        Button {
-    //
-    //        } label: {
-    //          Label("Example button", systemImage: "plus")
-    //        }
-    //      }
-
     //    }
+  }
+}
+extension StateViewExample {
+  private func content(_ size: ControlSize) -> (String, String, String) {
+    return (
+      "This is a title",
+      Icons.boat.icon,
+      "I'm a view with \(size.displayName) size.",
+    )
   }
 }
 
 #if DEBUG
 #Preview {
   StateViewExample()
-    .padding(40)
-    .frame(width: 600, height: 700)
-    .background(.black.opacity(0.6))
 }
 #endif
