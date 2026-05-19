@@ -45,7 +45,6 @@ extension Axis {
           case .minHeight, .maxHeight: .horizontal
         }
     }
-
   }
 }
 

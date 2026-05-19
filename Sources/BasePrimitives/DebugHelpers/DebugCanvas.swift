@@ -9,16 +9,14 @@ import SwiftUI
 
 public enum DebugPoint: Sendable {
   case none
-  case point(Color = .orange)
-  
+  case point(Color)
+
   public static let `default`: Self = .point(.orange)
 
   public var colourForPoint: Color? {
     switch self {
-      case .point(let colour):
-        return colour
-      case .none:
-        return nil
+      case .point(let colour): colour
+      case .none: nil
     }
   }
 }
@@ -29,10 +27,8 @@ public enum DebugTextPosition {
 
   public var multiplierForYPosition: CGFloat {
     switch self {
-      case .aboveOrigin:
-        return 1
-      case .belowOrigin:
-        return -1
+      case .aboveOrigin: 1
+      case .belowOrigin: -1
     }
   }
 }
