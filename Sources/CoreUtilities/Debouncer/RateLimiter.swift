@@ -70,30 +70,3 @@ public final class RateLimiter {
     pendingWorkItem?.cancel()
   }
 }
-
-/// This is fine if you’re debouncing rebuilds, analysis, caches, etc — not direct drawing.
-//@MainActor
-//public final class Debouncer {
-//  private var workItem: DispatchWorkItem?
-//  private let interval: TimeInterval
-//
-//  public init(interval: TimeInterval = 0.2) {
-//    self.interval = interval
-//  }
-//
-//  public func execute(_ action: @escaping () -> Void) {
-//    workItem?.cancel()
-//
-//    let item = DispatchWorkItem { action() }
-//    workItem = item
-//
-//    DispatchQueue.main.asyncAfter(
-//      deadline: .now() + interval,
-//      execute: item
-//    )
-//  }
-//
-//  deinit {
-//    workItem?.cancel()
-//  }
-//}

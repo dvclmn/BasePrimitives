@@ -13,7 +13,6 @@ extension View {
     self.environment(\.isDebugMode, mode)
   }
 
-
   public func helpText(_ text: String) -> some View {
     self.environment(\.helpText, text).help(text)
   }
