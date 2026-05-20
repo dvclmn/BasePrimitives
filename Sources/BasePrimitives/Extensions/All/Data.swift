@@ -8,7 +8,7 @@
 import Foundation
 
 extension Data {
-  public var prettyPrintedJSONString: String {
+  public var prettyPrinted: String {
     guard
       let object = try? JSONSerialization.jsonObject(with: self, options: []),
       let prettyData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
@@ -17,12 +17,3 @@ extension Data {
     return prettyString
   }
 }
-
-//extension Encodable {
-//  public var prettyPrintedJSONString: String {
-//    let encoder = JSONEncoder()
-//    encoder.outputFormatting = .prettyPrinted
-//    guard let data = try? encoder.encode(self) else { return "nil" }
-//    return String(data: data, encoding: .utf8) ?? "nil"
-//  }
-//}

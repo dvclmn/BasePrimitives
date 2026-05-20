@@ -5,11 +5,11 @@
 //  Created by Dave Coleman on 27/12/2024.
 //
 
-#if canImport(AppKit)
 import SwiftUI
 
-public extension MoveCommandDirection {
-  var name: String {
+extension MoveCommandDirection {
+
+  public var displayName: String {
     switch self {
       case .up: "Up"
       case .down: "Down"
@@ -18,5 +18,7 @@ public extension MoveCommandDirection {
       @unknown default: "Unknown"
     }
   }
+
+  @available(*, deprecated, renamed: "displayName")
+  public var name: String { displayName }
 }
-#endif

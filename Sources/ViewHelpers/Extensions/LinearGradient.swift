@@ -7,23 +7,22 @@
 
 import SwiftUI
 
-//@MainActor
 extension LinearGradient {
   public static func rainbow(
     start: UnitPoint = .leading,
-    end: UnitPoint = .trailing
+    end: UnitPoint = .trailing,
   ) -> LinearGradient {
     LinearGradient(
       colors: .rainbow,
       startPoint: start,
-      endPoint: end
+      endPoint: end,
     )
   }
 
   public static func lightFalloff(
     _ colour: Color = .white.opacity(0.1),
     direction: Alignment = .top,
-    falloffAmount: CGFloat = 0.9
+    falloffAmount: CGFloat = 0.9,
   ) -> LinearGradient {
 
     LinearGradient(
@@ -32,7 +31,7 @@ extension LinearGradient {
         colour.opacity(falloffAmount.inversePercentage),
       ],
       startPoint: direction.toUnitPoint(),
-      endPoint: direction.toOpposing.toUnitPoint()
+      endPoint: direction.toOpposing.toUnitPoint(),
     )
   }
 }
