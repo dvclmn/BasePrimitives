@@ -3,21 +3,21 @@
 import PackageDescription
 
 let package = Package(
-  name: "BasePrimitives",
+  name: "ToolKit",
   platforms: [
     .macOS("14.0")
   ],
 
   products: [
-    .library(name: "BasePrimitives", targets: ["BasePrimitives"]),
-    .library(name: "ViewHelpers", targets: ["ViewHelpers"]),
     .library(
-      name: "CoreUtilities",
+      name: "BasePrimitives",
       targets: [
+        "BasePrimitives",
         "CoreUtilities",
-        "InputPrimitives",
       ],
     ),
+    .library(name: "ViewHelpers", targets: ["ViewHelpers"]),
+
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
@@ -25,10 +25,12 @@ let package = Package(
   targets: [
     .target(
       name: "BasePrimitives",
-      dependencies: ["InputPrimitives", "CoreUtilities", "ViewHelpers"],
+      dependencies: ["CoreUtilities", "ViewHelpers"],
     ),
-    .target(name: "ViewHelpers"),
-    .target(name: "InputPrimitives"),
     .target(name: "CoreUtilities"),
+    .target(
+      name: "ViewHelpers",
+      dependencies: ["CoreUtilities"]
+    ),
   ],
 )
