@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 // MARK: - Binding CGRect
 extension Binding where Value == CGRect {
   public var getOrigin: CGPoint {
@@ -64,15 +63,13 @@ extension Binding where Value == CGSize? {
 extension Binding where Value == CGFloat? {
   public func toBindingRect(
     along axis: GeometryAxis,
-    reversed: Bool = false
+    reversed: Bool = false,
   ) -> Binding<CGRect?> {
     return Binding<CGRect?> {
       guard let value = wrappedValue else { return nil }
       let valueAdjusted: CGFloat = reversed ? -value : value
       let size: CGSize =
         switch axis {
-          //          case .horizontal: CGSize(width: .zero, height: value)
-          //          case .vertical: CGSize(width: value, height:.zero)
           case .horizontal: CGSize(width: valueAdjusted, height: .zero)
           case .vertical: CGSize(width: .zero, height: valueAdjusted)
         }

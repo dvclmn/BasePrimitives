@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-//public var twoPi: CGFloat { .pi * 2 }
-//public var twoPiDouble: Double { .pi * 2 }
-//public var twoPiCGFloat: CGFloat { .pi * 2 }
-//public var twoPiFloat: Float { .pi * 2 }
-
 public func twoPi<T: BinaryFloatingPoint>() -> T { T.pi * 2 }
 
 /// Looking for `clamp` methods? See `Extensions/Comparable`

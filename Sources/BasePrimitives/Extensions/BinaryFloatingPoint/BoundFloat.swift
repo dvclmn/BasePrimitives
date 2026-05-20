@@ -23,18 +23,6 @@ public struct BoundFloat<T: BinaryFloatingPoint> {
   }
 }
 
-//extension BoundFloat where T: Strideable {
-//  public init(
-//    _ value: T,
-//    range: ClosedRange<T>,
-//    step: T
-//  ) {
-//    self.value = value
-//    self.range = range
-//    self.step = step
-//  }
-//}
-
 extension BoundFloat {
   public var clamped: T {
     value.clamped(to: range)

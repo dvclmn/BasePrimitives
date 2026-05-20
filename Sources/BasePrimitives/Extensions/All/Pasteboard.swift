@@ -18,15 +18,8 @@ import UniformTypeIdentifiers
 extension NSPasteboard: PasteboardCopying {
   public func setString(_ string: String) {
     clearContents()
-        setString(string, forType: .string)
+    setString(string, forType: .string)
 
-//    let data = string.data(using: .utf8)!
-//
-//    // Primary modern flavour
-//    setData(data, forType: .init(UTType.utf8PlainText.identifier))
-//
-//    // Optional: legacy NSString flavour (still widely used)
-//    setString(string, forType: .string)
   }
 }
 
@@ -43,15 +36,15 @@ extension UIPasteboard: PasteboardCopying {
 public func copyStringToClipboard(_ contents: String) {
   DispatchQueue.main.async {
     let pasteboard: PasteboardCopying
-    
+
     #if canImport(AppKit)
     pasteboard = NSPasteboard.general
-    
+
     #elseif canImport(UIKit)
     pasteboard = UIPasteboard.general
-    
+
     #endif
-    
+
     pasteboard.setString(contents)
   }
 }

@@ -11,13 +11,6 @@ extension BinaryFloatingPoint {
 
   public var toAngle: Angle { .degrees(Double(self)) }
 
-
-
-  //  public func toPercent(within range: ClosedRange<Self>) -> Self {
-  //    let normalised: Double = Double(self.normalised(in: range))
-  //    return Self(normalised * 100)
-  //  }
-
   public var toDurationInSeconds: Duration { Duration.seconds(Double(self)) }
 
   public var degreesToRadians: Self { self * .pi / 180 }

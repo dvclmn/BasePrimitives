@@ -30,21 +30,8 @@ extension BinaryFloatingPoint {
     (self.wrappedUnit() + shortestUnitDelta(towards: other) * amount).wrappedUnit()
   }
 
-  /// Interpolate shortest path around colour wheel
-  @available(
-    *, deprecated, message: "Prefer SwiftUI's `VectorArithmetic/interpolated(towards:amount:)` instead"
-  )
-  //  public func interpolated(
-  //    towards other: Self,
-  //    strength: Self
-  //  ) -> Self {
-  //    let delta = ((other - self + 1.5).truncatingRemainder(dividingBy: 1.0)) - 0.5
-  //    return Self(self + delta * strength)
-  //  }
-
   /// Useful for Hue
   public var degrees: Self { self * 360 }
-  //  public init(degrees: Double) { Double(degrees / 360) }
 }
 
 extension Optional where Wrapped: BinaryFloatingPoint {
@@ -54,7 +41,7 @@ extension Optional where Wrapped: BinaryFloatingPoint {
   /// - If both non-nil -> linear interpolate with `strength` in [0, 1]
   public func interpolated(
     towards other: Wrapped?,
-    amount: Wrapped
+    amount: Wrapped,
   ) -> Wrapped? {
     switch (self, other) {
       case (nil, nil): return nil
@@ -63,14 +50,14 @@ extension Optional where Wrapped: BinaryFloatingPoint {
       case (let a?, let b?):
         let interpolated = Double(a).interpolated(
           towards: Double(b),
-          amount: Double(amount)
+          amount: Double(amount),
         )
         return Wrapped(interpolated)
     }
   }
   public func interpolatedHue(
     towards other: Wrapped?,
-    amount: Wrapped
+    amount: Wrapped,
   ) -> Wrapped? {
     switch (self, other) {
       case (nil, nil): return nil
@@ -79,7 +66,7 @@ extension Optional where Wrapped: BinaryFloatingPoint {
       case (let a?, let b?):
         return a.interpolatedHue(
           towards: b,
-          amount: amount
+          amount: amount,
         )
     }
   }

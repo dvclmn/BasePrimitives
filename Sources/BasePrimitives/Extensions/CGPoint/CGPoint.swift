@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-//extension CGPoint: @retroactive Hashable {
-//  public var hashValue: Int { x.hashValue << 32 ^ y.hashValue }
-//}
-
-//public func == (lhs: CGPoint, rhs: CGPoint) -> Bool {
-//  return lhs.distance(to: rhs) < 0.000001
-//}
-
 extension CGPoint {
 
   public func isNearUnitPoint(
@@ -109,10 +101,9 @@ extension CGPoint {
       .bottomLeading, .bottom, .bottomTrailing,
     ]
 
-    return anchors.min(by: {
-      relative.distanceSquared(to: $0) < relative.distanceSquared(to: $1)
-      //      distanceSquared(from: relative, to: $0) < distanceSquared(from: relative, to: $1)
-    }) ?? .center
+    return anchors.min(
+      by: { relative.distanceSquared(to: $0) < relative.distanceSquared(to: $1) }
+    ) ?? .center
   }
 
 }
@@ -122,15 +113,6 @@ extension CGPoint {
   public static let quickPreset01 = CGPoint(x: 100, y: 50)
   public static let quickPreset02 = CGPoint(x: 80, y: 120)
   public static let quickPreset03 = CGPoint(x: 20, y: 220)
-
-  /// What does this really mean/do?
-  //  public var normalised: CGPoint {
-  //    guard length > 0 else { return .zero }
-  //    return CGPoint(
-  //      x: x / length,
-  //      y: y / length
-  //    )
-  //  }
 
   public func centredIn(size: CGSize) -> CGPoint {
     let centred: CGSize = size / 2
@@ -144,19 +126,6 @@ extension CGPoint {
 
   /// Previously: `sqrt(x * x + y * y)`
   public var length: CGFloat { hypot(x, y) }
-
-  /// Below is equivalent to a previous version, which used
-  /// `sqrt(pow(x - point.x, 2) + pow(y - point.y, 2))`
-  ///
-  /// This calculates Euclidean distance (straight-line distance)
-  //  public func distance(to other: CGPoint) -> CGFloat {
-  //    return hypot(other.x - x, other.y - y)
-  //  }
-
-  /// Returns true if both x and y coordinates are in the range [0.0, 1.0]
-  //  public var isNormalised: Bool {
-  //    return x >= 0.0 && x <= 1.0 && y >= 0.0 && y <= 1.0
-  //  }
 
   /// Standard Linear Interpolation (Lerp)
   /// Aligns with VectorArithmetic's logic.
@@ -176,18 +145,6 @@ extension CGPoint {
     )
   }
 
-  //  public func delta(
-  //    from lastPosition: CGPoint,
-  //    sensitivity: CGFloat = 1.0
-  //  ) -> CGPoint {
-  //    let result = CGPoint(
-  //      x: (self.x - lastPosition.x) * sensitivity,
-  //      y: (self.y - lastPosition.y) * sensitivity
-  //    )
-  //
-  //    return result
-  //  }
-
   public func midpoint(to other: Self) -> Self {
     lerp(to: other, t: 0.5)
   }
@@ -197,69 +154,5 @@ extension CGPoint {
     to p2: CGPoint,
   ) -> CGPoint {
     p1.lerp(to: p2, t: 0.5)
-    //    return pointAlong(from: p1, to: p2, t: 0.5)
   }
-
-  /// Find a point along the line between two points
-  /// Example usage
-  ///
-  /// ```
-  /// let point1 = CGPoint(x: 0, y: 0)
-  /// let point2 = CGPoint(x: 100, y: 100)
-  ///
-  /// let midpoint = CGPoint.pointAlong(from: point1, to: point2, t: 0.5)
-  /// print("Midpoint: \(midpoint)") // Should print (50, 50)
-  ///
-  /// let quarterPoint = point1.pointAlong(to: point2, t: 0.25)
-  /// print("Quarter point: \(quarterPoint)") // Should print (25, 25)
-  ///
-  /// ```
-
-  /// Returns a point along the line from this point to `end`.
-  /// - Parameters:
-  ///   - end: The ending point of the line.
-  ///   - t: A factor determining the point's position along the line.
-  ///        When t = 0, the result is this point.
-  ///        When t = 1, the result is `end`.
-  ///        Values less than 0 or greater than 1 will extrapolate beyond the line segment.
-  /// - Returns: A point along the line from this point to `end`.
-  //  public func pointAlong(to end: CGPoint, t: CGFloat) -> CGPoint {
-  //    return CGPoint.pointAlong(from: self, to: end, t: t)
-  //  }
-
-  /// Returns a point at a specified distance along the line defined by `start` and `end`.
-  /// - Parameters:
-  ///   - start: The starting point of the line.
-  ///   - end: The ending point of the line.
-  ///   - distance: The absolute distance from the `start` point.
-  /// - Returns: A point along the line defined by `start` and `end` at the specified distance.
-  //  public static func pointAlong(
-  //    from start: CGPoint,
-  //    to end: CGPoint,
-  //    distance: CGFloat
-  //  ) -> CGPoint {
-  //    let dx = end.x - start.x
-  //    let dy = end.y - start.y
-  //    let totalDistance = sqrt(dx * dx + dy * dy)
-  //
-  //    /// Calculate the unit vector in the direction from start to end
-  //    let unitVectorX = dx / totalDistance
-  //    let unitVectorY = dy / totalDistance
-  //
-  //    /// Calculate the new point at the specified distance
-  //    return CGPoint(
-  //      x: start.x + unitVectorX * distance,
-  //      y: start.y + unitVectorY * distance
-  //    )
-  //  }
-
-  /// Returns a point at a specified distance along the line from this point to `end`.
-  /// - Parameters:
-  ///   - end: The ending point of the line.
-  ///   - distance: The absolute distance from this point.
-  /// - Returns: A point along the line from this point to `end` at the specified distance.
-  //  public func pointAlong(to end: CGPoint, distance: CGFloat) -> CGPoint {
-  //    return CGPoint.pointAlong(from: self, to: end, distance: distance)
-  //  }
-
 }

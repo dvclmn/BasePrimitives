@@ -42,7 +42,7 @@ extension Sequence {
   public func summarise<T: Comparable>(
     key: PartialKeyPath<Element>,
     sortedBy keyPath: KeyPath<Element, T>,
-    delimiter: Character? = ","
+    delimiter: Character? = ",",
   ) -> String {
     return
       self
@@ -63,7 +63,7 @@ extension Sequence {
   /// Non-native key path based sorting
   public func sorted<T: Comparable>(
     by keyPath: KeyPath<Element, T>,
-    using comparator: (T, T) -> Bool = (<)
+    using comparator: (T, T) -> Bool = (<),
   ) -> [Element] {
     sorted { a, b in
       comparator(a[keyPath: keyPath], b[keyPath: keyPath])
