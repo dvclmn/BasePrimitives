@@ -5,7 +5,6 @@ import PackageDescription
 let package = Package(
   name: "BasePrimitives",
   platforms: [
-    //    .iOS("17.0"),
     .macOS("14.0")
   ],
 

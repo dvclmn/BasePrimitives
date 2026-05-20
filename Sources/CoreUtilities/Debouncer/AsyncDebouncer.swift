@@ -38,7 +38,6 @@ extension AsyncDebouncer {
   public func execute(
     action: @escaping @MainActor @Sendable () async -> Void
   ) {
-    //  public func execute(action: @escaping @Sendable () async -> Void) {
     /// Cancel any previous task
     task?.cancel()
 
@@ -47,12 +46,6 @@ extension AsyncDebouncer {
       try await Task.sleep(for: interval)
       await action()
     }
-    //    task = Task {
-    //      try? await Task.sleep(for: interval)
-    //      if Task.isCancelled { return }
-    //      await action()
-    //
-    //    }
   }
 
   /// Executes immediately (leading edge) if there isn't an active cooldown window.
@@ -71,39 +64,14 @@ extension AsyncDebouncer {
 
     cooldownTask = Task {
       try await Task.sleep(for: interval)
-      // Inherits @MainActor from the method, so this is safe
       cooldownTask = nil
     }
   }
-  //  @MainActor
-  //  public func executeLeading(action: @escaping @Sendable () async -> Void) {
-  //
-  //    /// If we're currently within the cooldown window, ignore this trigger.
-  //    if cooldownTask != nil { return }
-  //
-  //    /// Cancel any pending trailing debounced task.
-  //    task?.cancel()
-  //
-  //    /// Run immediately.
-  //    Task {
-  //      await action()
-  //    }
-  //
-  //    /// Start a cooldown window so additional triggers are ignored until the interval passes.
-  //    cooldownTask = Task {
-  //      try? await Task.sleep(for: interval)
-  //
-  //      /// Clear cooldown on the main actor when the window elapses.
-  //      await MainActor.run { [weak self] in
-  //        self?.cooldownTask?.cancel()
-  //        self?.cooldownTask = nil
-  //      }
-  //    }
-  //  }
-
-  /// Executes the action either immediately (skipping the debounce delay) or with the standard trailing-edge debounce.
+  /// Executes the action either immediately (skipping the debounce delay)
+  /// or with the standard trailing-edge debounce.
   /// - Parameters:
-  ///   - shouldSkipDelay: When true, the action runs immediately (leading-edge). When false, it uses the standard trailing-edge debounce.
+  ///   - shouldSkipDelay: When true, the action runs immediately (leading-edge).
+  ///     When false, it uses the standard trailing-edge debounce.
   ///   - action: The asynchronous action to perform.
   @MainActor
   public func execute(
@@ -116,5 +84,4 @@ extension AsyncDebouncer {
       execute(action: action)
     }
   }
-
 }
