@@ -19,7 +19,7 @@ public struct GeometryCapture<T: GeometryCapturable>: Sendable {
 
   public init(
     type: T.Type,
-    transform: @escaping @Sendable (GeometryProxy) -> T
+    transform: @escaping @Sendable (GeometryProxy) -> T,
   ) {
     self.type = type
     self.transform = transform
@@ -49,7 +49,7 @@ extension GeometryCapture {
       return SafeAreaRect(
         size: proxy.size,
         safeInsets: proxy.safeAreaInsets,
-        globalFrame: proxy.frame(in: .global)
+        globalFrame: proxy.frame(in: .global),
       )
     }
   }

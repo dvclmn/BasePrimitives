@@ -5,12 +5,13 @@ import PackageDescription
 let package = Package(
   name: "BasePrimitives",
   platforms: [
-//    .iOS("17.0"),
-    .macOS("14.0"),
+    //    .iOS("17.0"),
+    .macOS("14.0")
   ],
 
   products: [
     .library(name: "BasePrimitives", targets: ["BasePrimitives"]),
+    .library(name: "ViewHelpers", targets: ["ViewHelpers"]),
     .library(
       name: "CoreUtilities",
       targets: [
@@ -27,6 +28,7 @@ let package = Package(
       name: "BasePrimitives",
       dependencies: ["InputPrimitives", "CoreUtilities"],
     ),
+    .target(name: "ViewHelpers"),
     .target(name: "InputPrimitives"),
     .target(name: "CoreUtilities"),
   ],

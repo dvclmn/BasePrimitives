@@ -15,6 +15,8 @@ extension GraphicsContext {
   ///
   /// Otherwise changing the zoom range in the caller domain will have
   /// unintended effects on font size calculations
+  ///
+  /// `pointColour` controls whether to display a point indicator, and it's colour
   public func drawDebugText(
     _ text: String,
     at point: CGPoint,
@@ -22,7 +24,8 @@ extension GraphicsContext {
     positioned debugTextPosition: DebugTextPosition = .aboveOrigin,
     colour: Color = .primary,
     fontSize: CGFloat = 11,
-    pointDisplay: DebugPoint = .default,
+    pointColour: Color? = nil,
+    //    pointDisplay: DebugPoint = .default,
   ) {
 
     //    let zoom = environment.zoomLevel
@@ -45,14 +48,14 @@ extension GraphicsContext {
 
     let labelRect = CGRect(
       origin: point.centredIn(size: labelSize).shifted(
-        dx: 0, dy: (labelHeightUnZoomed * 1.2) * debugTextPosition.multiplierForYPosition,),
+        dx: 0, dy: (labelHeightUnZoomed * 1.2) * debugTextPosition.multiplierForYPosition, ),
       size: labelSize,
     )
     //    self.fill(labelRect.path, with: .color(Color.gray))
     self.draw(text, at: labelRect.midpoint)
 
     /// Draw dot at provided point, if needed
-    if let pointColour = pointDisplay.colourForPoint {
+    if let pointColour {
       self.drawCircleCentred(at: point, colour: pointColour)
     }
   }
