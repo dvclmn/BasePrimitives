@@ -7,31 +7,14 @@
 
 import Foundation
 
-//extension Date: @retroactive RawRepresentable {
-//  public var rawValue: String {
-//    self.timeIntervalSinceReferenceDate.description
-//  }
-//
-//  public init?(rawValue: String) {
-//    self = Date(timeIntervalSinceReferenceDate: Double(rawValue) ?? 0.0)
-//  }
-//}
-/// ```
-/// let formattedDate = DateFormatter.localizedString(
-///   from: Date.minutesAgo(5),
-///   dateStyle: .short,
-///   timeStyle: .short
-/// )
-/// ```
 extension Date {
-
 
   public func dayOfTheMonthIcon(day: Int? = nil) -> String {
     let today: Int = day ?? Calendar.current.component(.day, from: self)
     return "\(today).calendar"
   }
 
-  // MARK: - Ago Methods
+  // MARK: - (x) Ago
 
   public func secondsAgo(_ seconds: TimeInterval) -> Date {
     return Date().addingTimeInterval(-seconds)
@@ -49,7 +32,7 @@ extension Date {
     return Date().addingTimeInterval(-days * 86400)
   }
 
-  // MARK: - From Now Methods
+  // MARK: - (x) From Now
 
   /// Returns a date `seconds` seconds from now.
   public func secondsFromNow(_ seconds: TimeInterval) -> Date {

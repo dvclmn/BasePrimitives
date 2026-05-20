@@ -32,3 +32,9 @@ extension Comparable {
     return Swift.min(upper, Swift.max(lower, self))
   }
 }
+
+extension Comparable where Self: BinaryFloatingPoint {
+  public func clamped(toIntRange range: Range<Int>) -> Self {
+    return clamped(Self(range.lowerBound), Self(range.upperBound))
+  }
+}

@@ -23,7 +23,13 @@ extension Character {
     return Character(result)
   }
 
+  /// Deprecated: Use `displayName` instead.
+  @available(*, deprecated, renamed: "displayName")
   public var descriptiveName: String {
+    displayName
+  }
+
+  public var displayName: String {
     switch self {
       case " ": "Space"
       case "\n": "New Line"
@@ -85,3 +91,4 @@ extension Array where Element == Character {
     return Array(repeating: char, count: count)
   }
 }
+
