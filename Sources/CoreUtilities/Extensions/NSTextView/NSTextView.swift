@@ -24,16 +24,8 @@ extension NSTextView {
   }
 
   public var documentRange: NSTextRange? { self.textLayoutManager?.documentRange }
-
   public var nsString: NSString { string as NSString }
-
   public var documentLength: Int { nsString.length }
-
-  //  public var safeCurrentParagraphRange: NSRange {
-  //    let paragraphRange: NSRange = nsString.paragraphRange(for: safeSelectedRange)
-  //    return paragraphRange.clamped(to: documentLength)
-  //  }
-
   public var safeCurrentParagraphRange: NSRange {
     /// 1. Get the safe selection first
     let safeSelection = safeSelectedRange
@@ -88,18 +80,6 @@ extension NSTextView {
   public func textRange(for range: NSRange) -> NSTextRange? {
     guard let tcm = self.textLayoutManager?.textContentManager else { return nil }
     return tcm.textRange(for: range)
-    //    guard let textLayoutManager = self.textLayoutManager,
-    //      let contentManager = textLayoutManager.textContentManager,
-    //      let documentRange = contentManager.documentRange
-    //    else { return nil }
-    //
-    //    // Calculate start and end locations based on offsets
-    //    guard let start = contentManager.location(
-    //        documentRange.location, offsetBy: range.location),
-    //      let end = contentManager.location(start, offsetBy: range.length)
-    //    else { return nil }
-    //
-    //    return NSTextRange(location: start, end: end)
   }
 
   /// TextKit 2 equivalent of boundingRect(forGlyphRange:...)

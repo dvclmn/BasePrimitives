@@ -25,7 +25,6 @@ extension Dictionary where Key: CustomStringConvertible, Value: CustomStringConv
       (key: "\"\($0)\":", value: "\"\($1)\"")
     }
     .sorted { $0.key < $1.key }
-    //    .sorted(by: keyPath)
 
     let lines: [String]
 
@@ -60,7 +59,6 @@ extension Dictionary {
     grouping values: S,
     by keyPath: KeyPath<S.Element, Key>,
   ) where Value == [S.Element] {
-    //    print("Performed a grouping operation for \(Array(values).count) values, at \(Date.debug)")
     self.init(grouping: values, by: { $0[keyPath: keyPath] })
   }
 

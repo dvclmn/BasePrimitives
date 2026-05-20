@@ -36,17 +36,4 @@ extension Axis {
       for: self.toGeometryAxis,
     )
   }
-
-  //
-  //  /// Returns the start and end UnitPoints for a gradient, given a convention relating dimensions to axis.
-  //  public func toGradientSpan(mapping: AxisMapping = .identity) -> UnitSpan {
-  //    //  public func toGradientSpan(convention: AxisConvention = .widthIsHorizontal) -> UnitSpan {
-  //    mapping.select(primary: <#T##T#>, secondary: <#T##T#>, for: self.toGridAxis)
-  ////    switch (self, mapping) {
-  ////      case (.horizontal, .identity), (.vertical, .heightIsHorizontal):
-  ////        return UnitSpan(start: .leading, end: .trailing)
-  ////      case (.horizontal, .heightIsHorizontal), (.vertical, .widthIsHorizontal):
-  ////        return UnitSpan(start: .top, end: .bottom)
-  ////    }
-  //  }
 }

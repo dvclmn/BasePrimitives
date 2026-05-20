@@ -8,11 +8,6 @@
 import Foundation
 
 extension Int {
-  //  public func normalisedIndexFloat(for count: Int) -> Float {
-  //    count > 1
-  //    ? Float(self) / Float(count - 1)
-  //    : 0
-  //  }
 
   /// Could also be called `fractionalPosition` or `unitPosition`
   public func normalisedIndex(for count: Int) -> CGFloat {
@@ -24,7 +19,6 @@ extension Int {
   public func normalisedIndex(for count: Int) -> Float {
     return count > 1 ? Float(self) / Float(count - 1) : 0
   }
-  
 
   public var doubled: Int { self * 2 }
   public var halved: Int { self / 2 }
