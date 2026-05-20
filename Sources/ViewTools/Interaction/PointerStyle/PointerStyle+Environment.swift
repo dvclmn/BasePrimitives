@@ -1,0 +1,12 @@
+//
+//  PointerStyle+Environment.swift
+//  ToolKit
+//
+//  Created by Dave Coleman on 21/4/2026.
+//
+
+//import SwiftUI
+
+//extension EnvironmentValues {
+//  @Entry public var pointerStyle: PointerStyleCompatible?
+//}
