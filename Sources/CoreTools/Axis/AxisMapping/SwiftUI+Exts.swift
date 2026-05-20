@@ -16,12 +16,3 @@ extension AxisMapping {
   }
 }
 
-extension UnitPoint: AxisKeyPathWritable {
-  public static var primaryWritableKey: WritableKeyPath<Self, CGFloat> { \.x }
-  public static var secondaryWritableKey: WritableKeyPath<Self, CGFloat> { \.y }
-}
-
-extension EdgeInsets: AxisKeyPathWritable {
-  public static var primaryWritableKey: WritableKeyPath<Self, CGFloat> { \.horizontalUniform }
-  public static var secondaryWritableKey: WritableKeyPath<Self, CGFloat> { \.verticalUniform }
-}

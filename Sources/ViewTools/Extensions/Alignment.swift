@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreTools
 
 /// Good to remember: `Alignment` always describes
 /// *two* things; a `HorizontalAlignment` *and*
@@ -113,5 +114,37 @@ extension VerticalAlignment {
       case .bottom: return .trailing
       default: return .center
     }
+  }
+}
+
+/// ```
+/// let layoutMapping: AxisMapping = .transposed
+/// let baseAlignment: Alignment = .topLeading // (H: .leading, V: .top)
+///
+/// let resolved = baseAlignment.mapped(by: layoutMapping)
+/// // Result: .topLeading
+/// // Because:
+/// // Old H (.leading) -> New V (.top)
+/// // Old V (.top) -> New H (.leading)
+/// // In a transpose, .topLeading stays .topLeading visually!
+///
+/// let topTrailing: Alignment = .topTrailing // (H: .trailing, V: .top)
+/// let resolvedTrailing = topTrailing.mapped(by: layoutMapping)
+/// // Result: .bottomLeading
+/// // Old H (.trailing) -> New V (.bottom)
+/// // Old V (.top) -> New H (.leading)
+/// ```
+extension Alignment: AxisOrientable {
+  public func mapped(by mapping: AxisMapping) -> Alignment {
+    /// If identity, return as-is.
+    guard mapping == .transposed else { return self }
+    
+    /// Swap and Translate:
+    /// 1. The old Horizontal becomes the new Vertical equivalent.
+    /// 2. The old Vertical becomes the new Horizontal equivalent.
+    return Alignment(
+      horizontal: self.vertical.horizontalEquivalent,
+      vertical: self.horizontal.verticalEquivalent
+    )
   }
 }

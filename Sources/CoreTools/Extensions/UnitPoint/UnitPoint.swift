@@ -14,8 +14,15 @@ import SwiftUI
 /// `0` and `1`, inclusive. When you extend this to two dimensions, you get the
 /// unit square `[0,1] x [0,1]`, and this is what `UnitPoint` represents.
 extension UnitPoint: @retroactive Identifiable {
-  public var id: String { self.name }
+  public var id: String { self.displayName }
 }
+
+extension UnitPoint: AxisKeyPathWritable {
+  public static var primaryWritableKey: WritableKeyPath<Self, CGFloat> { \.x }
+  public static var secondaryWritableKey: WritableKeyPath<Self, CGFloat> { \.y }
+}
+
+
 
 extension UnitPoint {
 
@@ -107,6 +114,8 @@ extension UnitPoint {
       default: Color.gray
     }
   }
+  
+  
 
   /// Corner intermediates (positioned between corners and edge centers)
   public static let topLeadingMid = UnitPoint(x: 0.25, y: 0.25)
@@ -141,35 +150,5 @@ extension UnitPoint {
   public static let diagonalThreeQuarters = UnitPoint(x: 0.75, y: 0.75)
   public static let diagonalInverseQuarter = UnitPoint(x: 0.25, y: 0.75)
   public static let diagonalInverseThreeQuarters = UnitPoint(x: 0.75, y: 0.25)
-
-  //  public init(fromPoint: CGPoint, in size: CGSize) {
-  //    /// Avoid division by zero; if a dimension is zero, fall back to 0
-  //    let unitX: CGFloat =
-  //      !size.width.isZero
-  //      ? fromPoint.x / size.width
-  //      : 0
-  //
-  //    let unitY: CGFloat =
-  //      !size.height.isZero
-  //      ? fromPoint.y / size.height
-  //      : 0
-  //
-  //    /// Clamp to the unit interval `[0, 1]`
-  //    let clampedX = max(0, min(1, unitX))
-  //    let clampedY = max(0, min(1, unitY))
-  //
-  //    self.init(x: clampedX, y: clampedY)
-  //  }
-  //
-  //  public static func location(
-  //    for point: CGPoint,
-  //    in size: CGSize
-  //  ) -> UnitPoint {
-  //    let result = UnitPoint(
-  //      x: point.x / size.width,
-  //      y: point.y / size.height
-  //    )
-  //    return result
-  //  }
 
 }

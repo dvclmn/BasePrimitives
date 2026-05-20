@@ -5,6 +5,7 @@
 //  Created by Dave Coleman on 3/8/2025.
 //
 
+import CoreTools
 import SwiftUI
 
 extension EdgeInsets {
@@ -15,13 +16,13 @@ extension EdgeInsets {
     top: CGFloat = 0,
     leading: CGFloat = 0,
     bottom: CGFloat = 0,
-    trailing: CGFloat = 0
+    trailing: CGFloat = 0,
   ) -> Self {
     self.init(
       top: top,
       leading: leading,
       bottom: bottom,
-      trailing: trailing
+      trailing: trailing,
     )
   }
   public static var zero: EdgeInsets { EdgeInsets() }
@@ -42,4 +43,9 @@ extension EdgeInsets {
       bottom = newValue
     }
   }
+}
+
+extension EdgeInsets: AxisKeyPathWritable {
+  public static var primaryWritableKey: WritableKeyPath<Self, CGFloat> { \.horizontalUniform }
+  public static var secondaryWritableKey: WritableKeyPath<Self, CGFloat> { \.verticalUniform }
 }

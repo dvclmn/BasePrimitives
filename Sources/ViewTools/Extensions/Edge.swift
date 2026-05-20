@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import CoreTools
 
 extension VerticalEdge {
   public var toAlignment: VerticalAlignment {
@@ -119,5 +120,33 @@ extension Edge {
 
   public var toAlignmentOpposing: Alignment {
     toAlignment.toOpposing
+  }
+}
+
+extension Edge: AxisOrientable {
+  public func mapped(by mapping: AxisMapping) -> Edge {
+    guard mapping == .transposed else { return self }
+    switch self {
+      case .top: return .leading
+      case .bottom: return .trailing
+      case .leading: return .top
+      case .trailing: return .bottom
+    }
+  }
+}
+
+
+
+extension AxisMapping {
+  /// Returns the physical Edge for a logical direction.
+  /// - Parameter isPositive: `true` for trailing/bottom (max), `false` for leading/top (min).
+  public func edge(for axis: GeometryAxis, isPositive: Bool) -> Edge {
+    let physicalAxis = self.map(axis)
+    switch (physicalAxis, isPositive) {
+      case (.horizontal, false): return .leading
+      case (.horizontal, true): return .trailing
+      case (.vertical, false): return .top
+      case (.vertical, true): return .bottom
+    }
   }
 }
