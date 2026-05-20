@@ -25,7 +25,7 @@ let package = Package(
   targets: [
     .target(
       name: "BasePrimitives",
-      dependencies: ["InputPrimitives", "CoreUtilities"],
+      dependencies: ["InputPrimitives", "CoreUtilities", "ViewHelpers"],
     ),
     .target(name: "ViewHelpers"),
     .target(name: "InputPrimitives"),
