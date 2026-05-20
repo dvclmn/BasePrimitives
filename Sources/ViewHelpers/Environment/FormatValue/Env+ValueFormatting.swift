@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 22/3/2026.
 //
 
-import CoreUtilities
+//import CoreUtilities
 import SwiftUI
 
 // MARK: - Environment values
@@ -27,7 +27,7 @@ extension EnvironmentValues {
   /// property on a type should be considered the identity vs transposed.
   /// Aka whether width maps to horizontal, or rows to vertical, etc etc.
   /// See ``AxisAddressable``
-  @Entry public var axisMapping: AxisMapping = .identity
+//  @Entry public var axisMapping: AxisMapping = .identity
 
 }
 

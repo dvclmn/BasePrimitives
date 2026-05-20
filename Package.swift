@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "ToolKit",
+  name: "BasePrimitives",
   platforms: [
     .macOS("14.0")
   ],

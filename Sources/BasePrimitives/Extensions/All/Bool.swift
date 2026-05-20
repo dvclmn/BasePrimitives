@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-extension Bool {
-
-  public func conditionalColour(
-    isTrue trueColour: AnyShapeStyle?,
-    otherwise fallback: AnyShapeStyle,
-  ) -> AnyShapeStyle {
-    self ? (trueColour ?? fallback) : fallback
-  }
-}
+//extension Bool {
+//
+//  public func conditionalColour(
+//    isTrue trueColour: AnyShapeStyle?,
+//    otherwise fallback: AnyShapeStyle,
+//  ) -> AnyShapeStyle {
+//    self ? (trueColour ?? fallback) : fallback
+//  }
+//}

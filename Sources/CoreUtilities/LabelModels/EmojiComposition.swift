@@ -47,13 +47,13 @@ extension EmojiComposition {
     emoji: [
       Emoji(
         emoji: "📎",
-        offset: CGSize(-30, 14),
+        offset: CGSize(width: -30, height: 14),
         rotation: .degrees(4),
         scale: 0.8
       ),
       Emoji(
         emoji: "✂️",
-        offset: CGSize(26, -14),
+        offset: CGSize(width: 26, height: -14),
         rotation: .degrees(16),
         scale: 1.0
       ),

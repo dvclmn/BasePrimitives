@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import InputPrimitives
 
 /// System-provided Env values for reference:
 /// https://developer.apple.com/documentation/swiftui/environmentvalues/

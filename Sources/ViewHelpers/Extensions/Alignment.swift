@@ -22,18 +22,6 @@ extension Alignment {
     }
   }
 
-  
-
-  //  /// Returns `.center` as default if case is unknown
-  //  public var opposite: HorizontalAlignment {
-  //    switch self {
-  //      case .leading: .trailing
-  //      case .trailing: .leading
-  //      case .listRowSeparatorLeading: .listRowSeparatorTrailing
-  //      case .listRowSeparatorTrailing: .listRowSeparatorLeading
-  //      default: .center
-  //    }
-  //  }
   public var toOpposing: Alignment {
     switch self {
 
@@ -110,9 +98,9 @@ extension HorizontalAlignment {
   /// Maps a horizontal alignment to its vertical equivalent.
   var verticalEquivalent: VerticalAlignment {
     switch self {
-      case .leading:  return .top
+      case .leading: return .top
       case .trailing: return .bottom
-      default:        return .center
+      default: return .center
     }
   }
 }
@@ -121,9 +109,9 @@ extension VerticalAlignment {
   /// Maps a vertical alignment to its horizontal equivalent.
   var horizontalEquivalent: HorizontalAlignment {
     switch self {
-      case .top:      return .leading
-      case .bottom:   return .trailing
-      default:        return .center
+      case .top: return .leading
+      case .bottom: return .trailing
+      default: return .center
     }
   }
 }
