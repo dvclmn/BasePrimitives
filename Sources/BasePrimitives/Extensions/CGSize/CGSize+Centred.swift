@@ -16,7 +16,7 @@ extension CGSize {
   /// - Returns: A CGRect positioned according to the strategy, or nil if strategy is failIfOversized and view is too large
   public func toCGRect(
     in containerSize: CGSize,
-    strategy: PlacementStrategy = .centerWithOverflow
+    strategy: PlacementStrategy = .centerWithOverflow,
   ) -> CGRect {
 
     switch strategy {
@@ -40,7 +40,7 @@ extension CGSize {
           x: containerSize.width - width,
           y: 0,
           width: width,
-          height: height
+          height: height,
         )
 
       case .bottomLeft:
@@ -48,7 +48,7 @@ extension CGSize {
           x: 0,
           y: containerSize.height - height,
           width: width,
-          height: height
+          height: height,
         )
 
       case .bottomRight:
@@ -56,14 +56,14 @@ extension CGSize {
           x: containerSize.width - width,
           y: containerSize.height - height,
           width: width,
-          height: height
+          height: height,
         )
     }
   }
 
   private func centeredRect(
     in containerSize: CGSize,
-    with size: CGSize
+    with size: CGSize,
   ) -> CGRect {
     let x = (containerSize.width - size.width) / 2
     let y = (containerSize.height - size.height) / 2
@@ -89,27 +89,27 @@ extension CGSize {
 }
 
 extension CGSize {
-  
+
   /// Strategy for handling views that are larger than their container
   public enum PlacementStrategy {
     /// Center the view within the container, allowing overflow
     case centerWithOverflow
-    
+
     /// Scale the view proportionally to fit within the container
     case scaleToFit
-    
+
     /// Scale the view to fill the container, potentially cropping content
     case scaleToFill
-    
+
     /// Align to top-left corner, allowing overflow
     case topLeft
-    
+
     /// Align to top-right corner, allowing overflow
     case topRight
-    
+
     /// Align to bottom-left corner, allowing overflow
     case bottomLeft
-    
+
     /// Align to bottom-right corner, allowing overflow
     case bottomRight
   }

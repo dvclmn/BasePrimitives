@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 extension CGSize: @retroactive Hashable {
   public func hash(into hasher: inout Hasher) {
     hasher.combine(width)
@@ -59,7 +58,7 @@ extension CGSize {
 
     return CGSize(
       width: (width - childSize.width) / 2,
-      height: (height - childSize.height) / 2
+      height: (height - childSize.height) / 2,
     )
   }
 
@@ -70,7 +69,7 @@ extension CGSize {
   public func inset(by inset: CGFloat) -> CGSize {
     return CGSize(
       width: max(0, width - (inset * 2)),
-      height: max(0, height - (inset * 2))
+      height: max(0, height - (inset * 2)),
     )
   }
 
@@ -83,7 +82,7 @@ extension CGSize {
     let newHeight = max(0, height - (insets.top + insets.bottom))
     return CGSize(width: newWidth, height: newHeight)
   }
-  
+
   public var diagonalLength: CGFloat {
     hypot(width, height)
   }
@@ -103,8 +102,6 @@ extension CGSize {
     return CGSize(width: width / 2, height: height / 2)
   }
 
-  
-
   public var hasValidValue: Bool {
     return !isNan && isFinite
   }
@@ -119,41 +116,19 @@ extension CGSize {
     return width.isNaN || height.isNaN
   }
 
-  //  public static func calculateMonospacedMetrics(for font: CTFont) -> CGSize {
-  //    let spaceChar = " " as CFString
-  //    var glyphRect = CGRect.zero
-  //    let glyph = CTFontGetGlyphWithName(font, spaceChar)
-  //    CTFontGetBoundingRectsForGlyphs(
-  //      font,
-  //      .horizontal,
-  //      [glyph],
-  //      &glyphRect,
-  //      1
-  //    )
-  //
-  //    let advance = CTFontGetAdvancesForGlyphs(font, .horizontal, [glyph], nil, 1)
-  //    let lineHeight = CTFontGetAscent(font) + CTFontGetDescent(font)
-  //
-  //    return CGSize(width: CGFloat(advance), height: lineHeight)
-  //  }
-  
-  // New, from BaseHelpers
-//  package var midpoint: CGPoint {
-//    return CGPoint(x: width / 2, y: height / 2)
-//  }
   public init(fromLength length: CGFloat) {
     self.init(width: length, height: length)
   }
-  
+
   /// Returns true if both width and height are greater than zero
   public var isGreaterThanZero: Bool { width > 0 && height > 0 }
-  
+
   /// Returns true if both width and height are greater than or equal to zero
   public var isGreaterThanOrEqualToZero: Bool { width >= 0 && height >= 0 }
-  
+
   /// Returns true if both width and height is zero
   public var isZero: Bool { width == 0 && height == 0 }
-  
+
   /// Returns true if either width or height is zero or negative
   public var isLessThanOrEqualToZero: Bool {
     !isGreaterThanZero

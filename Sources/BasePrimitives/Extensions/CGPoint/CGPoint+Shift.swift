@@ -10,7 +10,6 @@ import SwiftUI
 extension CGPoint {
 
   public func distanceSquared(
-//    from point1: CGPoint,
     to point2: CGPoint
   ) -> CGFloat {
     let dx = x - point2.x

@@ -9,7 +9,6 @@ import Foundation
 
 extension CGSize {
 
-
   // MARK: - Either dimension
   public func eitherDimensionIsGreaterThan(_ value: CGFloat) -> Bool {
     compareDimensions(to: value, using: >, matchMode: .any)
@@ -56,7 +55,7 @@ extension CGSize {
   private func compareDimensions<T: BinaryFloatingPoint>(
     to value: T,
     using comparison: (CGFloat, CGFloat) -> Bool,
-    matchMode: DimensionMatchMode
+    matchMode: DimensionMatchMode,
   ) -> Bool {
     let widthResult = comparison(width, CGFloat(value))
     let heightResult = comparison(height, CGFloat(value))
@@ -70,7 +69,7 @@ extension CGSize {
   private func compareDimensions(
     to other: Self,
     using comparison: (CGFloat, CGFloat) -> Bool,
-    matchMode: DimensionMatchMode
+    matchMode: DimensionMatchMode,
   ) -> Bool {
     let widthResult = comparison(width, other.width)
     let heightResult = comparison(height, other.height)

@@ -51,7 +51,7 @@ extension CGRect {
   public func unitPoint(for point: CGPoint) -> UnitPoint {
     return UnitPoint(
       x: width > 0 ? (point.x - minX) / width : 0,
-      y: height > 0 ? (point.y - minY) / height : 0
+      y: height > 0 ? (point.y - minY) / height : 0,
     )
   }
 
@@ -62,7 +62,7 @@ extension CGRect {
   public func point(at unitPoint: UnitPoint) -> CGPoint {
     return CGPoint(
       x: minX + (unitPoint.x * width),
-      y: minY + (unitPoint.y * height)
+      y: minY + (unitPoint.y * height),
     )
   }
 
